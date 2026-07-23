@@ -8,6 +8,7 @@ import {
   shipmentTrackerIms,
   zametrix,
 } from '@/data/projects';
+import { haptic } from '@/lib/haptic';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -264,6 +265,7 @@ const ProjectDetail = () => {
   }, [slug]);
 
   const handleBackToProjects = () => {
+    haptic.light();
     sessionStorage.setItem('nav_target', 'projects');
     navigate('/');
   };
@@ -275,7 +277,10 @@ const ProjectDetail = () => {
           <h2 className="text-2xl font-bold text-brand-dark">Project not found</h2>
           <p className="text-sm text-brand-dark/70">No project matches the requested route.</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => {
+              haptic.light();
+              navigate('/');
+            }}
             className="px-6 py-2 rounded-full bg-brand-green text-white font-bold text-sm shadow-sm"
           >
             Go to Home
@@ -286,10 +291,12 @@ const ProjectDetail = () => {
   }
 
   const handlePrev = () => {
+    haptic.light();
     setActiveSlide((prev) => (prev === 0 ? (project.screenshots?.length || 1) - 1 : prev - 1));
   };
 
   const handleNext = () => {
+    haptic.light();
     setActiveSlide((prev) => (prev === (project.screenshots?.length || 1) - 1 ? 0 : prev + 1));
   };
 
