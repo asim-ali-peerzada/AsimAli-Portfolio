@@ -51,7 +51,7 @@ function walkDir(dir) {
   const entries = readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
-    if (entry.isDirectory() && entry.name !== '_astro') {
+    if (entry.isDirectory()) {
       walkDir(fullPath);
     } else if (entry.isFile() && (entry.name.endsWith('.html') || entry.name.endsWith('.js'))) {
       let content = readFileSync(fullPath, 'utf-8');
