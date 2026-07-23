@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync, renameSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, renameSync, existsSync, copyFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
@@ -83,4 +83,17 @@ for (const file of pngFiles) {
   }
 }
 
-console.log('\n✅ Image optimization complete');
+// Guarantee dist/sitemap.xml exists for Google Search Console compatibility
+const sitemapIndex = join(distDir, 'sitemap-index.xml');
+const sitemap0 = join(distDir, 'sitemap-0.xml');
+const sitemapXml = join(distDir, 'sitemap.xml');
+
+if (existsSync(sitemapIndex)) {
+  copyFileSync(sitemapIndex, sitemapXml);
+  console.log('  ✓ Created dist/sitemap.xml (copy of sitemap-index.xml)');
+} else if (existsSync(sitemap0)) {
+  copyFileSync(sitemap0, sitemapXml);
+  console.log('  ✓ Created dist/sitemap.xml (copy of sitemap-0.xml)');
+}
+
+console.log('\n✅ Image & Sitemap optimization complete');
