@@ -64,7 +64,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="px-4 md:px-8 py-24 md:py-32 space-y-8">
+    <footer className="px-4 md:px-8 py-24 md:py-32 space-y-8">
       {/* CONTACT FORM */}
       <section
         id="contact-form-section"
@@ -111,7 +111,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="http://linkedin.com/in/the-asimali"
+              href="https://linkedin.com/in/the-asimali"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-4 md:p-6 rounded-[20px] md:rounded-[32px] bg-[#f8fafc]"
@@ -306,7 +306,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-    </div>
+    </footer>
   );
 };
 

@@ -31,6 +31,7 @@ const Metrics = () => {
       id="capabilities"
       className="w-full max-w-[1600px] px-4 md:px-8 mx-auto py-24 md:py-32"
     >
+      <h2 className="sr-only">Core Capabilities</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 justify-items-center">
         {metrics.map((m) => (
           <div

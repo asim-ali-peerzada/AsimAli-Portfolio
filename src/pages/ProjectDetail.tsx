@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import {
   aiCustomerSupport,
   ccms,
@@ -72,10 +73,10 @@ const getProjectMetrics = (slug: string) => {
       ];
     case 'genealogy-saas-platform':
       return [
-        { value: 'Real-Time', label: 'WebSocket Chat System' },
-        { value: '100%', label: 'Automated Support Routing' },
-        { value: 'Dual-Engine', label: 'Messaging Architecture' },
-        { value: 'Lead Backend', label: 'Product Systems Role' },
+        { value: '2', label: 'External Archive APIs Integrated' },
+        { value: 'OCR', label: 'Automated Document Extraction' },
+        { value: 'Multi-Tenant', label: 'Isolated Family Tree Data' },
+        { value: 'Lead Backend', label: 'Architecture Role' },
       ];
     default:
       return [
@@ -200,8 +201,8 @@ const getRoleList = (slug: string, rawRole?: string) => {
           text: 'Built document extraction and fuzzy record-matching algorithms.',
         },
         {
-          category: 'Real-Time Features',
-          text: 'Deployed Pusher WebSocket dual-chat system and automated guest support routing.',
+          category: 'Real-Time Collaboration',
+          text: 'Implemented Pusher-based collaborative tree editing with real-time sync across family members.',
         },
       ];
     default:
@@ -327,7 +328,7 @@ const ProjectDetail = () => {
   return (
     <div className="min-h-screen bg-white text-[#0a0a0a] font-['Urbanist',sans-serif] antialiased relative">
       <Navbar />
-      <div className="pt-28 md:pt-36 pb-24 px-4 md:px-8 max-w-[1600px] mx-auto space-y-12 md:space-y-16">
+      <main id="main-content" className="pt-28 md:pt-36 pb-24 px-4 md:px-8 max-w-[1600px] mx-auto space-y-12 md:space-y-16">
         {/* Back Button */}
         <div className="flex justify-start">
           <button
@@ -541,7 +542,8 @@ const ProjectDetail = () => {
             </ul>
           </div>
         </section>
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };

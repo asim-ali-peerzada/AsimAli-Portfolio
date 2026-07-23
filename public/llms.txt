@@ -1,0 +1,46 @@
+# Asim Ali — Laravel Backend Architect & Enterprise Systems Engineer
+> Software Engineer from Punjab, Pakistan specializing in multi-tenant SaaS platforms, Laravel backends, and React applications.
+
+## About
+- Software Engineer with 2+ years of experience
+- Expertise: PHP, Laravel, React, MySQL, Redis, REST APIs, WebSockets, Docker, Git
+- Focus: Enterprise SaaS, multi-tenant architecture, RBAC, workflow automation
+- Location: Hasilpur, Pakistan (working globally)
+
+## Core Expertise
+- Laravel Backend Development — Enterprise APIs, multi-tenant architecture, RBAC, queue processing
+- React Frontend Engineering — Component architecture, state management, Tailwind CSS
+- Multi-Tenant SaaS Platforms — Data isolation, subscription billing, tenant-aware access control
+- REST API Design — Sanctum authentication, rate limiting, secure API architecture
+- Database Engineering — MySQL optimization, complex relational schemas, migration strategies
+- Real-Time Systems — WebSocket integration with Pusher, event-driven architecture
+- Workflow Automation — IMAP email parsing, ETL pipelines, background job processing
+- AI Integration — RAG engines, Pinecone vector DB, OpenAI/Gemini LLM integration
+- Identity & Security — JWT, TOTP 2FA, Single Sign-On (SSO), Google 2FA
+- OCR & Data Processing — Document extraction, intelligent record matching, fuzzy search
+
+## Projects
+- [AI Assistant Platform](https://asimali.online/projects/ai-assistant-platform): Multi-tenant AI SaaS with RAG engine, Laravel 12 + FastAPI + React 19 + Pinecone
+- [CCMS — Enterprise CRM](https://asimali.online/projects/sales-&-contact-management-(ccms)): 5-tier RBAC CRM with state-based lead routing, Laravel 11 + React + MySQL + Pusher
+- [Enterprise SSO](https://asimali.online/projects/enterprise-single-sign-on): Centralized identity platform with JWT + TOTP 2FA + cross-domain token blacklisting
+- [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Multi-tenant family history platform with NARA/OpenArch API + OCR + record matching
+- [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports
+- [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker-&-ims): Automated logistics with IMAP email parsing + queue workers + item-level tracking
+
+## Services
+- Enterprise SaaS Development
+- Laravel Backend Architecture
+- React Frontend Development
+- CRM & Sales Automation
+- Identity & Access Management
+- Workflow Automation
+- API Integration
+- AI & LLM Integration
+
+## Contact
+- Website: https://asimali.online
+- Email: asimalipeerzada@gmail.com
+- LinkedIn: https://linkedin.com/in/the-asimali
+- GitHub: https://github.com/asim-ali-peerzada
+- WhatsApp: +923098715354
+- Calendly: https://calendly.com/asimalipeerzada/30min

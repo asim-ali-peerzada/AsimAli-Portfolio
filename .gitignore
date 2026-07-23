@@ -25,3 +25,9 @@ dist-ssr
 
 # other ignores...
 .env
+
+# SEO audit reports (generated, not needed in repo)
+FULL-AUDIT-REPORT.md
+ACTION-PLAN.md
+SEO-REPORT.html
+*.audit.md
