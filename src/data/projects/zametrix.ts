@@ -1,6 +1,7 @@
 import cover from '@/assets/images/zametrix/zm-cover.png';
 import shot1 from '@/assets/images/zametrix/zm-shot-1.png';
-import shot2 from '@/assets/images/zametrix/zm-shot-2.png';
+
+import reports from '@/assets/images/zametrix/zm-reports.png';
 import shot3 from '@/assets/images/zametrix/zm-shot-3.png';
 import shot4 from '@/assets/images/zametrix/zm-shot-4.png';
 import shot5 from '@/assets/images/zametrix/zm-shot-5.png';
@@ -8,7 +9,6 @@ import shot6 from '@/assets/images/zametrix/zm-shot-6.png';
 import shot7 from '@/assets/images/zametrix/zm-shot-7.png';
 import shot8 from '@/assets/images/zametrix/zm-shot-8.png';
 import shot9 from '@/assets/images/zametrix/zm-shot-9.png';
-import reports from '@/assets/images/zametrix/zm-reports.png';
 
 export const zametrix = {
   title: 'Zametrix',

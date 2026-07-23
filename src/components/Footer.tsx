@@ -1,8 +1,9 @@
 import portfolioHd from '@/assets/images/my-headshot/mine.png';
 import { ArrowRight, Mail } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { SiLinkedin, SiWhatsapp } from 'react-icons/si';
-import { toast } from 'sonner';
+import { FaLinkedin } from 'react-icons/fa';
+import { SiWhatsapp } from 'react-icons/si';
+import toast from 'react-hot-toast';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -118,7 +119,7 @@ const Footer = () => {
             >
               <div className="flex items-center gap-3 md:gap-5">
                 <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[16px] md:rounded-[20px] bg-[#10b981] flex items-center justify-center text-white shadow-sm shrink-0">
-                  <SiLinkedin size={20} className="md:w-[24px] md:h-[24px]" />
+                  <FaLinkedin size={20} className="md:w-[24px] md:h-[24px]" />
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-[18px] md:text-[24px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif]">
@@ -219,7 +220,7 @@ const Footer = () => {
 
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-full overflow-hidden brightness-90 flex-shrink-0">
-                  <img src={portfolioHd} alt="Asim Ali" loading="lazy" className="w-full h-full object-cover" />
+                  <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" loading="lazy" width={56} height={56} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="font-medium text-white text-[17px] tracking-tight leading-tight">
@@ -233,7 +234,7 @@ const Footer = () => {
                       className="hover:text-white transition-colors"
                       aria-label="LinkedIn"
                     >
-                      <SiLinkedin size={15} />
+                      <FaLinkedin size={15} />
                     </a>
                     <a
                       href="mailto:asimalipeerzada@gmail.com"

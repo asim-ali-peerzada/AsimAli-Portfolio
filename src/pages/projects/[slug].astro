@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectDetailRoot from '../../components/ProjectDetailRoot';
+import { getProjectBySlug, getAllProjectSlugs } from '../../data/projects';
+
+export async function getStaticPaths() {
+  const slugs = getAllProjectSlugs();
+  return slugs.map((slug) => ({
+    params: { slug },
+    props: { project: getProjectBySlug(slug) },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} — Asim Ali Portfolio`}>
+  <ProjectDetailRoot project={project} client:load />
+</Layout>

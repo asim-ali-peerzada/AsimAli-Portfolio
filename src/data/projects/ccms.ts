@@ -1,4 +1,4 @@
-import cover from '@/assets/images/ccms/3:2.png';
+import cover from '@/assets/images/ccms/3-2.png';
 import actionItems from '@/assets/images/ccms/action_items.png';
 import chat from '@/assets/images/ccms/chat.png';
 import clientContact from '@/assets/images/ccms/client_contact.png';

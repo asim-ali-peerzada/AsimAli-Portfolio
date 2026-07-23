@@ -1,0 +1,136 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+  const { title, description = 'Asim Ali is a Laravel Backend Developer & Enterprise SaaS Engineer from Pakistan.' } = Astro.props;
+
+import '@/styles/global.css';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Preconnect hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-8S0QQM9138"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-8S0QQM9138');
+  </script>
+
+  <!-- SEO Meta Tags -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Asim Ali" />
+  <meta name="keywords" content="Asim Ali, Laravel developer, PHP developer, backend developer, enterprise SaaS, multi-tenant, RBAC, REST API, React developer, full stack developer, software engineer Pakistan, freelance Laravel developer, CRM development, SSO implementation, workflow automation" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:image" content="https://asimali.online/opengraph-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Asim Ali - Laravel Backend Architect & Enterprise Systems Engineer Portfolio" />
+  <meta property="og:site_name" content="Asim Ali Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://asimali.online/opengraph-image.png" />
+
+  <!-- Favicon & Canonical -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="canonical" href={Astro.url} />
+  <meta name="theme-color" content="#10b981" />
+
+  <!-- Schema.org JSON-LD -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://asimali.online/#website",
+        "url": "https://asimali.online/",
+        "name": "Asim Ali - Software Developer Portfolio",
+        "description": "Official portfolio of Asim Ali, a Software Engineer from Punjab, Pakistan specializing in Laravel, React, and scalable web applications.",
+        "publisher": { "@id": "https://asimali.online/#asim-ali" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://asimali.online/#asim-ali",
+        "name": "Asim Ali",
+        "givenName": "Asim",
+        "familyName": "Ali",
+        "url": "https://asimali.online/",
+        "jobTitle": "Software Engineer",
+        "description": "Asim Ali is a Software Engineer from Punjab, Pakistan with 2+ years of experience specializing in PHP, Laravel, React, and building scalable enterprise web applications.",
+        "image": "https://asimali.online/opengraph-image.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Hasilpur",
+          "addressRegion": "Punjab",
+          "addressCountry": "Pakistan"
+        },
+        "email": "asimalipeerzada@gmail.com",
+        "knowsAbout": [
+          "PHP", "Laravel", "React", "JavaScript", "TypeScript",
+          "MySQL", "Redis", "REST API", "WebSockets", "Docker", "Git",
+          "Multi-Tenant SaaS", "RBAC", "JWT Authentication", "SSO",
+          "Queue-Based Processing", "ETL Pipelines", "OCR",
+          "RAG Engines", "Vector Databases", "LLM Integration"
+        ],
+        "knowsLanguage": ["en", "ur"],
+        "hasCredential": "Software Engineering",
+        "sameAs": [
+          "https://linkedin.com/in/the-asimali",
+          "https://github.com/asim-ali-peerzada"
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "name": "Asim Ali — Software Engineering Services",
+        "description": "Enterprise SaaS development, Laravel backend architecture, React frontend development, CRM automation, identity management, and AI integration services.",
+        "provider": { "@id": "https://asimali.online/#asim-ali" },
+        "url": "https://asimali.online/",
+        "areaServed": "Worldwide",
+        "serviceType": [
+          "Enterprise SaaS Development",
+          "Laravel Backend Architecture",
+          "React Frontend Development",
+          "CRM & Sales Automation",
+          "Identity & Access Management",
+          "Workflow Automation",
+          "REST API Engineering",
+          "AI & LLM Integration"
+        ]
+      }
+    ]
+  })} />
+</head>
+<body>
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#10b981] focus:text-white focus:rounded-md focus:shadow-lg"
+  >
+    Skip to main content
+  </a>
+  <slot />
+</body>
+</html>

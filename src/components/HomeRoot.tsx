@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
-import Experience from '@/components/Experience';
-import Footer from '@/components/Footer';
-import Hero from '@/components/Hero';
-import HowIBuild from '@/components/HowIBuild';
-import Metrics from '@/components/Metrics';
-import Navbar from '@/components/Navbar';
-import Projects from '@/components/Projects';
-import TechnicalAuthority from '@/components/TechnicalAuthority';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Hero from './Hero';
+import Metrics from './Metrics';
+import Projects from './Projects';
+import HowIBuild from './HowIBuild';
+import TechnicalAuthority from './TechnicalAuthority';
+import Experience from './Experience';
+import { TooltipProvider } from './ui/tooltip';
+import { Toaster } from './ui/toaster';
+import { Toaster as Sonner } from './ui/sonner';
 
 const SCROLL_KEY = 'homepage_scroll';
 
-const Index = () => {
+export default function HomeRoot() {
   useEffect(() => {
     const navTarget = sessionStorage.getItem('nav_target');
     if (navTarget) {
@@ -45,7 +48,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <TooltipProvider>
       <Navbar />
       <main id="main-content" className="pt-16 md:pt-20">
         <Hero />
@@ -54,12 +57,10 @@ const Index = () => {
         <HowIBuild />
         <TechnicalAuthority />
         <Experience />
-        {/* <BackendArchitecture /> */}
-        {/* <Contact /> */}
       </main>
       <Footer />
-    </div>
+      <Toaster />
+      <Sonner />
+    </TooltipProvider>
   );
-};
-
-export default Index;
+}

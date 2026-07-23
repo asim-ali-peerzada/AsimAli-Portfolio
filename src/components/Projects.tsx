@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import AnimatedTitle from './ui/AnimatedTitle';
 
-import { aiCustomerSupport } from '@/data/projects/ai-customer-support';
-import { ccms } from '@/data/projects/ccms';
-import { enterpriseSso } from '@/data/projects/enterprise-sso';
-import { genealogy } from '@/data/projects/genealogy';
-import { shipmentTrackerIms } from '@/data/projects/shipment-tracker-ims';
-import { zametrix } from '@/data/projects/zametrix';
+import {
+  aiCustomerSupport,
+  ccms,
+  enterpriseSso,
+  genealogy,
+  shipmentTrackerIms,
+  zametrix,
+} from '@/data/projects';
 
 const projectsData = [
   ccms,
@@ -19,14 +20,20 @@ const projectsData = [
 ];
 
 const Projects = () => {
-  const [showAll, setShowAll] = useState(() => {
-    return localStorage.getItem('projects_show_all') === 'true';
-  });
+  const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    if (typeof localStorage !== 'undefined') {
+      setShowAll(localStorage.getItem('projects_show_all') === 'true');
+    }
+  }, []);
 
   const toggleShowAll = () => {
     const next = !showAll;
     setShowAll(next);
-    localStorage.setItem('projects_show_all', String(next));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('projects_show_all', String(next));
+    }
   };
 
   const displayedProjects = showAll ? projectsData : projectsData.slice(0, 4);
@@ -47,17 +54,15 @@ const Projects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16 w-full">
           {displayedProjects.map((project, i) => (
             <div key={i} className="group relative flex flex-col">
-              <Link
-                to={`/projects/${encodeURIComponent(project.slug)}`}
-                state={{ project }}
-                className="block w-full"
-              >
+              <a href={`/projects/${project.slug}`} className="block w-full">
                 {/* Image panel */}
                 <div className="aspect-[6/5] w-full bg-[#f8fafc] rounded-[32px] overflow-hidden relative mb-5 border border-[#e2e8f0]">
                   <img
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
+                    width={1920}
+                    height={1280}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
@@ -70,7 +75,7 @@ const Projects = () => {
                       {project.title}
                     </h3>
                     <div className="flex gap-2 items-center flex-shrink-0 flex-wrap justify-end">
-                      {project.tags.map((tag, idx) => (
+                      {project.tags.map((tag: string, idx: number) => (
                         <span
                           key={idx}
                           className="px-4 py-1.5 rounded-full bg-[#f1f5f9] text-[#0a0a0a] text-[13px] font-medium font-['Urbanist',sans-serif] tracking-wide"
@@ -84,7 +89,7 @@ const Projects = () => {
                     {project.niche}
                   </p>
                 </div>
-              </Link>
+              </a>
             </div>
           ))}
         </div>

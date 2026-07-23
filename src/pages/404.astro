@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="404 - Page Not Found">
+  <script>
+    sessionStorage.redirect = location.href;
+  </script>
+  <meta http-equiv="refresh" content="0;url=/">
+</Layout>
