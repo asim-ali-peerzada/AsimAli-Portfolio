@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fragment+Mono:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Urbanist', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fragment Mono', monospace;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%; /* #0a0a0a - deep charcoal */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+
+    --primary: 160 84% 39%; /* #10b981 - emerald */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%; /* #f1f5f9 - slate off-white */
+    --secondary-foreground: 0 0% 4%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%; /* #64748b - slate */
+
+    --accent: 160 84% 39%; /* #10b981 - emerald accent */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 20% 91%; /* #e2e8f0 - slate border */
+    --input: 215 20% 91%;
+    --ring: 160 84% 39%;
+
+    --radius: 2rem; /* 32px */
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  /* Smooth scroll is handled programmatically for nav clicks */
+}
+
+@layer utilities {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom premium styles */
+.portfolio-card {
+  @apply w-full mx-auto border border-brand-border bg-brand-bg rounded-[32px] p-6 md:p-12 mb-8 relative overflow-hidden transition-all duration-300;
+}
+
+.portfolio-card-dark {
+  @apply w-full mx-auto border border-brand-dark bg-brand-dark text-white rounded-[32px] p-6 md:p-12 mb-8 relative overflow-hidden transition-all duration-300;
+}
