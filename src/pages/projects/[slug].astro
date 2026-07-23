@@ -12,8 +12,52 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+
+const pageTitle = `${project.title} — ${project.niche} | Asim Ali`;
+const pageDescription = `${project.niche}. ${project.overview ? project.overview.slice(0, 155) : ''}...`;
+const heroImage = project.image ? (typeof project.image === 'string' ? project.image : project.image.src) : 'https://asimali.online/opengraph-image.png';
+const canonicalUrl = `https://asimali.online/projects/${project.slug}`;
+
+const projectJsonLd = [
+  {
+    "@type": "CreativeWork",
+    "@id": `${canonicalUrl}#creativework`,
+    "url": canonicalUrl,
+    "name": project.title,
+    "headline": `${project.title} — ${project.niche}`,
+    "description": project.overview || project.niche,
+    "author": { "@id": "https://asimali.online/#asim-ali" },
+    "keywords": project.tags ? project.tags.join(', ') : '',
+    "creator": { "@id": "https://asimali.online/#asim-ali" }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://asimali.online/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": project.title,
+        "item": canonicalUrl
+      }
+    ]
+  }
+];
 ---
 
-<Layout title={`${project.title} — Asim Ali Portfolio`}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={heroImage}
+  type="article"
+  canonicalUrl={canonicalUrl}
+  jsonLd={projectJsonLd}
+>
   <ProjectDetailRoot project={project} client:load />
 </Layout>

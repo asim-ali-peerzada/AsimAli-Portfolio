@@ -2,11 +2,90 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  canonicalUrl?: string;
+  jsonLd?: object | object[];
 }
 
-  const { title, description = 'Asim Ali is a Laravel Backend Developer & Enterprise SaaS Engineer from Pakistan.' } = Astro.props;
+const {
+  title,
+  description = 'Asim Ali is a Laravel Backend Developer & Enterprise SaaS Engineer from Pakistan specializing in secure, multi-tenant SaaS platforms and custom API architecture.',
+  image = 'https://asimali.online/opengraph-image.png',
+  type = 'website',
+  canonicalUrl,
+  jsonLd,
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.href : 'https://asimali.online';
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 
 import '@/styles/global.css';
+
+const baseSchemaGraph = [
+  {
+    "@type": "WebSite",
+    "@id": "https://asimali.online/#website",
+    "url": "https://asimali.online/",
+    "name": "Asim Ali - Software Developer Portfolio",
+    "description": "Official portfolio of Asim Ali, a Software Engineer from Punjab, Pakistan specializing in Laravel, React, and scalable web applications.",
+    "publisher": { "@id": "https://asimali.online/#asim-ali" }
+  },
+  {
+    "@type": "Person",
+    "@id": "https://asimali.online/#asim-ali",
+    "name": "Asim Ali",
+    "givenName": "Asim",
+    "familyName": "Ali",
+    "url": "https://asimali.online/",
+    "jobTitle": "Software Engineer",
+    "description": "Asim Ali is a Software Engineer from Punjab, Pakistan with 2+ years of experience specializing in PHP, Laravel, React, and building scalable enterprise web applications.",
+    "image": "https://asimali.online/opengraph-image.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hasilpur",
+      "addressRegion": "Punjab",
+      "addressCountry": "Pakistan"
+    },
+    "email": "asimalipeerzada@gmail.com",
+    "knowsAbout": [
+      "PHP", "Laravel", "React", "JavaScript", "TypeScript",
+      "MySQL", "Redis", "REST API", "WebSockets", "Docker", "Git",
+      "Multi-Tenant SaaS", "RBAC", "JWT Authentication", "SSO",
+      "Queue-Based Processing", "ETL Pipelines", "OCR",
+      "RAG Engines", "Vector Databases", "LLM Integration"
+    ],
+    "knowsLanguage": ["en", "ur"],
+    "hasCredential": "Software Engineering",
+    "sameAs": [
+      "https://linkedin.com/in/the-asimali",
+      "https://github.com/asim-ali-peerzada"
+    ]
+  },
+  {
+    "@type": "ProfessionalService",
+    "name": "Asim Ali — Software Engineering Services",
+    "description": "Enterprise SaaS development, Laravel backend architecture, React frontend development, CRM automation, identity management, and AI integration services.",
+    "provider": { "@id": "https://asimali.online/#asim-ali" },
+    "url": "https://asimali.online/",
+    "areaServed": "Worldwide",
+    "serviceType": [
+      "Enterprise SaaS Development",
+      "Laravel Backend Architecture",
+      "React Frontend Development",
+      "CRM & Sales Automation",
+      "Identity & Access Management",
+      "Workflow Automation",
+      "REST API Engineering",
+      "AI & LLM Integration"
+    ]
+  }
+];
+
+const mergedSchemaGraph = jsonLd
+  ? [...baseSchemaGraph, ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])]
+  : baseSchemaGraph;
 ---
 <!doctype html>
 <html lang="en">
@@ -40,12 +119,12 @@ import '@/styles/global.css';
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={Astro.url} />
-  <meta property="og:image" content="https://asimali.online/opengraph-image.png" />
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={imageUrl} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Asim Ali - Laravel Backend Architect & Enterprise Systems Engineer Portfolio" />
+  <meta property="og:image:alt" content={title} />
   <meta property="og:site_name" content="Asim Ali Portfolio" />
   <meta property="og:locale" content="en_US" />
 
@@ -53,75 +132,17 @@ import '@/styles/global.css';
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://asimali.online/opengraph-image.png" />
+  <meta name="twitter:image" content={imageUrl} />
 
   <!-- Favicon & Canonical -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="canonical" href={Astro.url} />
+  <link rel="canonical" href={canonical} />
   <meta name="theme-color" content="#10b981" />
 
   <!-- Schema.org JSON-LD -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://asimali.online/#website",
-        "url": "https://asimali.online/",
-        "name": "Asim Ali - Software Developer Portfolio",
-        "description": "Official portfolio of Asim Ali, a Software Engineer from Punjab, Pakistan specializing in Laravel, React, and scalable web applications.",
-        "publisher": { "@id": "https://asimali.online/#asim-ali" }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://asimali.online/#asim-ali",
-        "name": "Asim Ali",
-        "givenName": "Asim",
-        "familyName": "Ali",
-        "url": "https://asimali.online/",
-        "jobTitle": "Software Engineer",
-        "description": "Asim Ali is a Software Engineer from Punjab, Pakistan with 2+ years of experience specializing in PHP, Laravel, React, and building scalable enterprise web applications.",
-        "image": "https://asimali.online/opengraph-image.png",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Hasilpur",
-          "addressRegion": "Punjab",
-          "addressCountry": "Pakistan"
-        },
-        "email": "asimalipeerzada@gmail.com",
-        "knowsAbout": [
-          "PHP", "Laravel", "React", "JavaScript", "TypeScript",
-          "MySQL", "Redis", "REST API", "WebSockets", "Docker", "Git",
-          "Multi-Tenant SaaS", "RBAC", "JWT Authentication", "SSO",
-          "Queue-Based Processing", "ETL Pipelines", "OCR",
-          "RAG Engines", "Vector Databases", "LLM Integration"
-        ],
-        "knowsLanguage": ["en", "ur"],
-        "hasCredential": "Software Engineering",
-        "sameAs": [
-          "https://linkedin.com/in/the-asimali",
-          "https://github.com/asim-ali-peerzada"
-        ]
-      },
-      {
-        "@type": "ProfessionalService",
-        "name": "Asim Ali — Software Engineering Services",
-        "description": "Enterprise SaaS development, Laravel backend architecture, React frontend development, CRM automation, identity management, and AI integration services.",
-        "provider": { "@id": "https://asimali.online/#asim-ali" },
-        "url": "https://asimali.online/",
-        "areaServed": "Worldwide",
-        "serviceType": [
-          "Enterprise SaaS Development",
-          "Laravel Backend Architecture",
-          "React Frontend Development",
-          "CRM & Sales Automation",
-          "Identity & Access Management",
-          "Workflow Automation",
-          "REST API Engineering",
-          "AI & LLM Integration"
-        ]
-      }
-    ]
+    "@graph": mergedSchemaGraph
   })} />
 </head>
 <body>
