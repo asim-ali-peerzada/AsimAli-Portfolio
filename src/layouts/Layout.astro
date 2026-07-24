@@ -102,13 +102,15 @@ const mergedSchemaGraph = jsonLd
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics (deferred for LCP) -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-8S0QQM9138"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { window.dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-8S0QQM9138');
+    function gtag(){dataLayer.push(arguments);}
+    window.addEventListener('load', function() {
+      gtag('js', new Date());
+      gtag('config', 'G-8S0QQM9138');
+    });
   </script>
 
   <!-- SEO Meta Tags -->

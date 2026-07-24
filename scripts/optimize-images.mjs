@@ -139,6 +139,38 @@ function escapeRegex(str) {
 
 walkDir(distDir);
 
+// Add preload link for the CSS stylesheet (move it early in head for faster LCP)
+const cssFiles = readdirSync(assetsDir).filter(f => f.endsWith('.css'));
+for (const cssFile of cssFiles) {
+  const preloadTag = `<link rel="preload" href="/_astro/${cssFile}" as="style" fetchpriority="high">\n  `;
+  // Add preload to all HTML files right after <title>
+  for (const entry of readdirSync(distDir, { withFileTypes: true })) {
+    const fp = join(distDir, entry.name);
+    if (entry.isFile() && entry.name.endsWith('.html')) {
+      let content = readFileSync(fp, 'utf-8');
+      if (content.includes('rel="preload"') || content.includes('fetchpriority="high"')) continue;
+      content = content.replace('</title>', `</title>\n  ${preloadTag}`);
+      writeFileSync(fp, content, 'utf-8');
+      console.log(`  ✓ Added preload for ${cssFile} in ${entry.name}`);
+    }
+  }
+  // Also add preload to project subdirectory HTML files
+  const projectsDir = join(distDir, 'projects');
+  if (existsSync(projectsDir)) {
+    const projDirs = readdirSync(projectsDir);
+    for (const proj of projDirs) {
+      const projHtml = join(projectsDir, proj, 'index.html');
+      if (existsSync(projHtml)) {
+        let content = readFileSync(projHtml, 'utf-8');
+        if (content.includes('rel="preload"')) continue;
+        content = content.replace('</title>', `</title>\n  ${preloadTag}`);
+        writeFileSync(projHtml, content, 'utf-8');
+        console.log(`  ✓ Added preload for ${cssFile} in projects/${proj}/index.html`);
+      }
+    }
+  }
+}
+
 // Remove backup PNG files
 for (const file of pngFiles) {
   const bakPath = join(assetsDir, file + '.bak');
