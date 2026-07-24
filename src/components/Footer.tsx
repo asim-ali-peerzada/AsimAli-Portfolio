@@ -97,7 +97,7 @@ const Footer = () => {
               className="flex items-center justify-between p-4 md:p-6 rounded-[20px] md:rounded-[32px] bg-[#f8fafc]"
             >
               <div className="flex items-center gap-3 md:gap-5">
-                <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[16px] md:rounded-[20px] bg-[#10b981] flex items-center justify-center text-white shadow-sm shrink-0">
+                <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[16px] md:rounded-[20px] bg-[#047857] flex items-center justify-center text-white shadow-sm shrink-0">
                   <Mail size={20} className="md:w-[24px] md:h-[24px]" />
                 </div>
                 <div className="min-w-0">
@@ -119,7 +119,7 @@ const Footer = () => {
               className="flex items-center justify-between p-4 md:p-6 rounded-[20px] md:rounded-[32px] bg-[#f8fafc]"
             >
               <div className="flex items-center gap-3 md:gap-5">
-                <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[16px] md:rounded-[20px] bg-[#10b981] flex items-center justify-center text-white shadow-sm shrink-0">
+                <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[16px] md:rounded-[20px] bg-[#047857] flex items-center justify-center text-white shadow-sm shrink-0">
                   <FaLinkedin size={20} className="md:w-[24px] md:h-[24px]" />
                 </div>
                 <div className="min-w-0">
@@ -200,7 +200,7 @@ const Footer = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-5 rounded-full bg-[#059669] text-white font-bold text-[18px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-5 rounded-full bg-[#047857] text-white font-bold text-[18px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Sending...' : 'Start the Conversation'}
             </button>
