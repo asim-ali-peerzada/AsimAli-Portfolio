@@ -1,3 +1,4 @@
+import { srcSet } from '@/lib/utils';
 import portfolioHd from '@/assets/images/my-headshot/mine.png';
 import { ArrowRight, Mail } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
@@ -220,7 +221,7 @@ const Footer = () => {
 
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-full overflow-hidden brightness-90 flex-shrink-0">
-                  <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" loading="lazy" width={56} height={56} className="w-full h-full object-cover" />
+                  <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" loading="lazy" width={56} height={56} srcSet={srcSet(typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src, ['40w', '120w'])} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="font-medium text-white text-[17px] tracking-tight leading-tight">

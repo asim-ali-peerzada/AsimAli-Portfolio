@@ -1,3 +1,4 @@
+import { srcSet } from '@/lib/utils';
 import portfolioHd from '@/assets/images/my-headshot/croped-mine.png';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -53,7 +54,7 @@ const Navbar = () => {
         >
           <div className="relative w-10 h-10 flex-shrink-0">
             <div className="w-full h-full rounded-full overflow-hidden shadow-sm">
-              <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" width={40} height={40} className="w-full h-full object-cover" />
+              <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" width={40} height={40} srcSet={srcSet(typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src, ['40w', '120w'])} className="w-full h-full object-cover" />
             </div>
           </div>
 

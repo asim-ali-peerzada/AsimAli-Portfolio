@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { haptic } from '../lib/haptic';
+import { srcSet } from '../lib/utils';
 
 interface Project {
   slug: string;
@@ -239,6 +240,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
             fetchpriority="high"
             width={1920}
             height={1280}
+            srcSet={srcSet(project.image, ['800w', '1600w'])}
             className="w-full h-auto object-cover rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-200/50"
           />
         </div>
@@ -318,6 +320,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
               loading="lazy"
               width={1920}
               height={1280}
+              srcSet={srcSet(project.screenshots[activeSlide], ['800w', '1600w'])}
               className="w-full h-auto object-cover rounded-[24px]"
             />
           </div>

@@ -10,3 +10,8 @@ export function resolveImage(img: unknown): string {
   if (img && typeof img === 'object' && 'src' in img) return (img as { src: string }).src;
   return String(img);
 }
+
+export function srcSet(url: string, sizes: string[]): string {
+  const ext = url.match(/\.(webp|png)$/)?.[0] || '.webp';
+  return sizes.map(s => `${url.replace(new RegExp(`${ext}$`), `@${s}${ext}`)} ${s}`).join(', ');
+}

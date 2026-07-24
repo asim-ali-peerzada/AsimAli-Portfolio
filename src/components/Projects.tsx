@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { srcSet } from '@/lib/utils';
 import AnimatedTitle from './ui/AnimatedTitle';
 
 import {
@@ -63,6 +64,7 @@ const Projects = () => {
                     loading="lazy"
                     width={1920}
                     height={1280}
+                    srcSet={srcSet(project.image, ['800w', '1600w'])}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
