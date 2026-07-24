@@ -100,9 +100,9 @@ const Footer = () => {
                   <Mail size={20} className="md:w-[24px] md:h-[24px]" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-[18px] md:text-[24px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif]">
-                    Email
-                  </h4>
+                  <h3 className="text-[18px] md:text-[24px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif]">
+                Email
+                  </h3>
                   <p className="text-[13px] md:text-[16px] text-[#64748b] font-['Urbanist',sans-serif]">
                     Project ideas welcome. Spreadsheet horror stories too.
                   </p>
@@ -122,9 +122,9 @@ const Footer = () => {
                   <FaLinkedin size={20} className="md:w-[24px] md:h-[24px]" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="text-[18px] md:text-[24px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif]">
+                  <h3 className="text-[18px] md:text-[24px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif]">
                     LinkedIn
-                  </h4>
+                  </h3>
                   <p className="text-[13px] md:text-[16px] text-[#64748b] font-['Urbanist',sans-serif]">
                     Slightly more professional than my commit messages.
                   </p>
@@ -199,7 +199,7 @@ const Footer = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-5 rounded-full bg-[#10b981] text-white font-bold text-[18px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-5 rounded-full bg-[#059669] text-white font-bold text-[18px] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Sending...' : 'Start the Conversation'}
             </button>
@@ -234,7 +234,7 @@ const Footer = () => {
                       className="hover:text-white transition-colors"
                       aria-label="LinkedIn"
                     >
-                      <FaLinkedin size={15} />
+                      <FaLinkedin size={15} aria-label="LinkedIn" />
                     </a>
                     <a
                       href="mailto:asimalipeerzada@gmail.com"
@@ -252,7 +252,7 @@ const Footer = () => {
                       className="hover:text-white transition-colors"
                       aria-label="WhatsApp"
                     >
-                      <SiWhatsapp size={15} />
+                      <SiWhatsapp size={15} aria-label="WhatsApp" />
                     </a>
                   </div>
                 </div>
@@ -265,9 +265,9 @@ const Footer = () => {
 
             {/* Right Column */}
             <div className="w-full lg:w-[450px] flex flex-col items-start lg:mt-12 font-['Urbanist',sans-serif]">
-              <h4 className="text-[28px] md:text-[32px] font-medium text-white tracking-tight mb-6">
+              <h3 className="text-[28px] md:text-[32px] font-medium text-white tracking-tight mb-6">
                 Let's Connect
-              </h4>
+              </h3>
 
               <div className="flex flex-col gap-4 w-full">
                 <a

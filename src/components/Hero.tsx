@@ -12,7 +12,7 @@ const Hero = () => {
             Enterprise SaaS
           </div>
 
-          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#10b981] text-white text-[13px] md:text-[14px] font-medium tracking-wide">
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#059669] text-white text-[13px] md:text-[14px] font-medium tracking-wide">
             <Zap size={16} strokeWidth={2} />
             Product Engineering
           </div>
@@ -40,7 +40,7 @@ const Hero = () => {
           href="https://calendly.com/asimalipeerzada/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#10b981] text-white font-bold text-[17px] font-['Urbanist',sans-serif] shadow-md transition-colors hover:bg-[#0d9668]"
+          className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#059669] text-white font-bold text-[17px] font-['Urbanist',sans-serif] shadow-md transition-colors hover:bg-[#047857]"
         >
           Schedule a call <span>➔</span>
         </a>

@@ -99,7 +99,7 @@ const Projects = () => {
           <div className="flex justify-center mt-16">
             <button
               onClick={toggleShowAll}
-              className="inline-flex items-center justify-center px-10 py-4 rounded-full bg-[#10b981] text-white font-bold text-base hover:scale-105 transition-all duration-300 shadow-lg"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-full bg-[#059669] text-white font-bold text-base hover:scale-105 transition-all duration-300 shadow-lg"
             >
               {showAll ? 'Show Less' : 'Show More Work'}
             </button>
