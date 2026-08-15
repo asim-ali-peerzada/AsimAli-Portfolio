@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   const slugs = getAllProjectSlugs();
   return slugs.map((slug) => ({
     params: { slug },
-    props: { project: getProjectBySlug(slug) },
+    props: { project: getProjectBySlug(slug)! },
   }));
 }
 
@@ -15,7 +15,7 @@ const { project } = Astro.props;
 
 const pageTitle = `${project.title} — ${project.niche} | Asim Ali`;
 const pageDescription = `${project.niche}. ${project.overview ? project.overview.slice(0, 155) : ''}...`;
-const heroImage = project.image ? (typeof project.image === 'string' ? project.image : project.image.src) : 'https://asimali.online/opengraph-image.png';
+const heroImage = project.image || 'https://asimali.online/opengraph-image.png';
 const canonicalUrl = `https://asimali.online/projects/${project.slug}`;
 
 const projectJsonLd = [

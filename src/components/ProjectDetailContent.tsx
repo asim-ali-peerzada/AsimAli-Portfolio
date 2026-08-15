@@ -1,403 +1,594 @@
-import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
-import { haptic } from '../lib/haptic';
-import { srcSet } from '../lib/utils';
-
-interface Project {
-  slug: string;
-  title: string;
-  niche: string;
-  image: string;
-  screenshots: string[];
-  services: string[];
-  tools: string[];
-  overview: string;
-  problem: string;
-  solution: string;
-  highlights: string[];
-  role: string;
-  tags: string[];
-}
+import { useEffect } from 'react';
+import { ArrowLeft, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
+import ContactSection from './ContactSection';
+import { projects, type Project } from '@/data/projects';
 
 interface ProjectDetailContentProps {
   project: Project;
 }
 
-const FormattedText = ({ text }: { text?: string }) => {
-  if (!text) return null;
-  const parts = text.split(/(\*\*.*?\*\*)/g);
-  return (
-    <>
-      {parts.map((part, i) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          return (
-            <strong key={i} className="font-bold text-[#0a0a0a]">
-              {part.slice(2, -2)}
-            </strong>
-          );
-        }
-        return part;
-      })}
-    </>
-  );
-};
+interface EngineeringCaseStudy {
+  headlineSplit: [string, string];
+  tagline: string;
+  problem: string;
+  systemSummary: string;
+  roleDescription: string;
+  capabilities: { num: string; title: string; desc: string }[];
+  architecture: {
+    client: string;
+    api: string;
+    services: string[];
+    data: string[];
+    external: string[];
+  };
+  challenge: {
+    title: string;
+    body: string;
+    approach: string;
+    decision: string;
+    tradeoff: string;
+  };
+  outcome: string;
+}
 
-const getProjectMetrics = (slug: string) => {
-  switch (slug) {
-    case 'shipment-tracker-&-ims':
-      return [
-        { value: '100%', label: 'Automated Email Parsing' },
-        { value: '0', label: 'Manual Logistics Entries' },
-        { value: 'Real-Time', label: 'Inventory & Item Tracking' },
-        { value: 'Lead Architect', label: 'Engineering Role' },
-      ];
-    case 'sales-&-contact-management-(ccms)':
-      return [
-        { value: '100%', label: 'State-Based Lead Routing' },
-        { value: '0', label: 'Pipeline Visibility Gaps' },
-        { value: '5-Tier', label: 'Hierarchical RBAC Model' },
-        { value: 'Lead Architect', label: 'System Engineering Role' },
-      ];
-    case 'enterprise-single-sign-on':
-      return [
-        { value: '100%', label: 'Cross-Domain Identity Sync' },
-        { value: 'TOTP / 2FA', label: 'Zero-Trust Security' },
-        { value: '0', label: 'Manual Access Bottlenecks' },
-        { value: 'Security Lead', label: 'Identity Systems Role' },
-      ];
-    case 'ai-assistant-platform':
-      return [
-        { value: '100%', label: 'Multi-Tenant Isolation' },
-        { value: 'RAG Engine', label: 'Vector Knowledge Search' },
-        { value: '< 500ms', label: 'Microservice Response' },
-        { value: 'Full-Stack Lead', label: 'AI Architecture Role' },
-      ];
-    case 'zametrix':
-      return [
-        { value: '4-Role', label: 'Verification & Governance' },
-        { value: '100%', label: 'Verified Property Data' },
-        { value: 'Real-Time', label: 'Market Analytics Pulse' },
-        { value: 'Full-Stack Lead', label: 'PropTech Systems Role' },
-      ];
-    case 'genealogy-saas-platform':
-      return [
-        { value: '2', label: 'External Archive APIs Integrated' },
-        { value: 'OCR', label: 'Automated Document Extraction' },
-        { value: 'Multi-Tenant', label: 'Isolated Family Tree Data' },
-        { value: 'Lead Backend', label: 'Architecture Role' },
-      ];
-    default:
-      return [
-        { value: '100%', label: 'Automated Workflows' },
-        { value: '0', label: 'Manual Data Entry' },
-        { value: 'Production', label: 'Scalable Architecture' },
-        { value: 'Lead Engineer', label: 'Full-Stack Role' },
-      ];
-  }
-};
-
-const getRoleList = (slug: string, rawRole?: string) => {
-  switch (slug) {
-    case 'shipment-tracker-&-ims':
-      return [
-        { category: 'Architecture', text: 'Designed relational database schema and state-machine logistics workflows for item-level tracking.' },
-        { category: 'Backend & Automation', text: 'Built IMAP email ingestion engine, regex data extraction pipelines, and background queue workers.' },
-        { category: 'Security & Identity', text: 'Integrated external Single Sign-On (SSO) authentication with granular role-based access control.' },
-        { category: 'Frontend & Dashboards', text: 'Built administrative monitoring dashboards, Livewire UI, and real-time operational interfaces.' },
-      ];
-    case 'sales-&-contact-management-(ccms)':
-      return [
-        { category: 'Architecture', text: 'Designed complex relational schema for multi-level reporting hierarchies (CEO down to Sales Reps).' },
-        { category: 'Backend & APIs', text: 'Architected RESTful API layer in Laravel 11 secured with Sanctum token authorization.' },
-        { category: 'Workflow Automation', text: 'Implemented automated state-based lead assignment logic and quote-to-order pipeline.' },
-        { category: 'Analytics & Dashboards', text: 'Built aggregation endpoints powering real-time executive sales dashboards.' },
-      ];
-    case 'enterprise-single-sign-on':
-      return [
-        { category: 'Architecture & Security', text: 'Designed JWT authentication flows, Google 2FA protocols, and cross-domain token blacklisting.' },
-        { category: 'Backend Integrations', text: 'Developed external API synchronization logic and queued background job processing.' },
-        { category: 'Data Pipelines', text: 'Built queue-based engine for bulk Excel infrastructure data processing and import.' },
-        { category: 'Frontend & Governance', text: 'Delivered React-based control panel utilizing Recharts for real-time access monitoring.' },
-      ];
-    case 'ai-assistant-platform':
-      return [
-        { category: 'System Architecture', text: 'Decoupled system into Laravel 12 API foundation, FastAPI AI intelligence engine, and React 19 UI.' },
-        { category: 'AI & RAG Engineering', text: 'Built Retrieval-Augmented Generation pipeline with Pinecone vector DB and LLM integrations.' },
-        { category: 'Multi-Tenant Security', text: 'Engineered strict workspace tenant data isolation, RBAC, subscription billing, and audit logs.' },
-        { category: 'Multimodal Workflows', text: 'Integrated Whisper/Deepgram STT and ElevenLabs/OpenAI TTS for voice automation.' },
-      ];
-    case 'zametrix':
-      return [
-        { category: 'Full-Stack Architecture', text: 'Designed Laravel REST APIs and responsive React/TypeScript frontend.' },
-        { category: 'Governance & RBAC', text: 'Architected 4-role access hierarchy (Admin, Partner, Agent, Public) with Spatie RBAC.' },
-        { category: 'Data Pipelines', text: 'Engineered structured reporting and administrative verification pipeline for market updates.' },
-        { category: 'Analytics & CRM', text: 'Built property pulse comparison tools, PDF generation, and lead routing CRM module.' },
-      ];
-    case 'genealogy-saas-platform':
-      return [
-        { category: 'Backend Architecture', text: 'Designed multi-tenant data isolation model and GEDCOM archival schemas.' },
-        { category: 'API Integrations', text: 'Integrated NARA and OpenArch external historical archive APIs.' },
-        { category: 'OCR Pipeline', text: 'Built document extraction and fuzzy record-matching algorithms.' },
-        { category: 'Real-Time Collaboration', text: 'Implemented Pusher-based collaborative tree editing with real-time sync across family members.' },
-      ];
-    default:
-      return rawRole
-        ? [{ category: 'Engineering Focus', text: rawRole }]
-        : [{ category: 'Full-Stack Development', text: 'Designed and built full application workflow.' }];
-  }
+const caseStudiesData: Record<string, EngineeringCaseStudy> = {
+  'sales-&-contact-management-(ccms)': {
+    headlineSplit: ['CLIENT CONTACT', 'MANAGEMENT SYSTEM'],
+    tagline: 'Multi-tenant enterprise CRM centralizing sales pipelines, customer operations, real-time collaboration, reporting, and role-based access.',
+    problem: 'The organization struggled with fragmented client records, untracked multi-stage negotiations, and manual geographic lead distribution. They required a centralized platform enforcing strict corporate hierarchy visibility while providing executives with real-time analytics on quarterly quotas and pending deals.',
+    systemSummary: 'Engineered a modular Laravel CRM engine that automates lead assignment by territory, digitizes quote-to-order pipelines, and calculates live performance analytics across hierarchical dashboards.',
+    roleDescription: 'Lead Backend Architect: Designed the multi-tier relational schema (CEO down to Sales Reps), built the REST API layer in Laravel, implemented the state-mapping lead router, and crafted real-time aggregation queries for executive dashboards.',
+    capabilities: [
+      { num: '01', title: 'Multi-Tenant Architecture', desc: 'Isolated customer accounts with strict organization and workspace boundary enforcement.' },
+      { num: '02', title: 'Automated Territory Routing', desc: 'State-mapping engine routing incoming prospects to regional directors and account executives.' },
+      { num: '03', title: 'Sales Pipeline & Quotes', desc: 'Multi-stage approval workflow converting deals to verified revenue with automated PDF generation.' },
+      { num: '04', title: 'Hierarchical RBAC', desc: 'Cascading data visibility model ensuring granular record isolation across 5 corporate tiers.' },
+      { num: '05', title: 'Real-Time Sales Pulse', desc: 'High-throughput aggregation endpoints powering executive dashboards with live quarterly metrics.' },
+    ],
+    architecture: {
+      client: 'React 19 + TypeScript SPA / Responsive Executive Dashboard',
+      api: 'Laravel REST API Gateway (Sanctum Tokens, Rate Limiting, Route Middleware)',
+      services: ['Territory Router Service', 'Quote & Order Pipeline Engine', 'Aggregation & Metric Workers'],
+      data: ['MySQL Relational Schema (Cascading Indexes)', 'Redis Performance Cache Layer'],
+      external: ['Pusher Real-Time Sync', 'Microsoft Graph Email Ingestion', 'PDF Generator Engine'],
+    },
+    challenge: {
+      title: 'High-Dimensional Reporting Hierarchies Under Strict Data Isolation',
+      body: 'Executing hierarchical roll-up reports across thousands of client accounts where visibility dynamically branches based on role, assigned territories, and manager-subordinate relationships without triggering severe N+1 latency bottlenecks.',
+      approach: 'Decoupled raw transaction storage from presentation metrics. Built optimized recursive CTE database queries paired with scheduled Redis cache warmers for quarterly aggregated statistics.',
+      decision: 'Enforced authorization logic at the database query builder layer rather than in PHP application memory, preventing accidental data leaks and ensuring predictable sub-100ms response times.',
+      tradeoff: 'Prioritized read throughput and strict tenant isolation over distributed microservices complexity, keeping the entire transactional boundary atomic inside MySQL.',
+    },
+    outcome: 'Eliminated manual lead assignment delays, centralized pipeline tracking across 5 operational tiers, and provided C-level leadership with real-time visibility into quarterly revenue forecasting.',
+  },
+  'enterprise-single-sign-on': {
+    headlineSplit: ['ENTERPRISE UNIFIED', 'SINGLE SIGN-ON'],
+    tagline: 'Centralized identity and access platform enabling secure cross-domain authentication, role provisioning, JWT lifecycle management, and TOTP multi-factor security.',
+    problem: 'Managing user identities and credentials across disparate internal and partner applications created severe administrative overhead, delayed employee onboarding, and introduced critical security blind spots.',
+    systemSummary: 'Architected a centralized OAuth 2.0 and JWT identity hub fortified with Google TOTP 2FA, automated domain request workflows, and cross-application session synchronization.',
+    roleDescription: 'Security Architect & Full-Stack Lead: Designed cryptographic token lifecycles, implemented zero-trust access control with TOTP 2FA, built queue-based infrastructure processing, and delivered the React administrative monitoring panel.',
+    capabilities: [
+      { num: '01', title: 'Centralized Identity Hub', desc: 'Single-source-of-truth authentication serving independent web applications and services.' },
+      { num: '02', title: 'Zero-Trust 2FA Security', desc: 'Google Authenticator TOTP implementation with secure recovery workflows and rate limiting.' },
+      { num: '03', title: 'Cross-Domain Token Sync', desc: 'Cryptographically signed JWT sessions with instant revocation and cross-app token validation.' },
+      { num: '04', title: 'Approval-Based Access', desc: 'Self-service domain access request pipeline with admin moderation and audit logging.' },
+      { num: '05', title: 'Bulk Data Processing', desc: 'Queue-driven Excel ingestion engine processing thousands of site records in the background.' },
+    ],
+    architecture: {
+      client: 'Vite React Governance Portal + Embedded Login Client Widgets',
+      api: 'Laravel 12 Authentication & Identity Gateway',
+      services: ['JWT Cryptographic Signer / Verifier', 'TOTP 2FA Engine', 'Background Queue Workers'],
+      data: ['MySQL User & Identity Store', 'Redis Token Blacklist & Session Store'],
+      external: ['Connected Partner Apps (CCMS, JobFinder, Samsung)', 'SMTP Email Notification Engine'],
+    },
+    challenge: {
+      title: 'Instant Cross-Domain Token Invalidation in Distributed Applications',
+      body: 'Stateless JWT tokens cannot be revoked natively until expiry. When an employee is offboarded or a security incident occurs, session access across all connected applications must terminate immediately.',
+      approach: 'Implemented a hybrid token strategy: short-lived access tokens paired with a centralized Redis token blacklist and webhook event dispatching to invalidate client sessions in real time.',
+      decision: 'Adopted standard RS256 asymmetric signing keys so child applications can independently verify tokens while only the central SSO hub holds the private signing key.',
+      tradeoff: 'Introduced a lightweight Redis validation check on critical mutations in exchange for instant, cluster-wide revocation capability.',
+    },
+    outcome: 'Unified corporate authentication into a single secure gateway, reduced employee onboarding time by 80%, and achieved zero-trust 2FA enforcement across the entire application ecosystem.',
+  },
+  'genealogy-saas-platform': {
+    headlineSplit: ['GENEALOGY ARCHIVAL', 'SAAS PLATFORM'],
+    tagline: 'Multi-tenant genealogy platform combining interactive family trees, historical records, OCR data extraction, intelligent matching, and subscriptions.',
+    problem: 'Family history researchers struggle with fragmented archives, incompatible record schemas, and manual transcription bottlenecks when organizing generational lineages.',
+    systemSummary: 'Built a collaborative genealogy SaaS integrating automated historical record fetching, OCR document text extraction, and real-time family tree synchronization.',
+    roleDescription: 'Lead Backend Developer: Architected the multi-tenant archival schemas, integrated NARA/OpenArch historical APIs, engineered the OCR document extraction pipeline, and implemented collaborative live tree sync.',
+    capabilities: [
+      { num: '01', title: 'Multi-Tenant Lineage Isolation', desc: 'Workspace-level tenant isolation ensuring absolute privacy for sensitive family genealogical data.' },
+      { num: '02', title: 'OCR Record Extraction', desc: 'Automated image-to-text pipeline parsing historical death certificates, census logs, and deeds.' },
+      { num: '03', title: 'Intelligent Entity Matching', desc: 'Fuzzy-matching algorithms correlating discovered archives with existing tree nodes.' },
+      { num: '04', title: 'Real-Time Collaborative Trees', desc: 'Pusher-powered live editing allowing multiple family members to explore and update records.' },
+      { num: '05', title: 'Archival API Connectors', desc: 'Direct integrations with public archives (NARA, OpenArch) for automated source verification.' },
+    ],
+    architecture: {
+      client: 'Interactive Visual Family Tree Canvas + Responsive Record Viewer',
+      api: 'Laravel RESTful Archival & Lineage API',
+      services: ['OCR Extraction Worker', 'Fuzzy Record Matching Engine', 'GEDCOM Exporter / Importer'],
+      data: ['Relational Graph & Lineage MySQL Schema', 'Redis Real-Time State Cache'],
+      external: ['NARA Public API', 'OpenArch Archive API', 'Pusher WebSockets Engine'],
+    },
+    challenge: {
+      title: 'Fuzzy Matching & Recursive Graph Traversal on Historical Records',
+      body: 'Historical records frequently feature misspelled names, incomplete birth dates, and varying phonetics across decades. Querying deep generational graphs while correlating historical records posed severe performance challenges.',
+      approach: 'Implemented Double Metaphone phonetic matching combined with Levenshtein distance scoring inside background queue workers, pre-computing record suggestions asynchronously.',
+      decision: 'Employed an adjacency list model with indexed path materialized views in MySQL to execute deep ancestor and descendant queries in single round trips.',
+      tradeoff: 'Accepted slight background latency for automated suggestion discovery in exchange for lightning-fast instantaneous tree rendering in the browser.',
+    },
+    outcome: 'Transformed weeks of manual archive searching into automated background discoveries, enabling seamless cross-family collaboration on historical lineages.',
+  },
+  zametrix: {
+    headlineSplit: ['ZAMETRIX REAL ESTATE', 'DATA INTELLIGENCE'],
+    tagline: 'Full-stack property intelligence platform combining market data, investment analysis, location intelligence, property comparison, and business workflows.',
+    problem: 'Real estate investment decisions suffer from unstructured market data, lack of reliable location comparison metrics, and unmoderated agent listings lacking verified transaction histories.',
+    systemSummary: 'Architected a multi-role intelligence portal with administrative data verification pipelines, location pulse analytics, and integrated CRM lead handling.',
+    roleDescription: 'Full-Stack Architect: Engineered the Laravel REST API layer, designed the 4-role Spatie RBAC governance system, developed property pulse comparison algorithms, and built the React TypeScript frontend.',
+    capabilities: [
+      { num: '01', title: '4-Role Governance Workflow', desc: 'Structured pipeline (Admin, Partner, Agent, Public) enforcing strict data verification.' },
+      { num: '02', title: 'Market Pulse & Price Snapshots', desc: 'Analytics engine calculating price trends, infrastructure scoring, and area valuation indexes.' },
+      { num: '03', title: 'Property Comparison Engine', desc: 'Side-by-side geospatial and feature comparison across housing societies and phases.' },
+      { num: '04', title: 'Lead Routing & CRM', desc: 'Integrated inquiry tracking routing investor leads directly to verified territory partners.' },
+      { num: '05', title: 'Automated PDF Dossiers', desc: 'High-fidelity dynamic investment report generation for clients and institutional buyers.' },
+    ],
+    architecture: {
+      client: 'React 19 + TypeScript PWA (TanStack Query, Tailwind CSS, Framer Motion)',
+      api: 'Laravel REST API (Repository & Service Pattern, Sanctum Auth)',
+      services: ['Market Pulse Aggregator', 'Moderation Pipeline Service', 'DomPDF Report Generator'],
+      data: ['MySQL Property & Geospatial Store', 'Redis Query Cache Layer'],
+      external: ['Mapping & Geolocation Services', 'SMTP Lead Notification Engine'],
+    },
+    challenge: {
+      title: 'Guaranteeing Data Integrity in Crowdsourced Real Estate Reporting',
+      body: 'Ensuring that market pricing submitted by field agents across hundreds of sectors undergoes rigorous moderation before influencing public valuation algorithms.',
+      approach: 'Built an event-driven moderation queue where raw submissions are staged in isolated draft states and audited with change-differential tracking prior to publication.',
+      decision: 'Designed a unified repository pattern separating transactional updates from optimized analytical read models cached in Redis.',
+      tradeoff: 'Enforced mandatory administrative approval for market updates to prioritize high-trust data accuracy over unverified real-time volume.',
+    },
+    outcome: 'Delivered an enterprise-grade PropTech intelligence portal empowering investors with transparent price trends and structured property verification.',
+  },
+  'shipment-tracker-&-ims': {
+    headlineSplit: ['SHIPMENT TRACKER &', 'INVENTORY SYSTEM'],
+    tagline: 'Telecom logistics platform managing shipment lifecycles, item-level inventory, automated email processing, installation workflows, and operational tracking.',
+    problem: 'Logistics and engineering teams relied heavily on manual data entry to extract shipment manifests from unstructured supplier emails, leading to delayed records, missing parts, and operational blind spots.',
+    systemSummary: 'Engineered an automated data pipeline connecting directly to IMAP mailboxes, parsing unstructured email notifications, and managing item-level inventory through a stateful logistics engine.',
+    roleDescription: 'Backend Systems Architect: Engineered the automated IMAP email ingestion parser, designed the 7-stage finite state machine for shipment lifecycles, and built the administrative operations dashboard.',
+    capabilities: [
+      { num: '01', title: 'IMAP Automated Ingestion', desc: 'Direct mailbox connector fetching and extracting structured parts data from supplier emails.' },
+      { num: '02', title: 'State-Machine Lifecycle', desc: '7-stage finite state workflow tracking equipment from transit to installation and van transfers.' },
+      { num: '03', title: 'Item-Level Inventory Ledger', desc: 'Granular parts tracking monitoring quantities, serials, missing items, and technician usage.' },
+      { num: '04', title: 'Asynchronous Queue Pipelines', desc: 'Background workers handling heavy parsing and extraction without UI latency.' },
+      { num: '05', title: 'SSO & Governance Auditing', desc: 'External Single Sign-On integration with full mutation history and anomaly alerts.' },
+    ],
+    architecture: {
+      client: 'Responsive Operational Dashboard (Laravel Blade, Livewire, Tailwind CSS)',
+      api: 'Laravel 12 Backend Engine & Operational Controller Layer',
+      services: ['IMAP Mailbox Listener & Parser', 'Logistics Finite State Machine', 'Inventory Ledger Worker'],
+      data: ['MySQL Relational Schema (Item Ledger, Shipments, Audit Logs)', 'Redis Queue Store'],
+      external: ['Enterprise AuthCenter SSO', 'Telecom Vendor Supplier Mailboxes'],
+    },
+    challenge: {
+      title: 'Resilient Data Extraction from Unpredictable Multi-Vendor Email Formats',
+      body: 'Carrier and supplier dispatch emails varied significantly in formatting, character encoding, and structure. Missing a single part number or tracking code compromised downstream field technician installations.',
+      approach: 'Engineered a resilient heuristic parser with fallback regex extraction strategies, validation schemas, and an automated quarantine queue for unparseable emails requiring manual review.',
+      decision: 'Modeled the entire shipment lifecycle around a strict finite state machine, preventing impossible status leaps and guaranteeing transactional consistency on inventory counts.',
+      tradeoff: 'Enforced atomic database transactions on item quantity mutations to prioritize zero inventory discrepancy over raw ingestion velocity.',
+    },
+    outcome: 'Eliminated 100% of manual logistics data entry from incoming emails and established complete end-to-end traceability for critical telecom hardware.',
+  },
+  'ai-assistant-platform': {
+    headlineSplit: ['MULTI-TENANT AI', 'ASSISTANT PLATFORM'],
+    tagline: 'Enterprise SaaS platform unifying conversational AI, Retrieval-Augmented Generation (RAG), multimodal processing, and multi-tenant business automation.',
+    problem: 'Enterprises struggle to securely ground large language models in proprietary business documents while enforcing strict tenant data isolation, role-based controls, and voice interactions.',
+    systemSummary: 'Architected a decoupled microservices architecture uniting a Laravel 12 business API, a high-performance Python/FastAPI RAG engine, and a modern React 19 operational UI.',
+    roleDescription: 'Full-Stack Architect & AI Lead: Designed the decoupled microservices infrastructure, built the FastAPI RAG pipeline with Pinecone Vector DB, and implemented tenant workspace isolation with subscription billing.',
+    capabilities: [
+      { num: '01', title: 'Decoupled Microservices', desc: 'Laravel 12 core business engine paired with high-performance Python/FastAPI AI engine.' },
+      { num: '02', title: 'RAG Document Ingestion', desc: 'Chunking, embedding, and vector retrieval grounded in tenant-isolated Pinecone indexes.' },
+      { num: '03', title: 'Multimodal Voice Pipelines', desc: 'Real-time speech-to-text (Whisper) and text-to-speech (ElevenLabs) conversational engine.' },
+      { num: '04', title: 'Multi-Tenant Workspace RBAC', desc: 'Strict data partitioning, workspace invitations, audit logging, and subscription billing.' },
+      { num: '05', title: 'Observability & Monitoring', desc: 'Telemetry tracking token usage, vector query latency, and automated retry policies.' },
+    ],
+    architecture: {
+      client: 'React 19 Dashboard + Embeddable Conversational Widget (Tailwind CSS, Vite)',
+      api: 'Laravel 12 Core Business API & FastAPI AI Intelligence Microservice',
+      services: ['RAG Vector Pipeline (LangChain)', 'Multimodal Audio Processor', 'Stripe Billing & Quota Manager'],
+      data: ['MySQL Tenant & User Relational Store', 'Pinecone Vector Database', 'Redis Context Cache'],
+      external: ['OpenAI / Google Gemini LLMs', 'Whisper & ElevenLabs Audio APIs'],
+    },
+    challenge: {
+      title: 'Tenant-Isolated Semantic Retrieval with Sub-500ms Response Latency',
+      body: 'Executing semantic search across proprietary documents while strictly preventing cross-tenant data leakage and maintaining low conversational latency for real-time customer widgets.',
+      approach: 'Implemented metadata filtering at the vector database query layer, ensuring vector lookups are strictly constrained to the authenticated tenant workspace ID alongside Redis caching for frequent context embeddings.',
+      decision: 'Decoupled the synchronous HTTP request from heavy embedding pipelines via background queue workers, providing immediate UI feedback during large document uploads.',
+      tradeoff: 'Chose a dedicated Python/FastAPI microservice for AI computation rather than keeping everything in PHP, optimizing for native vector and ML library performance.',
+    },
+    outcome: 'Enabled secure, enterprise-grade AI automation with isolated business knowledge bases, sub-500ms response latency, and multimodal voice capabilities.',
+  },
 };
 
 export default function ProjectDetailContent({ project }: ProjectDetailContentProps) {
-  const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 400], [1, 1.03]);
-
-  const [activeSlide, setActiveSlide] = useState(0);
-
   useEffect(() => {
-    const forceScrollTop = () => {
-      window.scrollTo(0, 0);
-      if (document.documentElement) document.documentElement.scrollTop = 0;
-      if (document.body) document.body.scrollTop = 0;
-    };
-    forceScrollTop();
-    const rafId = requestAnimationFrame(forceScrollTop);
-    const t1 = setTimeout(forceScrollTop, 20);
-    const t2 = setTimeout(forceScrollTop, 100);
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    window.scrollTo(0, 0);
   }, [project.slug]);
 
+  // Find adjacent projects for bottom navigation loop
+  const currentIndex = projects.findIndex((p: Project) => p.slug === project.slug);
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : projects[projects.length - 1];
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : projects[0];
+
+  const caseStudy = caseStudiesData[project.slug] || {
+    headlineSplit: [project.title.toUpperCase(), 'CASE STUDY'] as [string, string],
+    tagline: project.description || project.niche,
+    problem: project.problem || 'Complex enterprise business workflow requiring automated digital tracking.',
+    systemSummary: project.overview || 'Engineered a scalable architecture solving operational friction.',
+    roleDescription: project.role || 'Backend Systems Architect & Full-Stack Engineer.',
+    capabilities: (project.highlights || []).map((h: string, i: number) => ({
+      num: String(i + 1).padStart(2, '0'),
+      title: h.split(':')[0] || `Capability ${i + 1}`,
+      desc: h.split(':')[1] || h,
+    })),
+    architecture: {
+      client: 'Responsive Web Application (TypeScript / React)',
+      api: 'RESTful Backend API Engine (Laravel)',
+      services: ['Core Business Logic Engine', 'Background Queue Workers'],
+      data: ['Relational MySQL Database', 'Redis Cache Layer'],
+      external: ['Third-Party Webhook & Service APIs'],
+    },
+    challenge: {
+      title: 'Architectural Scale & Security Isolation',
+      body: project.problem || 'Ensuring transactional consistency across large datasets.',
+      approach: project.solution || 'Built decoupled service architecture with automated data validation.',
+      decision: 'Enforced clean service boundaries with relational data isolation.',
+      tradeoff: 'Prioritized robust data integrity and maintainability.',
+    },
+    outcome: (project as any).keyTakeaway || 'Delivered a resilient, production-ready backend system engineered for long-term scalability.',
+  };
+
   const handleBackToProjects = () => {
-    haptic.light();
     sessionStorage.setItem('nav_target', 'projects');
     window.location.href = '/';
   };
 
-  const handlePrev = () => {
-    haptic.light();
-    setActiveSlide((prev) => (prev === 0 ? (project.screenshots?.length || 1) - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    haptic.light();
-    setActiveSlide((prev) => (prev === (project.screenshots?.length || 1) - 1 ? 0 : prev + 1));
-  };
-
-  const impactMetrics = getProjectMetrics(project.slug);
-  const roleList = getRoleList(project.slug, project.role);
-
-  const problemTexts: Record<string, string> = {
-    'shipment-tracker-&-ims': 'Logistics and engineering teams were **heavily reliant on manual data entry** to process shipment updates arriving via email. This fragmented communication led to slow, error-prone record-keeping, creating **severe operational blind spots** in tracking shipment lifecycles, identifying missing parts, and managing field technician assignments.',
-    'sales-&-contact-management-(ccms)': 'The organization was struggling with **fragmented client data**, untracked sales pipelines, and manual lead distribution. They required a centralized system that could **enforce strict data visibility** based on corporate hierarchy and geographic territories while providing real-time executive sales analytics.',
-    'enterprise-single-sign-on': 'Managing user access across multiple internal and external applications created **severe administrative bottlenecks**. Manual approval workflows led to **inconsistent onboarding/offboarding**, weak security enforcement, and fragmented infrastructure data, increasing both operational overhead and security vulnerabilities.',
-    'ai-assistant-platform': 'Businesses increasingly require AI automation but struggle to **securely integrate proprietary data**. Implementing intelligent chatbots often leads to **disconnected workflows and poor data isolation**, lacking backend infrastructure to manage multi-tenant access, document processing, and multi-channel customer conversations.',
-    zametrix: 'The real estate industry suffers from **fragmented, inconsistent, and unstructured property data**. Investors lack reliable location-based intelligence, field agents rely on manual reporting, and administrative teams struggle with **weak visibility and inefficient moderation workflows**.',
-  };
-
-  const solutionTexts: Record<string, string> = {
-    'shipment-tracker-&-ims': 'Architected an **automated data pipeline that connects directly to an IMAP mailbox** to fetch, parse, and classify incoming email notifications into structured shipment records. The system utilizes background queue processing for **reliable data extraction** and enforces a multi-step business workflow, allowing administrative teams to **track item-level quantities, flag missing equipment, and monitor technician transfers** through a centralized, SSO-secured dashboard.',
-    'sales-&-contact-management-(ccms)': 'Engineered a **robust Laravel-based CRM** that automates the entire sales lifecycle. The system **routes leads dynamically based on state-mapping**, digitizes the quote-to-order pipeline, and implements hierarchical dashboards giving executives **real-time aggregated insights into quarterly sales valuations** and team performance.',
-    'enterprise-single-sign-on': 'Architected a **centralized identity platform** that eliminates manual access handling. The system provides **secure, 2FA-fortified login** and enforces strict role-based access control (RBAC), allowing administrators to **seamlessly provision, synchronize, and monitor user access** across connected enterprise applications.',
-    'ai-assistant-platform': 'Architected a **full-stack SaaS solution** that securely isolates tenant data while providing advanced conversational AI. The platform leverages a Python/FastAPI microservice for **Retrieval-Augmented Generation (RAG)**, governed by a Laravel 12 API layer that **strictly enforces RBAC, subscription billing, and audit logging**.',
-    zametrix: 'Architected a **centralized, multi-role intelligence platform** that standardizes property data collection and moderation. Field agent submissions are **routed through administrative verification** before feeding a public analytics portal where users can **compare locations and explore property trends**.',
-  };
-
-  const problemText = problemTexts[project.slug] ?? project.problem;
-  const solutionText = solutionTexts[project.slug] ?? project.solution;
-
   return (
-    <main id="main-content" className="pt-28 md:pt-36 pb-24 px-4 md:px-8 max-w-[1600px] mx-auto space-y-12 md:space-y-16">
-      {/* Back Button */}
-      <div className="flex justify-start">
-        <button
-          onClick={handleBackToProjects}
-          className="flex items-center gap-2 pl-[9px] pr-[27px] py-[9px] rounded-full bg-[#f8fafc] text-[#0a0a0a] font-normal text-[18px] md:text-[20px] hover:bg-[#e2e8f0] transition-colors font-['Urbanist',sans-serif]"
-        >
-          <ArrowLeft size={22} strokeWidth={1.5} color="#0a0a0a" />
-          Back to Projects
-        </button>
-      </div>
+    <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center pt-28 sm:pt-36 pb-20 px-5 sm:px-8">
+      <div className="w-full max-w-[1140px] flex flex-col items-start gap-16 md:gap-24">
+        
+        {/* Top Breadcrumb / Back Link */}
+        <div className="w-full flex items-center justify-between">
+          <button
+            onClick={handleBackToProjects}
+            className="flex items-center gap-2 text-muted hover:text-white transition-colors group cursor-pointer font-display text-[14px] sm:text-[15px]"
+          >
+            <ArrowLeft size={18} className="text-orange group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Projects</span>
+          </button>
 
-      {/* Hero Container */}
-      <div className="w-full bg-slate-50/50 border border-slate-100/80 rounded-[40px] pt-10 px-4 md:px-8 pb-8 flex flex-col items-center">
-        <h1 className="text-4xl sm:text-5xl md:text-[76px] font-medium tracking-tight text-[#0a0a0a] mb-4 leading-[1.1] font-['Urbanist',sans-serif] text-center">
-          {project.title}
-        </h1>
-        <p className="text-[16px] md:text-[20px] font-normal text-[#64748b] tracking-wide mb-8 font-['Urbanist',sans-serif] text-center max-w-4xl">
-          {project.niche}
-        </p>
-
-        <div className="w-full flex items-center justify-center relative mb-8 overflow-hidden rounded-[24px]">
-          <motion.img
-            style={{ scale }}
-            src={project.image}
-            alt={project.title}
-            loading="eager"
-            fetchpriority="high"
-            width={1920}
-            height={1280}
-            srcSet={srcSet(project.image, ['800w', '1600w'])}
-            className="w-full h-auto object-cover rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-200/50"
-          />
+          <span className="text-[12px] sm:text-[13px] font-mono text-dim tracking-wider uppercase">
+            Case Study // {project.slug}
+          </span>
         </div>
 
-        {/* Impact Metrics */}
-        <div className="w-full bg-emerald-50/70 border border-emerald-100/80 rounded-[32px] p-6 md:p-8 my-10 md:my-14 shadow-xs">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-emerald-200/60">
-            {impactMetrics.map((metric, idx) => (
-              <div key={idx} className={`flex flex-col items-center justify-center text-center ${idx > 0 ? 'pt-4 lg:pt-0' : ''}`}>
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0d9668] font-['Urbanist',sans-serif]">
-                  {metric.value}
+        {/* 1. PROJECT HERO: Split Typography & Metadata */}
+        <div className="w-full flex flex-col items-start gap-6">
+          <h1 className="text-[44px] sm:text-[76px] lg:text-[96px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+            {caseStudy.headlineSplit[0]} <br />
+            <span className="text-ghost">{caseStudy.headlineSplit[1]}</span>
+          </h1>
+
+          <p className="text-[17px] sm:text-[20px] text-muted leading-[145%] font-normal font-display max-w-[760px]">
+            {caseStudy.tagline}
+          </p>
+
+          {/* Technical Metadata Pills */}
+          <div className="flex flex-wrap gap-2 pt-2">
+            {project.tags?.map((tag: string) => (
+              <span
+                key={tag}
+                className="text-[12px] sm:text-[13px] font-medium text-white/90 bg-white/5 border border-white/10 rounded-lg px-3.5 py-1 font-display tracking-wide"
+              >
+                {tag}
+              </span>
+            ))}
+            {project.tools?.slice(0, 3).map((tool: string) => (
+              <span
+                key={tool}
+                className="text-[12px] sm:text-[13px] font-medium text-orange/90 bg-orange/10 border border-orange/20 rounded-lg px-3.5 py-1 font-display tracking-wide"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+
+          {/* LARGE HERO SCREENSHOT */}
+          <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 mt-6 shadow-2xl">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-auto object-cover max-h-[640px]"
+            />
+          </div>
+        </div>
+
+        {/* 2. OVERVIEW, PROBLEM & ROLE */}
+        <section className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
+          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // The Problem
+            </span>
+            <h3 className="text-[20px] font-semibold text-white font-display">
+              Operational Friction
+            </h3>
+            <p className="text-[14.5px] text-muted leading-[150%] font-display">
+              {caseStudy.problem}
+            </p>
+          </div>
+
+          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // The System
+            </span>
+            <h3 className="text-[20px] font-semibold text-white font-display">
+              Engineered Solution
+            </h3>
+            <p className="text-[14.5px] text-muted leading-[150%] font-display">
+              {caseStudy.systemSummary}
+            </p>
+          </div>
+
+          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // My Role
+            </span>
+            <h3 className="text-[20px] font-semibold text-white font-display">
+              Architecture & Backend
+            </h3>
+            <p className="text-[14.5px] text-muted leading-[150%] font-display">
+              {caseStudy.roleDescription}
+            </p>
+          </div>
+        </section>
+
+        {/* 3. VISUAL INTERLUDE: First High-Resolution Screenshot */}
+        {project.screenshots && project.screenshots.length > 0 && (
+          <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-2xl">
+            <img
+              src={project.screenshots[0]}
+              alt={`${project.title} Interface 1`}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        )}
+
+        {/* 4. KEY CAPABILITIES (01-05 Architecture Modules) */}
+        <section className="w-full flex flex-col items-start gap-8">
+          <div>
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // Capabilities
+            </span>
+            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
+              Key System <span className="text-ghost">Modules</span>
+            </h2>
+          </div>
+
+          <div className="w-full flex flex-col gap-3">
+            {caseStudy.capabilities.map((cap) => (
+              <div
+                key={cap.num}
+                className="link-row flex items-start gap-5 rounded-2xl p-5 sm:p-6 bg-white/2 border border-white/7"
+              >
+                <span className="text-[14px] font-mono font-semibold text-orange bg-orange/10 border border-orange/25 rounded-md px-2.5 py-1 shrink-0 mt-0.5">
+                  {cap.num}
                 </span>
-                <span className="text-[11px] sm:text-[12px] lg:text-[13px] font-semibold text-slate-800 tracking-wider uppercase mt-1 font-['Urbanist',sans-serif]">
-                  {metric.label}
-                </span>
+                <div className="flex flex-col gap-1 flex-1">
+                  <h3 className="text-[18px] sm:text-[20px] font-semibold text-white font-display">
+                    {cap.title}
+                  </h3>
+                  <p className="text-[14px] sm:text-[14.5px] text-muted leading-[140%] font-display">
+                    {cap.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Services & Tech Stack */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full mt-2">
-          <div className="lg:col-span-6 bg-white border border-gray-200/60 rounded-[32px] p-6 lg:p-8 space-y-5 h-full shadow-xs">
-            <h3 className="text-[24px] md:text-[28px] font-semibold text-black tracking-tight font-['Urbanist',sans-serif]">
-              Services
-            </h3>
-            <div className="flex flex-wrap gap-2 lg:gap-3">
-              {project.services?.map((s, idx) => (
-                <span key={idx} className="px-4 py-2 rounded-full bg-[#f1f5f9] text-[#0a0a0a] text-[13px] lg:text-[14px] font-medium tracking-wide font-['Urbanist',sans-serif]">
-                  {s}
-                </span>
+        {/* 5. SYSTEM ARCHITECTURE DIAGRAM (Framer Dark System Aesthetics) */}
+        <section className="w-full flex flex-col items-start gap-8">
+          <div>
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // Architecture
+            </span>
+            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
+              System Topology <span className="text-ghost">& Data Flow</span>
+            </h2>
+          </div>
+
+          <div className="w-full rounded-2xl bg-white/[0.015] border border-white/10 p-6 sm:p-10 flex flex-col items-center gap-6">
+            {/* Top Layer: Client Application */}
+            <div className="w-full max-w-[500px] p-4 rounded-xl bg-white/[0.04] border border-white/12 text-center">
+              <span className="text-[11px] font-mono text-orange uppercase tracking-wider block">Presentation Layer</span>
+              <h4 className="text-[15px] sm:text-[16px] font-semibold text-white font-display mt-1">{caseStudy.architecture.client}</h4>
+            </div>
+
+            {/* Coral Arrow Down */}
+            <span className="text-orange font-mono text-[18px]">↓</span>
+
+            {/* Middle Layer: API Gateway */}
+            <div className="w-full max-w-[500px] p-4 rounded-xl bg-white/[0.06] border border-orange/30 text-center shadow-[0_0_24px_rgba(244,108,56,0.1)]">
+              <span className="text-[11px] font-mono text-orange uppercase tracking-wider block">API Gateway & Auth Boundary</span>
+              <h4 className="text-[15px] sm:text-[16px] font-semibold text-white font-display mt-1">{caseStudy.architecture.api}</h4>
+            </div>
+
+            {/* Coral Arrow Down */}
+            <span className="text-orange font-mono text-[18px]">↓</span>
+
+            {/* Domain Services Layer */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              {caseStudy.architecture.services.map((srv, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-white/[0.03] border border-white/8 text-center flex flex-col justify-center">
+                  <span className="text-[10px] font-mono text-muted uppercase tracking-wider block">Domain Service {idx + 1}</span>
+                  <p className="text-[13.5px] font-medium text-white font-display mt-1">{srv}</p>
+                </div>
               ))}
             </div>
+
+            {/* Coral Arrow Down */}
+            <span className="text-orange font-mono text-[18px]">↓</span>
+
+            {/* Persistence & External Integrations */}
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
+                <span className="text-[11px] font-mono text-orange uppercase tracking-wider block">Data & Cache Infrastructure</span>
+                <div className="flex flex-col gap-1 mt-2">
+                  {caseStudy.architecture.data.map((d, i) => (
+                    <p key={i} className="text-[13.5px] text-muted font-display">• {d}</p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
+                <span className="text-[11px] font-mono text-orange uppercase tracking-wider block">External Services & Integration</span>
+                <div className="flex flex-col gap-1 mt-2">
+                  {caseStudy.architecture.external.map((ext, i) => (
+                    <p key={i} className="text-[13.5px] text-muted font-display">• {ext}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="lg:col-span-6 bg-white border border-gray-200/60 rounded-[32px] p-6 lg:p-8 space-y-5 h-full shadow-xs">
-            <h3 className="text-[24px] md:text-[28px] font-semibold text-black tracking-tight font-['Urbanist',sans-serif]">
-              Tech Stack
+        </section>
+
+        {/* 6. VISUAL INTERLUDE: Second High-Resolution Screenshot */}
+        {project.screenshots && project.screenshots.length > 1 && (
+          <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-2xl">
+            <img
+              src={project.screenshots[1]}
+              alt={`${project.title} Interface 2`}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        )}
+
+        {/* 7. ENGINEERING SIGNATURE: Challenge, Approach, Decision, Trade-Off */}
+        <section className="w-full flex flex-col items-start gap-8">
+          <div>
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // Engineering Focus
+            </span>
+            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
+              Technical Deep-Dive <span className="text-ghost">& Decisions</span>
+            </h2>
+          </div>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="link-row p-6 sm:p-7 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-2.5">
+              <span className="text-[12px] font-mono text-orange uppercase tracking-wider">01. The Technical Challenge</span>
+              <h4 className="text-[17px] font-semibold text-white font-display">{caseStudy.challenge.title}</h4>
+              <p className="text-[14px] text-muted leading-[145%] font-display">{caseStudy.challenge.body}</p>
+            </div>
+
+            <div className="link-row p-6 sm:p-7 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-2.5">
+              <span className="text-[12px] font-mono text-orange uppercase tracking-wider">02. Engineering Approach</span>
+              <h4 className="text-[17px] font-semibold text-white font-display">Systematic Resolution</h4>
+              <p className="text-[14px] text-muted leading-[145%] font-display">{caseStudy.challenge.approach}</p>
+            </div>
+
+            <div className="link-row p-6 sm:p-7 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-2.5">
+              <span className="text-[12px] font-mono text-orange uppercase tracking-wider">03. Key Architectural Decision</span>
+              <h4 className="text-[17px] font-semibold text-white font-display">Intentional Design Choice</h4>
+              <p className="text-[14px] text-muted leading-[145%] font-display">{caseStudy.challenge.decision}</p>
+            </div>
+
+            <div className="link-row p-6 sm:p-7 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-2.5">
+              <span className="text-[12px] font-mono text-orange uppercase tracking-wider">04. Intentional Trade-Off</span>
+              <h4 className="text-[17px] font-semibold text-white font-display">Prioritization Rationale</h4>
+              <p className="text-[14px] text-muted leading-[145%] font-display">{caseStudy.challenge.tradeoff}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. MORE SCREENSHOTS (Gallery Grid if available) */}
+        {project.screenshots && project.screenshots.length > 2 && (
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            {project.screenshots.slice(2, 6).map((shot: string, idx: number) => (
+              <div key={idx} className="rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-xl">
+                <img src={shot} alt={`${project.title} gallery ${idx + 1}`} className="w-full h-auto object-cover" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 9. OUTCOME & TECHNOLOGY STACK */}
+        <section className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // The Outcome
+            </span>
+            <h3 className="text-[22px] font-semibold text-white font-display">
+              Business & Operational Value
             </h3>
-            <div className="flex flex-wrap gap-2 lg:gap-3">
-              {project.tools?.map((tool, idx) => (
-                <span key={idx} className="px-4 py-2 rounded-full bg-[#f1f5f9] text-[#0a0a0a] text-[13px] lg:text-[14px] font-medium tracking-wide font-['Urbanist',sans-serif]">
+            <p className="text-[15px] text-muted leading-[150%] font-display">
+              {caseStudy.outcome}
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
+            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+              // Technologies Used
+            </span>
+            <h3 className="text-[22px] font-semibold text-white font-display">
+              Stack & Infrastructure
+            </h3>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {project.tools?.map((tool: string) => (
+                <span
+                  key={tool}
+                  className="text-[12px] font-medium text-white/90 bg-white/5 border border-white/10 rounded-md px-2.5 py-1 font-display"
+                >
                   {tool}
                 </span>
               ))}
             </div>
           </div>
+        </section>
+
+        {/* 10. PROJECT NAVIGATION LOOP (Previous / Next Projects) */}
+        <div className="w-full border-t border-b border-white/10 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <a
+            href={`/projects/${prevProject.slug}`}
+            className="flex items-center gap-3 text-muted hover:text-white transition-colors group cursor-pointer"
+          >
+            <ArrowDownLeft size={22} className="text-orange group-hover:-translate-x-1 group-hover:translate-y-1 transition-transform" />
+            <div className="flex flex-col items-start">
+              <span className="text-[11px] font-mono text-dim uppercase tracking-wider">Previous Project</span>
+              <span className="text-[16px] sm:text-[18px] font-semibold text-white font-display group-hover:text-orange transition-colors">
+                {prevProject.title}
+              </span>
+            </div>
+          </a>
+
+          <a
+            href={`/projects/${nextProject.slug}`}
+            className="flex items-center gap-3 text-muted hover:text-white transition-colors group cursor-pointer sm:text-right"
+          >
+            <div className="flex flex-col items-end">
+              <span className="text-[11px] font-mono text-dim uppercase tracking-wider">Next Project</span>
+              <span className="text-[16px] sm:text-[18px] font-semibold text-white font-display group-hover:text-orange transition-colors">
+                {nextProject.title}
+              </span>
+            </div>
+            <ArrowUpRight size={22} className="text-orange group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </a>
         </div>
+
+        {/* 11. CONTACT CTA AT BOTTOM OF CASE STUDY */}
+        <div className="w-full max-w-[696px]">
+          <ContactSection />
+        </div>
+
       </div>
-
-      {/* Overview & Problem */}
-      <section className="flex flex-col lg:flex-row gap-6 w-full">
-        <div className="w-full lg:w-[40%] bg-[#f8fafc] border border-gray-100 rounded-[32px] px-[32px] md:px-[39px] py-[36px] md:py-[45px] flex flex-col">
-          <h2 className="text-[32px] md:text-[48px] font-medium tracking-tight text-[#0a0a0a] mb-6 leading-[1.1] font-['Urbanist',sans-serif]">
-            Overview
-          </h2>
-          <p className="text-[16px] md:text-[19px] text-[#475569] leading-relaxed font-normal font-['Urbanist',sans-serif]">
-            <FormattedText text={project.overview} />
-          </p>
-        </div>
-        <div className="w-full lg:w-[60%] bg-[#f8fafc] border border-gray-100 rounded-[32px] px-[32px] md:px-[39px] py-[36px] md:py-[45px] flex flex-col">
-          <h2 className="text-[32px] md:text-[48px] font-medium tracking-tight text-[#0a0a0a] mb-6 leading-[1.1] font-['Urbanist',sans-serif]">
-            Problem
-          </h2>
-          <p className="text-[16px] md:text-[19px] text-[#475569] leading-relaxed font-normal font-['Urbanist',sans-serif]">
-            <FormattedText text={problemText} />
-          </p>
-        </div>
-      </section>
-
-      {/* Screenshots Carousel */}
-      <section className="w-full rounded-[40px] py-8 md:py-12 px-4 md:px-8 flex flex-col items-center bg-slate-50/40 border border-slate-100/60">
-        <div className="w-full max-w-5xl flex flex-col items-center">
-          <div className="w-full overflow-hidden rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-gray-200/60 bg-white">
-            <img
-              src={project.screenshots[activeSlide]}
-              alt={`screenshot-${activeSlide}`}
-              loading="lazy"
-              width={1920}
-              height={1280}
-              srcSet={srcSet(project.screenshots[activeSlide], ['800w', '1600w'])}
-              className="w-full h-auto object-cover rounded-[24px]"
-            />
-          </div>
-          <div className="flex items-center justify-center gap-4 mt-8 p-1.5 rounded-full bg-white border border-gray-200/80 shadow-md">
-            <button
-              onClick={handlePrev}
-              className="w-10 h-10 rounded-full bg-[#f8fafc] border border-gray-200 text-[#0a0a0a] flex items-center justify-center hover:bg-[#10b981] hover:text-white hover:border-[#10b981] active:scale-95 transition-all shadow-xs"
-              aria-label="Previous screenshot"
-            >
-              <ArrowLeft size={18} strokeWidth={2} />
-            </button>
-            <div className="px-4 py-1 rounded-full bg-[#f1f5f9] text-[13px] font-semibold text-[#0a0a0a] font-['Urbanist',sans-serif] tracking-wider">
-              {activeSlide + 1} <span className="text-gray-400 font-normal">/</span> {project.screenshots?.length}
-            </div>
-            <button
-              onClick={handleNext}
-              className="w-10 h-10 rounded-full bg-[#f8fafc] border border-gray-200 text-[#0a0a0a] flex items-center justify-center hover:bg-[#10b981] hover:text-white hover:border-[#10b981] active:scale-95 transition-all shadow-xs"
-              aria-label="Next screenshot"
-            >
-              <ArrowRight size={18} strokeWidth={2} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution, Role & Highlights */}
-      <section className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-        <div className="lg:w-[55%] space-y-12">
-          <div className="space-y-4">
-            <h2 className="text-[32px] md:text-[48px] font-medium tracking-tight text-[#0a0a0a] leading-[1.1] font-['Urbanist',sans-serif] text-left">
-              Solution
-            </h2>
-            <p className="text-[16px] md:text-[19px] text-[#475569] leading-relaxed font-normal font-['Urbanist',sans-serif]">
-              <FormattedText text={solutionText} />
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <h2 className="text-[32px] md:text-[48px] font-medium tracking-tight text-[#0a0a0a] leading-[1.1] font-['Urbanist',sans-serif] text-left">
-              My Role
-            </h2>
-            <div className="space-y-4">
-              {roleList.map((item, idx) => (
-                <div key={idx} className="p-5 rounded-[20px] bg-[#f8fafc] border border-gray-200/60 flex items-start gap-4 transition-all hover:border-gray-300">
-                  <div className="w-8 h-8 rounded-full bg-[#10b981]/10 text-[#10b981] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h4 className="text-[16px] md:text-[18px] font-bold text-[#0a0a0a] font-['Urbanist',sans-serif]">
-                      {item.category}
-                    </h4>
-                    <p className="text-[14px] md:text-[16px] text-[#475569] leading-relaxed font-normal font-['Urbanist',sans-serif] mt-1">
-                      {item.text}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:w-[45%] w-full bg-[#f8fafc] border border-gray-100 rounded-[32px] p-8 md:p-12">
-          <h2 className="text-[32px] md:text-[48px] font-medium tracking-tight text-[#0a0a0a] leading-[1.1] mb-8 font-['Urbanist',sans-serif] text-left">
-            Highlights
-          </h2>
-          <ul className="space-y-5">
-            {project.highlights?.map((h) => (
-              <li key={h} className="flex items-start gap-3">
-                <CheckCircle size={20} strokeWidth={1.5} className="mt-0.5 flex-shrink-0 text-[#10b981]" />
-                <span className="text-[15px] md:text-[17px] text-[#0a0a0a] font-medium leading-relaxed font-['Urbanist',sans-serif]">
-                  {h}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </main>
   );
 }

@@ -1,16 +1,11 @@
-import cover from '@/assets/images/ims/ims-cover.png';
-import shot1 from '@/assets/images/ims/ims-shot-1.png';
-import shot2 from '@/assets/images/ims/ims-shot-2.png';
-import shot3 from '@/assets/images/ims/ims-shot-3.png';
-import shot4 from '@/assets/images/ims/ims-shot-4.png';
-import shot5 from '@/assets/images/ims/ims-shot-5.png';
-
 export const shipmentTrackerIms = {
-  title: 'IMS (Inventory & Shipment Management)',
+  title: 'Shipment Tracker & IMS',
+  description:
+    'Telecom logistics platform managing shipment lifecycles, inventory, automated email processing, installation workflows, and operational tracking.',
   niche:
     'Enterprise-grade inventory and shipment management platform bridging unstructured email notifications with a structured operational web dashboard.',
-  image: cover,
-  tags: ['IMAP', 'ETL', 'Queues'],
+  image: '/images/ims/ims-cover.webp',
+  tags: ['IMAP', 'Workflow Automation', 'Queues', 'Inventory'],
   slug: 'shipment-tracker-&-ims',
   services: [
     'Workflow Automation & ETL',
@@ -43,5 +38,12 @@ export const shipmentTrackerIms = {
     'Blade, Livewire, Tailwind CSS, Vite',
     'External SSO Integration',
   ],
-  screenshots: [cover, shot5, shot1, shot2, shot3, shot4],
+  screenshots: [
+    '/images/ims/ims-cover.webp',
+    '/images/ims/ims-shot-5.webp',
+    '/images/ims/ims-shot-1.webp',
+    '/images/ims/ims-shot-2.webp',
+    '/images/ims/ims-shot-3.webp',
+    '/images/ims/ims-shot-4.webp',
+  ],
 };

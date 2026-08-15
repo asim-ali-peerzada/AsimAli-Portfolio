@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import Navbar from './Navbar';
-import Footer from './Footer';
-import Hero from './Hero';
-import Metrics from './Metrics';
+import LeftPortraitCard from './LeftPortraitCard';
+import HeroContent from './HeroContent';
 import Projects from './Projects';
-import HowIBuild from './HowIBuild';
-import TechnicalAuthority from './TechnicalAuthority';
 import Experience from './Experience';
-import { TooltipProvider } from './ui/tooltip';
-import { Toaster } from './ui/toaster';
-import { Toaster as Sonner } from './ui/sonner';
+import EngineeringImpact from './EngineeringImpact';
+import TechStack from './TechStack';
+import ContactSection from './ContactSection';
+import Footer from './Footer';
+import { Toaster } from 'react-hot-toast';
 
 const SCROLL_KEY = 'homepage_scroll';
 
@@ -48,19 +47,32 @@ export default function HomeRoot() {
   }, []);
 
   return (
-    <TooltipProvider>
+    <>
       <Navbar />
-      <main id="main-content" className="pt-16 md:pt-20">
-        <Hero />
-        <Metrics />
-        <Projects />
-        <HowIBuild />
-        <TechnicalAuthority />
-        <Experience />
+      <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center">
+        {/* Main 1140px Canvas Container */}
+        <div className="w-full max-w-[1140px] px-5 sm:px-8 lg:px-0 pt-28 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-[50px] lg:gap-[100px] relative">
+          
+          {/* Sticky Left Column (Centered on Mobile, Pinned on Desktop) */}
+          <aside className="w-full max-w-[344px] shrink-0 lg:sticky lg:top-[50px] z-20 flex justify-center">
+            <LeftPortraitCard />
+          </aside>
+
+          {/* Scrollable Right Column */}
+          <div className="flex-1 w-full max-w-[696px] flex flex-col items-start min-w-0">
+            <HeroContent />
+            <Projects />
+            <Experience />
+            <EngineeringImpact />
+            <TechStack />
+            <ContactSection />
+          </div>
+        </div>
+
+        {/* Global Bottom Footer */}
+        <Footer />
       </main>
-      <Footer />
       <Toaster />
-      <Sonner />
-    </TooltipProvider>
+    </>
   );
 }

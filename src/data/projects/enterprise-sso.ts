@@ -1,15 +1,11 @@
-import cover from '@/assets/images/sso/sso-cover.png';
-import shot1 from '@/assets/images/sso/sso-shot-1.png';
-import shot2 from '@/assets/images/sso/sso-shot-2.png';
-import shot3 from '@/assets/images/sso/sso-shot-3.png';
-import shot4 from '@/assets/images/sso/sso-shot-4.png';
-
 export const enterpriseSso = {
-  title: 'Unified SSO',
+  title: 'Enterprise Unified SSO',
+  description:
+    'Centralized identity platform connecting multiple applications through secure authentication, access provisioning, and cross-application access control.',
   niche:
     'Centralized identity platform enabling secure cross-application access, role provisioning, JWT authentication, and TOTP-based multi-factor security.',
-  image: cover,
-  tags: ['Security', 'JWT', 'SSO'],
+  image: '/images/sso/sso-cover.webp',
+  tags: ['Identity Platform', 'JWT', 'OAuth', 'MFA'],
   slug: 'enterprise-single-sign-on',
   services: [
     'Identity & Access Management (IAM)',
@@ -42,5 +38,11 @@ export const enterpriseSso = {
     'Queue & Job-based Processing',
     'Recharts (Analytics) & SMTP',
   ],
-  screenshots: [cover, shot1, shot2, shot3, shot4],
+  screenshots: [
+    '/images/sso/sso-cover.webp',
+    '/images/sso/sso-shot-1.webp',
+    '/images/sso/sso-shot-2.webp',
+    '/images/sso/sso-shot-3.webp',
+    '/images/sso/sso-shot-4.webp',
+  ],
 };

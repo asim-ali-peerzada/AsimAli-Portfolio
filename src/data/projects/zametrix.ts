@@ -1,21 +1,11 @@
-import cover from '@/assets/images/zametrix/zm-cover.png';
-import shot1 from '@/assets/images/zametrix/zm-shot-1.png';
-
-import reports from '@/assets/images/zametrix/zm-reports.png';
-import shot3 from '@/assets/images/zametrix/zm-shot-3.png';
-import shot4 from '@/assets/images/zametrix/zm-shot-4.png';
-import shot5 from '@/assets/images/zametrix/zm-shot-5.png';
-import shot6 from '@/assets/images/zametrix/zm-shot-6.png';
-import shot7 from '@/assets/images/zametrix/zm-shot-7.png';
-import shot8 from '@/assets/images/zametrix/zm-shot-8.png';
-import shot9 from '@/assets/images/zametrix/zm-shot-9.png';
-
 export const zametrix = {
-  title: 'Zametrix',
+  title: 'Zametrix — Real Estate Intelligence',
+  description:
+    'Property intelligence platform combining market data, investment analysis, location intelligence, property comparison, and business workflows.',
   niche:
     'Full-stack property intelligence platform for real estate market analysis and investor decision support.',
-  image: cover,
-  tags: ['Real Estate', 'Analytics', 'RBAC'],
+  image: '/images/zametrix/zm-cover.webp',
+  tags: ['Data Intelligence', 'Analytics', 'Geospatial', 'APIs'],
   slug: 'zametrix',
   services: [
     'Enterprise SaaS Development',
@@ -49,5 +39,16 @@ export const zametrix = {
     'Redis (Caching)',
     'DomPDF (Report Generation)',
   ],
-  screenshots: [cover, shot3, shot1, shot4, shot5, shot6, shot7, shot8, shot9, reports],
+  screenshots: [
+    '/images/zametrix/zm-cover.webp',
+    '/images/zametrix/zm-shot-3.webp',
+    '/images/zametrix/zm-shot-1.webp',
+    '/images/zametrix/zm-shot-4.webp',
+    '/images/zametrix/zm-shot-5.webp',
+    '/images/zametrix/zm-shot-6.webp',
+    '/images/zametrix/zm-shot-7.webp',
+    '/images/zametrix/zm-shot-8.webp',
+    '/images/zametrix/zm-shot-9.webp',
+    '/images/zametrix/zm-reports.webp',
+  ],
 };

@@ -1,112 +1,73 @@
-import { srcSet } from '@/lib/utils';
-import portfolioHd from '@/assets/images/my-headshot/croped-mine.png';
-import { Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Briefcase, Cpu, FolderGit2, Home, Mail, Zap } from "lucide-react";
+import React from "react";
 
-const navItems = [
-  { label: 'Work', href: '#projects' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Impact', href: '#experience' },
-  { label: 'Contact', href: '#contact-form-section' },
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+}
+
+const navItems: NavItem[] = [
+  { label: "Home", href: "#hero", icon: Home },
+  { label: "Projects", href: "#projects", icon: FolderGit2 },
+  { label: "Experience", href: "#experience", icon: Briefcase },
+  { label: "Highlights", href: "#impact", icon: Zap },
+  { label: "Stack", href: "#tech-stack", icon: Cpu },
+  { label: "Contact", href: "#contact-form-section", icon: Mail },
 ];
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+const Navbar: React.FC = () => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
-    setMenuOpen(false);
     const el = document.querySelector(href);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-      sessionStorage.setItem('nav_target', href.replace('#', ''));
-      window.location.href = '/';
+      window.location.href = `/${href}`;
     }
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-hidden bg-white border-b border-gray-100/80 ${
-        scrolled ? 'shadow-md' : 'shadow-sm'
-      }`}
+    <nav
+      className="nav-anim fixed top-[30px] left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-[18px] rounded-2xl px-5 backdrop-blur-md transition-all duration-300 pointer-events-auto"
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.03)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+        animationDelay: "0.1s",
+      }}
     >
-      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20 box-border">
-        {/* Left: Avatar + Name */}
-        <div
-          onClick={() => (window.location.href = '/')}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') window.location.href = '/';
-          }}
-          className="flex items-center gap-3 cursor-pointer"
-          role="button"
-          tabIndex={0}
-          aria-label="Go to home page"
-        >
-          <div className="relative w-10 h-10 flex-shrink-0">
-            <div className="w-full h-full rounded-full overflow-hidden shadow-sm">
-              <img src={typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src} alt="Asim Ali" width={40} height={40} srcSet={srcSet(typeof portfolioHd === 'string' ? portfolioHd : (portfolioHd as any).src, ['40w', '120w'])} className="w-full h-full object-cover" />
-            </div>
-          </div>
+      {navItems.map((item) => {
+        const IconComponent = item.icon;
 
-          <span className="text-[17px] font-medium text-[#0a0a0a] font-['Urbanist',sans-serif] tracking-tight antialiased hidden sm:block">
-            Asim Ali
-          </span>
-        </div>
+        return (
+          <a
+            key={item.label}
+            href={item.href}
+            onClick={(e) => handleNavClick(e, item.href)}
+            aria-label={item.label}
+            className="group relative flex h-[32px] w-[32px] items-center justify-center rounded-full text-white/80 hover:text-white transition-colors duration-200 cursor-pointer"
+          >
+            <IconComponent size={20} strokeWidth={1.75} />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="px-4 py-2 text-[16px] font-medium text-[#374151] hover:text-[#10b981] font-['Urbanist',sans-serif] tracking-wide transition-colors rounded-full hover:bg-[#f1f5f9]"
+            {/* Pure CSS Hover Tooltip */}
+            <span
+              className="pointer-events-none absolute top-[44px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-2.5 py-1 text-[12px] font-display text-white transition-all duration-200 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-50 shadow-2xl"
+              style={{
+                backgroundColor: "rgba(21, 19, 18, 0.95)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+              }}
             >
               {item.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#f1f5f9] transition-colors"
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Dropdown */}
-      <div
-        className={`md:hidden bg-white border-t border-gray-100 shadow-lg max-w-full transition-all duration-200 overflow-hidden ${
-          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-4 py-4 flex flex-col gap-2">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="px-4 py-3 text-[16px] font-medium text-[#374151] hover:text-[#10b981] font-['Urbanist',sans-serif] tracking-wide transition-colors rounded-full hover:bg-[#f1f5f9]"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </header>
+            </span>
+          </a>
+        );
+      })}
+    </nav>
   );
 };
 

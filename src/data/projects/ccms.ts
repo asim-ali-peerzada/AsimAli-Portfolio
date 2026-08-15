@@ -1,23 +1,10 @@
-import cover from '@/assets/images/ccms/3-2.png';
-import actionItems from '@/assets/images/ccms/action_items.png';
-import chat from '@/assets/images/ccms/chat.png';
-import clientContact from '@/assets/images/ccms/client_contact.png';
-import communicationLogs from '@/assets/images/ccms/communication_logs.png';
-import companiesClient from '@/assets/images/ccms/companies_client.png';
-import dash from '@/assets/images/ccms/dash.png';
-import followUp from '@/assets/images/ccms/follow_up.png';
-import notifDel from '@/assets/images/ccms/notif_del.png';
-import permissionSettings from '@/assets/images/ccms/permission_settings.png';
-import pipeline from '@/assets/images/ccms/pipeline.png';
-import reportingHierarchy from '@/assets/images/ccms/reporting_hirachy.png';
-import salesQuote from '@/assets/images/ccms/sales_quote.png';
-import systemSettings from '@/assets/images/ccms/system_settings.png';
-
 export const ccms = {
   title: 'CCMS (Client Contact Management System)',
+  description:
+    'Multi-tenant enterprise CRM centralizing sales pipelines, customer operations, real-time collaboration, reporting, and role-based access.',
   niche: 'Multi-Tier CRM & Sales Automation Pipeline',
-  image: cover,
-  tags: ['SaaS', 'CRM', 'Websockets'],
+  image: '/images/ccms/3-2.webp',
+  tags: ['Laravel', 'Multi-Tenant', 'RBAC', 'Real-Time'],
   slug: 'sales-&-contact-management-(ccms)',
   services: [
     'Enterprise CRM Development',
@@ -52,18 +39,18 @@ export const ccms = {
     'Microsoft Graph API',
   ],
   screenshots: [
-    dash,
-    pipeline,
-    salesQuote,
-    clientContact,
-    companiesClient,
-    actionItems,
-    followUp,
-    communicationLogs,
-    chat,
-    permissionSettings,
-    reportingHierarchy,
-    notifDel,
-    systemSettings,
+    '/images/ccms/dash.webp',
+    '/images/ccms/pipeline.webp',
+    '/images/ccms/sales_quote.webp',
+    '/images/ccms/client_contact.webp',
+    '/images/ccms/companies_client.webp',
+    '/images/ccms/action_items.webp',
+    '/images/ccms/follow_up.webp',
+    '/images/ccms/communication_logs.webp',
+    '/images/ccms/chat.webp',
+    '/images/ccms/permission_settings.webp',
+    '/images/ccms/reporting_hirachy.webp',
+    '/images/ccms/notif_del.webp',
+    '/images/ccms/system_settings.webp',
   ],
 };

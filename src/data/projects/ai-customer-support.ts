@@ -1,16 +1,10 @@
-import cover from '@/assets/images/ai-chatbot/ai-cover.png';
-import shot1 from '@/assets/images/ai-chatbot/ai-shot-1.png';
-import shot2 from '@/assets/images/ai-chatbot/ai-shot-2.png';
-import shot3 from '@/assets/images/ai-chatbot/ai-shot-3.png';
-import shot4 from '@/assets/images/ai-chatbot/ai-shot-4.png';
-import shot5 from '@/assets/images/ai-chatbot/ai-shot-5.png';
-import shot6 from '@/assets/images/ai-chatbot/ai-shot-6.png';
-
 export const aiCustomerSupport = {
   title: 'AI Assistant Platform',
+  description:
+    'Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement',
   niche: 'Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement',
-  image: cover,
-  tags: ['RAG', 'AI', 'FastAPI'],
+  image: '/images/ai-chatbot/ai-cover.webp',
+  tags: ['RAG', 'AI Automation', 'FastAPI', 'Multi-Tenant'],
   slug: 'ai-assistant-platform',
   services: [
     'Enterprise SaaS Development',
@@ -44,5 +38,12 @@ export const aiCustomerSupport = {
     'OpenAI / Google Gemini',
     'LangChain / LangGraph',
   ],
-  screenshots: [shot1, shot2, shot3, shot5, shot4, shot6],
+  screenshots: [
+    '/images/ai-chatbot/ai-shot-1.webp',
+    '/images/ai-chatbot/ai-shot-2.webp',
+    '/images/ai-chatbot/ai-shot-3.webp',
+    '/images/ai-chatbot/ai-shot-5.webp',
+    '/images/ai-chatbot/ai-shot-4.webp',
+    '/images/ai-chatbot/ai-shot-6.webp',
+  ],
 };
