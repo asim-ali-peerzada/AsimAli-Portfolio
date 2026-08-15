@@ -4,7 +4,7 @@ export const ccms = {
     'Production enterprise sales & client CRM with territory-based data isolation, manager-approved pipelines, cascade revenue targets, and quote-to-PDF workflows.',
   niche: 'Enterprise Sales & Client CRM',
   image: '/images/ccms/3-2.webp',
-  tags: ['Laravel', 'React', 'MUI', 'Territory RBAC'],
+  tags: ['Territory RBAC', 'Approval Pipelines', 'Cascade Targets', 'Real-Time'],
   slug: 'sales-&-contact-management-(ccms)',
   services: [
     'Enterprise CRM Development',

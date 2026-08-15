@@ -32,11 +32,10 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className="nav-anim fixed top-[30px] left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-[18px] rounded-2xl px-5 backdrop-blur-md transition-all duration-300 pointer-events-auto"
+      className="nav-anim fixed top-[30px] left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-[18px] rounded-2xl px-5 transition-all duration-300 pointer-events-auto"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.03)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
-        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+        border: "1px solid rgba(255, 255, 255, 0.06)",
         animationDelay: "0.1s",
       }}
     >
@@ -55,11 +54,10 @@ const Navbar: React.FC = () => {
 
             {/* Pure CSS Hover Tooltip */}
             <span
-              className="pointer-events-none absolute top-[44px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-2.5 py-1 text-[12px] font-display text-white transition-all duration-200 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-50 shadow-2xl"
+              className="pointer-events-none absolute top-[44px] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg px-2.5 py-1 text-[12px] font-display text-white transition-all duration-200 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-50"
               style={{
                 backgroundColor: "rgba(21, 19, 18, 0.95)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(255, 255, 255, 0.15)",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
               }}
             >
               {item.label}

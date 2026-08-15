@@ -1,10 +1,5 @@
 import { projects, type Project } from "@/data/projects";
-import {
-  ArrowDownLeft,
-  ArrowLeft,
-  ArrowUpRight,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowDownLeft, ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import ContactSection from "./ContactSection";
 
@@ -955,36 +950,23 @@ export default function ProjectDetailContent({
             <span>Back to Projects</span>
           </button>
 
-          <div className="flex items-center gap-3">
-            {caseStudy.liveUrl && (
-              <a
-                href={caseStudy.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:flex items-center gap-1.5 text-[12px] font-medium text-orange hover:underline uppercase tracking-wider"
-              >
-                <span>View Live System</span>
-                <ExternalLink size={13} />
-              </a>
-            )}
-            <span className="text-[12px] sm:text-[13px] font-mono text-dim tracking-wider uppercase">
-              Case Study // {project.title.split(" (")[0].split(" — ")[0]}
-            </span>
-          </div>
+          <span className="text-[12px] sm:text-[13px] font-mono text-dim tracking-wider uppercase">
+            Case Study · {project.title.split(" (")[0].split(" — ")[0]}
+          </span>
         </div>
 
-        {/* 1. PROJECT HERO: Split Typography & Unified Metadata */}
+        {/* 1. PROJECT HERO: Split Typography & Clear Tag Groups */}
         <div className="w-full flex flex-col items-start gap-6">
           <h1 className="text-[44px] sm:text-[76px] lg:text-[96px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
             {caseStudy.headlineSplit[0]} <br />
-            <span className="text-ghost">{caseStudy.headlineSplit[1]}</span>
+            <span className="text-white/20">{caseStudy.headlineSplit[1]}</span>
           </h1>
 
           <p className="text-[17px] sm:text-[20px] text-muted leading-[145%] font-normal font-display max-w-[760px]">
             {caseStudy.tagline}
           </p>
 
-          {/* Engineering & Core Stack Tags (single row, no duplicates) */}
+          {/* Unified Engineering & Stack Tags with vertical centering and clear grouping */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
             {project.tags?.map((tag: string) => (
               <span
@@ -996,7 +978,9 @@ export default function ProjectDetailContent({
             ))}
             {project.tools && project.tools.length > 0 && (
               <>
-                <span className="text-dim text-[12px] px-1 hidden sm:inline">•</span>
+                <span className="text-dim text-[13px] px-1.5 inline-flex items-center select-none font-bold">
+                  •
+                </span>
                 {project.tools
                   .filter((tool: string) => !project.tags?.includes(tool))
                   .slice(0, 3)
@@ -1005,7 +989,7 @@ export default function ProjectDetailContent({
                       key={tool}
                       className="text-[12px] sm:text-[13px] font-medium text-orange/90 bg-orange/10 border border-orange/20 rounded-lg px-3 py-1 font-display tracking-wide"
                     >
-                      {tool.split(' (')[0].split(' +')[0]}
+                      {tool.split(" (")[0].split(" +")[0]}
                     </span>
                   ))}
               </>
@@ -1024,52 +1008,60 @@ export default function ProjectDetailContent({
           </div>
         </div>
 
-        {/* 2. OVERVIEW, PROBLEM & ROLE */}
-        <section className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
-          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
-            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
-              // The Problem
-            </span>
-            <h3 className="text-[20px] font-semibold text-white font-display">
-              Operational Friction
-            </h3>
-            <p className="text-[14.5px] text-muted leading-[150%] font-display">
-              {caseStudy.problem}
-            </p>
+        {/* 2. OVERVIEW, PROBLEM & SYSTEM (2-Column Grid with Equal Heights) */}
+        <section className="w-full flex flex-col gap-6 pt-4">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3 h-full">
+              <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+                // The Problem
+              </span>
+              <h3 className="text-[20px] font-semibold text-white font-display">
+                Operational Friction
+              </h3>
+              <p className="text-[14.5px] text-muted leading-[150%] font-display">
+                {caseStudy.problem}
+              </p>
+            </div>
+
+            <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3 h-full">
+              <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+                // The System
+              </span>
+              <h3 className="text-[20px] font-semibold text-white font-display">
+                Engineered Solution
+              </h3>
+              <p className="text-[14.5px] text-muted leading-[150%] font-display">
+                {caseStudy.systemSummary}
+              </p>
+            </div>
           </div>
 
-          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
-            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
-              // The System
-            </span>
-            <h3 className="text-[20px] font-semibold text-white font-display">
-              Engineered Solution
-            </h3>
-            <p className="text-[14.5px] text-muted leading-[150%] font-display">
-              {caseStudy.systemSummary}
-            </p>
-          </div>
+          {/* DEDICATED FULL-WIDTH ROLE & ARCHITECTURE SHOWCASE */}
+          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
+              <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+                // My Role & Engineering Scope
+              </span>
+              <h3 className="text-[22px] font-semibold text-white font-display">
+                Architecture & Backend Implementation
+              </h3>
+              <p className="text-[14.5px] text-muted leading-[145%] font-display mt-0.5">
+                {caseStudy.roleIntro}
+              </p>
+            </div>
 
-          <div className="link-row p-6 sm:p-8 rounded-2xl bg-white/2 border border-white/7 flex flex-col gap-3">
-            <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
-              // My Role
-            </span>
-            <h3 className="text-[20px] font-semibold text-white font-display">
-              Architecture & Backend
-            </h3>
-            <p className="text-[14px] text-white/90 leading-[145%] font-display font-medium">
-              {caseStudy.roleIntro}
-            </p>
-            <div className="flex flex-col gap-2 mt-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 mt-2">
               {caseStudy.roleBullets.map((b, idx) => (
                 <div
                   key={idx}
-                  className="text-[13.5px] text-muted leading-[140%] font-display"
+                  className="p-4 sm:p-4.5 rounded-xl bg-white/[0.025] border border-white/6 flex flex-col gap-1"
                 >
-                  <strong className="text-white/80 font-semibold">
-                    {b.label}:
-                  </strong>{" "}
-                  {b.text}
+                  <span className="text-[13px] font-mono text-orange font-semibold uppercase tracking-wider">
+                    {b.label}
+                  </span>
+                  <p className="text-[13.5px] text-muted leading-[145%] font-display">
+                    {b.text}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1077,17 +1069,17 @@ export default function ProjectDetailContent({
         </section>
 
         {/* 3. CAPABILITIES (01-06 Architecture Modules) */}
-        <section className="w-full flex flex-col items-start gap-8">
-          <div>
+        <section className="w-full flex flex-col items-start gap-10">
+          <div className="flex flex-col items-start">
             <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
               // Capabilities
             </span>
-            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
-              Key System <span className="text-ghost">Modules</span>
+            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[115%] font-display mt-2">
+              Key System <span className="text-white/20">Modules</span>
             </h2>
           </div>
 
-          <div className="w-full flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-3.5">
             {caseStudy.capabilities.map((cap) => (
               <div
                 key={cap.num}
@@ -1109,19 +1101,19 @@ export default function ProjectDetailContent({
           </div>
         </section>
 
-        {/* 4. PRODUCT IN ACTION: Screenshots with context */}
+        {/* 4. PRODUCT IN ACTION: Screenshots with distinct view separation */}
         {galleryShots.length > 0 && (
-          <section className="w-full flex flex-col items-start gap-6">
-            <div>
+          <section className="w-full flex flex-col items-start gap-10">
+            <div className="flex flex-col items-start">
               <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
                 // Product in Action
               </span>
-              <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
-                Operational <span className="text-ghost">Interfaces</span>
+              <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[115%] font-display mt-2">
+                Operational <span className="text-white/20">Interfaces</span>
               </h2>
             </div>
 
-            <div className="w-full flex flex-col gap-8">
+            <div className="w-full flex flex-col gap-12 sm:gap-14">
               <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-2xl">
                 <img
                   src={galleryShots[0]}
@@ -1147,14 +1139,14 @@ export default function ProjectDetailContent({
           </section>
         )}
 
-        {/* 5. VISUAL SYSTEM ARCHITECTURE DIAGRAM (Engineered Layout) */}
-        <section className="w-full flex flex-col items-start gap-8">
-          <div>
+        {/* 5. VISUAL SYSTEM ARCHITECTURE DIAGRAM (Consistent Left-Aligned Header) */}
+        <section className="w-full flex flex-col items-start gap-10">
+          <div className="flex flex-col items-start">
             <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
               // Architecture
             </span>
-            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[110%] font-display mt-2">
-              System Topology <span className="text-ghost">& Data Flow</span>
+            <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[115%] font-display mt-2">
+              System Topology <span className="text-white/20">& Data Flow</span>
             </h2>
           </div>
 
@@ -1313,24 +1305,35 @@ export default function ProjectDetailContent({
           </div>
         </section>
 
-        {/* 7. ADDITIONAL GALLERY (Remaining screenshots) */}
+        {/* 7. ADDITIONAL GALLERY: Expanded Application Views */}
         {galleryShots.length > 2 && (
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-            {galleryShots.slice(2, 6).map((shot: string, idx: number) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-xl"
-              >
-                <img
-                  src={shot}
-                  alt={`${project.title} screenshot ${idx + 3}`}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <section className="w-full flex flex-col items-start gap-8">
+            <div className="flex flex-col items-start">
+              <span className="text-[12px] uppercase tracking-widest font-mono text-orange">
+                // Interface Details
+              </span>
+              <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[115%] font-display mt-2">
+                Expanded <span className="text-white/20">Application Views</span>
+              </h2>
+            </div>
+
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+              {galleryShots.slice(2, 6).map((shot: string, idx: number) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-xl p-0"
+                >
+                  <img
+                    src={shot}
+                    alt={`${project.title} interface detail ${idx + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* 8. OUTCOME & CATEGORIZED TECHNOLOGIES */}
@@ -1384,14 +1387,14 @@ export default function ProjectDetailContent({
         </section>
 
         {/* 9. DIRECTIONAL PROJECT NAVIGATION LOOP */}
-        <div className="w-full border-t border-b border-white/10 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="w-full border-t border-b border-white/10 py-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6">
           <a
             href={`/projects/${prevProject.slug}`}
             className="flex items-center gap-3 text-muted hover:text-white transition-colors group cursor-pointer"
           >
             <ArrowDownLeft
               size={22}
-              className="text-orange group-hover:-translate-x-1 group-hover:translate-y-1 transition-transform"
+              className="text-orange group-hover:-translate-x-1 group-hover:translate-y-1 transition-transform shrink-0"
             />
             <div className="flex flex-col items-start">
               <span className="text-[11px] font-mono text-dim uppercase tracking-wider">
@@ -1405,7 +1408,7 @@ export default function ProjectDetailContent({
 
           <a
             href={`/projects/${nextProject.slug}`}
-            className="flex items-center gap-3 text-muted hover:text-white transition-colors group cursor-pointer sm:text-right"
+            className="flex items-center justify-end gap-3 text-muted hover:text-white transition-colors group cursor-pointer text-right"
           >
             <div className="flex flex-col items-end">
               <span className="text-[11px] font-mono text-dim uppercase tracking-wider">
@@ -1417,13 +1420,13 @@ export default function ProjectDetailContent({
             </div>
             <ArrowUpRight
               size={22}
-              className="text-orange group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+              className="text-orange group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0"
             />
           </a>
         </div>
 
         {/* 10. CONTACT CTA */}
-        <div className="w-full max-w-[696px]">
+        <div className="w-full">
           <ContactSection />
         </div>
       </div>

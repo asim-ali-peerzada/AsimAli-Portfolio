@@ -9,7 +9,7 @@ import {
 const LeftPortraitCard = () => {
   return (
     <div
-      className="relative w-[344px] h-[640px] bg-white flex flex-col justify-start items-center gap-[24px] overflow-hidden shadow-2xl"
+      className="relative w-[344px] h-[640px] bg-white flex flex-col justify-start items-center gap-[24px] overflow-hidden"
       style={{
         width: "344px",
         height: "640px",
@@ -19,12 +19,11 @@ const LeftPortraitCard = () => {
         boxSizing: "border-box",
       }}
     >
-      {/* 1. Portrait Image Container (Matching Framer reference: 304px x 310px, 16px radius, warm orange backdrop) */}
+      {/* 1. Portrait Image Container (Matching Framer reference: 304px x 310px, 16px radius, flat backdrop) */}
       <div
         className="relative w-full h-[310px] overflow-hidden flex items-center justify-center shrink-0"
         style={{
-          background:
-            "radial-gradient(circle at 50% 35%, #FF5A1F 0%, #D83B00 65%, #7A1C00 100%)",
+          background: "#1B1E22",
           borderRadius: "16px",
         }}
       >
