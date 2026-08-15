@@ -1,10 +1,17 @@
+import cover from '@/assets/images/ims/16shots_so.png';
+import shot1 from '@/assets/images/ims/562shots_so.png';
+import shot2 from '@/assets/images/ims/821shots_so.png';
+import shot3 from '@/assets/images/ims/833shots_so.png';
+import shot4 from '@/assets/images/ims/875shots_so.png';
+import shot5 from '@/assets/images/ims/897shots_so.png';
+
 export const shipmentTrackerIms = {
   title: 'Shipment Tracker & IMS',
   description:
     'Telecom logistics platform managing shipment lifecycles, inventory, automated email processing, installation workflows, and operational tracking.',
   niche:
     'Enterprise-grade inventory and shipment management platform bridging unstructured email notifications with a structured operational web dashboard.',
-  image: '/images/ims/ims-cover.webp',
+  image: cover,
   tags: ['IMAP', 'Workflow Automation', 'Queues', 'Inventory'],
   slug: 'shipment-tracker-&-ims',
   services: [
@@ -39,11 +46,11 @@ export const shipmentTrackerIms = {
     'External SSO Integration',
   ],
   screenshots: [
-    '/images/ims/ims-cover.webp',
-    '/images/ims/ims-shot-5.webp',
-    '/images/ims/ims-shot-1.webp',
-    '/images/ims/ims-shot-2.webp',
-    '/images/ims/ims-shot-3.webp',
-    '/images/ims/ims-shot-4.webp',
+    cover,
+    shot1,
+    shot2,
+    shot3,
+    shot4,
+    shot5,
   ],
 };

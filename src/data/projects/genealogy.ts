@@ -1,9 +1,18 @@
+import cover from '@/assets/images/ft/195shots_so.png';
+import shot1 from '@/assets/images/ft/257shots_so.png';
+import shot2 from '@/assets/images/ft/308shots_so.png';
+import shot3 from '@/assets/images/ft/335shots_so_1.png';
+import shot4 from '@/assets/images/ft/352shots_so_2.png';
+import shot5 from '@/assets/images/ft/644shots_so.png';
+import shot6 from '@/assets/images/ft/884shots_so.png';
+import shot7 from '@/assets/images/ft/921shots_so.png';
+
 export const genealogy = {
   title: 'Genealogy SaaS Platform',
   description:
     'Multi-tenant genealogy platform combining interactive family trees, historical records, OCR data extraction, intelligent matching, and subscriptions.',
   niche: 'Multi-Tenant Family History & Archival Platform',
-  image: '/images/ft/ft-platform-overview.webp',
+  image: cover,
   tags: ['Multi-Tenant', 'OCR', 'AI Matching', 'SaaS'],
   slug: 'genealogy-saas-platform',
   services: ['Enterprise SaaS Development', 'API Integrations', 'OCR Processing'],
@@ -27,12 +36,13 @@ export const genealogy = {
     'Historical record processing at scale requires robust OCR pipelines and intelligent fuzzy-matching algorithms. Combining API integrations with automated extraction transforms weeks of manual research into seconds of computation.',
   tools: ['Laravel', 'MySQL', 'OCR Engine', 'Redis', 'Pusher'],
   screenshots: [
-    '/images/ft/ft-main-dashboard.webp',
-    '/images/ft/ft-ticket-pipeline.webp',
-    '/images/ft/ft-conversations.webp',
-    '/images/ft/ft-guest-widget.webp',
-    '/images/ft/collab.webp',
-    '/images/ft/gedcom.webp',
-    '/images/ft/ft-directory.webp',
+    cover,
+    shot1,
+    shot2,
+    shot3,
+    shot4,
+    shot5,
+    shot6,
+    shot7,
   ],
 };

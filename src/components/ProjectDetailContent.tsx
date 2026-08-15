@@ -863,7 +863,7 @@ export default function ProjectDetailContent({
           text: "Implemented RESTful endpoints secured with policy authorization.",
         },
       ],
-      capabilities: (project.highlights || []).map((h, i) => ({
+      capabilities: (project.highlights || []).map((h: string, i: number) => ({
         num: String(i + 1).padStart(2, "0"),
         title: h.split(":")[0] || `Capability ${i + 1}`,
         desc: h.split(":")[1] || h,
@@ -920,7 +920,7 @@ export default function ProjectDetailContent({
 
   // Filter out the cover image to avoid rendering the same image twice in the gallery
   const galleryShots = (project.screenshots || []).filter(
-    (shot) => shot !== project.image,
+    (shot: string) => shot !== project.image,
   );
 
   const handleBackToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -1083,7 +1083,7 @@ export default function ProjectDetailContent({
           </div>
 
           <div className="w-full flex flex-col gap-3.5">
-            {caseStudy.capabilities.map((cap) => (
+            {caseStudy.capabilities.map((cap: any) => (
               <div
                 key={cap.num}
                 className="link-row flex items-start gap-5 rounded-2xl p-5 sm:p-6 bg-white/2 border border-white/7"
@@ -1375,7 +1375,7 @@ export default function ProjectDetailContent({
                     {cat.category}
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    {cat.items.map((item) => (
+                    {cat.items.map((item: string) => (
                       <span
                         key={item}
                         className="text-[11.5px] font-medium text-white/90 bg-white/5 border border-white/10 rounded-md px-2.5 py-0.5 font-display"

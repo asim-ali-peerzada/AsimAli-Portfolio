@@ -1,10 +1,16 @@
+import cover from '@/assets/images/ai_chatbot/357shots_so.png';
+import shot1 from '@/assets/images/ai_chatbot/60shots_so.png';
+import shot2 from '@/assets/images/ai_chatbot/749shots_so.png';
+import shot3 from '@/assets/images/ai_chatbot/909shots_so.png';
+import shot4 from '@/assets/images/ai_chatbot/967shots_so.png';
+
 export const aiCustomerSupport = {
   title: "AI Assistant Platform",
   description:
     "Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement",
   niche:
     "Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement",
-  image: "/images/ai-chatbot/ai-cover.webp",
+  image: cover,
   tags: ["RAG", "AI Automation", "FastAPI", "Multi-Tenant"],
   slug: "ai-assistant-platform",
   services: [
@@ -40,11 +46,10 @@ export const aiCustomerSupport = {
     "LangChain / LangGraph",
   ],
   screenshots: [
-    "/images/ai-chatbot/ai-shot-1.webp",
-    "/images/ai-chatbot/ai-shot-2.webp",
-    "/images/ai-chatbot/ai-shot-3.webp",
-    "/images/ai-chatbot/ai-shot-5.webp",
-    "/images/ai-chatbot/ai-shot-4.webp",
-    "/images/ai-chatbot/ai-shot-6.webp",
+    cover,
+    shot1,
+    shot2,
+    shot3,
+    shot4,
   ],
 };

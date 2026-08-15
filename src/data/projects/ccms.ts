@@ -1,9 +1,23 @@
+import cover from '@/assets/images/ccms/107shots_so.png';
+import shot1 from '@/assets/images/ccms/131shots_so.png';
+import shot2 from '@/assets/images/ccms/166shots_so.png';
+import shot3 from '@/assets/images/ccms/203shots_so.png';
+import shot4 from '@/assets/images/ccms/27shots_so.png';
+import shot5 from '@/assets/images/ccms/282shots_so_1.png';
+import shot6 from '@/assets/images/ccms/293shots_so.png';
+import shot7 from '@/assets/images/ccms/301shots_so.png';
+import shot8 from '@/assets/images/ccms/348shots_so.png';
+import shot9 from '@/assets/images/ccms/374shots_so.png';
+import shot10 from '@/assets/images/ccms/637shots_so.png';
+import shot11 from '@/assets/images/ccms/82shots_so.png';
+import shot12 from '@/assets/images/ccms/88shots_so.png';
+
 export const ccms = {
   title: 'CCMS (Client Contact Management System)',
   description:
     'Production enterprise sales & client CRM with territory-based data isolation, manager-approved pipelines, cascade revenue targets, and quote-to-PDF workflows.',
   niche: 'Enterprise Sales & Client CRM',
-  image: '/images/ccms/3-2.webp',
+  image: cover,
   tags: ['Territory RBAC', 'Approval Pipelines', 'Cascade Targets', 'Real-Time'],
   slug: 'sales-&-contact-management-(ccms)',
   services: [
@@ -41,18 +55,18 @@ export const ccms = {
     'AuthCenter SSO',
   ],
   screenshots: [
-    '/images/ccms/dash.webp',
-    '/images/ccms/pipeline.webp',
-    '/images/ccms/sales_quote.webp',
-    '/images/ccms/client_contact.webp',
-    '/images/ccms/companies_client.webp',
-    '/images/ccms/action_items.webp',
-    '/images/ccms/follow_up.webp',
-    '/images/ccms/communication_logs.webp',
-    '/images/ccms/chat.webp',
-    '/images/ccms/permission_settings.webp',
-    '/images/ccms/reporting_hirachy.webp',
-    '/images/ccms/notif_del.webp',
-    '/images/ccms/system_settings.webp',
+    cover,
+    shot1,
+    shot2,
+    shot3,
+    shot4,
+    shot5,
+    shot6,
+    shot7,
+    shot8,
+    shot9,
+    shot10,
+    shot11,
+    shot12,
   ],
 };
