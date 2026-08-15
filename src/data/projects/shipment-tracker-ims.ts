@@ -32,7 +32,7 @@ export const shipmentTrackerIms = {
   keyTakeaway:
     'Automating logistics workflows from unstructured email ingestion to structured inventory tracking eliminates manual bottlenecks and provides the real-time visibility needed to maintain operational integrity at scale.',
   tools: [
-    'Laravel 12 (PHP) & MySQL',
+    'Laravel (PHP) & MySQL',
     'Webklex IMAP (Email Parsing)',
     'Laravel Queues & Telescope',
     'Blade, Livewire, Tailwind CSS, Vite',

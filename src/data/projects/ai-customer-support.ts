@@ -19,8 +19,8 @@ export const aiCustomerSupport = {
   problem:
     'Businesses increasingly require AI automation but struggle to securely integrate it with their proprietary data. Implementing intelligent chatbots often leads to disconnected workflows with poor data isolation, lacking the proper backend infrastructure to securely manage multi-tenant access, document processing, and multi-channel customer conversations.',
   solution:
-    "Architected a full-stack SaaS solution that securely isolates tenant data while providing advanced conversational AI. The platform leverages a Python/FastAPI microservice for Retrieval-Augmented Generation (RAG) and multimodal processing, governed by a robust Laravel 12 API layer that strictly enforces RBAC, subscription billing, and audit logging. This enables businesses to seamlessly inject proprietary documents into the AI's knowledge base via a high-performance React UI.",
-  role: 'Full-Stack Architect & Lead Engineer. Independently designed and developed the entire system from the ground up, establishing the Laravel 12 API foundation, engineering the FastAPI AI service layer, and building the React 19 frontend. Focus was on scalable product design, ensuring secure tenant isolation, seamless cross-service API communication, and high-performance background job processing.',
+    "Architected a full-stack SaaS solution that securely isolates tenant data while providing advanced conversational AI. The platform leverages a Python/FastAPI microservice for Retrieval-Augmented Generation (RAG) and multimodal processing, governed by a robust Laravel API layer that strictly enforces RBAC, subscription billing, and audit logging. This enables businesses to seamlessly inject proprietary documents into the AI's knowledge base via a high-performance React UI.",
+  role: 'Full-Stack Architect & Lead Engineer. Independently designed and developed the entire system from the ground up, establishing the Laravel API foundation, engineering the FastAPI AI service layer, and building the React frontend. Focus was on scalable product design, ensuring secure tenant isolation, seamless cross-service API communication, and high-performance background job processing.',
   highlights: [
     'Microservices AI Architecture: Decoupled the application logic by routing core business operations through a Laravel API while delegating heavy LLM tasks and Vector DB (Pinecone) queries to a dedicated FastAPI engine.',
     'Retrieval-Augmented Generation (RAG): Engineered a document ingestion pipeline where businesses can upload proprietary knowledge, allowing the AI assistant to generate highly accurate, context-aware responses specific to each tenant.',
@@ -31,9 +31,9 @@ export const aiCustomerSupport = {
   keyTakeaway:
     'AI-powered automation must be backed by robust backend architecture to be production-ready. Decoupling AI processing into a dedicated microservice while keeping business logic in Laravel ensures scalability, maintainability, and secure tenant isolation.',
   tools: [
-    'Laravel 12 (PHP 8.2+)',
+    'Laravel (PHP)',
     'FastAPI (Python)',
-    'React 19 (Vite, Tailwind)',
+    'React (Vite, Tailwind)',
     'Pinecone (Vector DB)',
     'OpenAI / Google Gemini',
     'LangChain / LangGraph',
