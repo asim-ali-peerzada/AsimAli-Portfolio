@@ -83,73 +83,70 @@ const ContactSection = () => {
   return (
     <section
       id="contact-form-section"
-      className="w-full flex flex-col items-start pt-[70px] lg:pt-[100px] pb-10"
+      className="w-full flex flex-col items-start pt-[90px] lg:pt-[120px] pb-10"
     >
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left Column: Heading & Descriptive Paragraph */}
-        <div className="lg:col-span-5 flex flex-col items-start gap-4">
-          <h2 className="text-[42px] sm:text-[60px] lg:text-[72px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
-            LET'S BUILD <br />
-            <span className="text-white/20">YOUR NEXT SYSTEM</span>
-          </h2>
+      {/* Section Heading */}
+      <h2 className="text-[42px] sm:text-[74px] lg:text-[90px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+        LET'S BUILD <br />
+        <span className="text-white/20">YOUR NEXT SYSTEM</span>
+      </h2>
 
-          <p className="text-[15px] sm:text-[16px] text-muted leading-[150%] font-normal font-display max-w-[480px]">
-            Whether you are looking to architect a secure SaaS platform, integrate
-            complex payment gateways, or automate operational workflows, I am ready
-            to help.
-          </p>
+      {/* Body Copy */}
+      <p className="text-[16px] text-muted leading-[145%] font-normal font-display max-w-[560px] mt-4">
+        Whether you are looking to architect a secure SaaS platform, integrate
+        complex payment gateways, or automate operational workflows, I am ready
+        to help.
+      </p>
+
+      {/* Contact Form */}
+      <form
+        onSubmit={handleContactSubmit}
+        className="flex w-full flex-col gap-5 mt-10 sm:mt-12"
+      >
+        <div className="flex flex-col sm:flex-row gap-5">
+          <div className="flex flex-1 flex-col gap-2">
+            <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
+              <span>Name</span>
+              <span className="text-orange">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="Your Name"
+              maxLength={NAME_MAX}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border focus:border-orange transition-colors"
+            />
+          </div>
+
+          <div className="flex flex-1 flex-col gap-2">
+            <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
+              <span>Email</span>
+              <span className="text-orange">*</span>
+            </label>
+            <input
+              type="email"
+              required
+              placeholder="Your@email.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (emailError) setEmailError(null);
+              }}
+              className={`bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border transition-colors ${
+                emailError
+                  ? "focus:border-[#FF2600] border border-[#FF2600]"
+                  : "focus:border-orange"
+              }`}
+            />
+            {emailError && (
+              <p className="text-[12px] text-[#FF2600] font-display">
+                {emailError}
+              </p>
+            )}
+          </div>
         </div>
-
-        {/* Right Column: Contact Form */}
-        <div className="lg:col-span-7 w-full">
-          <form
-            onSubmit={handleContactSubmit}
-            className="flex w-full flex-col gap-5"
-          >
-            <div className="flex flex-col sm:flex-row gap-5">
-              <div className="flex flex-1 flex-col gap-2">
-                <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
-                  <span>Name</span>
-                  <span className="text-orange">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Your Name"
-                  maxLength={NAME_MAX}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border focus:border-orange transition-colors"
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col gap-2">
-                <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
-                  <span>Email</span>
-                  <span className="text-orange">*</span>
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="Your@email.com"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (emailError) setEmailError(null);
-                  }}
-                  className={`bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border transition-colors ${
-                    emailError
-                      ? "focus:border-[#FF2600] border border-[#FF2600]"
-                      : "focus:border-orange"
-                  }`}
-                />
-                {emailError && (
-                  <p className="text-[12px] text-[#FF2600] font-display">
-                    {emailError}
-                  </p>
-                )}
-              </div>
-            </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1.5">
@@ -251,9 +248,7 @@ const ContactSection = () => {
               </a>
             </p>
           </form>
-        </div>
-      </div>
-    </section>
+        </section>
   );
 };
 
