@@ -12,7 +12,7 @@ export const genealogy = {
   description:
     'Multi-tenant genealogy platform combining interactive family trees, historical records, OCR data extraction, intelligent matching, and subscriptions.',
   niche: 'Multi-Tenant Family History & Archival Platform',
-  image: cover,
+  image: '/images/ft/ft-platform-overview.webp',
   tags: ['Multi-Tenant', 'OCR', 'AI Matching', 'SaaS'],
   slug: 'genealogy-saas-platform',
   services: ['Enterprise SaaS Development', 'API Integrations', 'OCR Processing'],

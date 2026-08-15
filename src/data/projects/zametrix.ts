@@ -14,7 +14,7 @@ export const zametrix = {
     'Property intelligence platform combining market data, investment analysis, location intelligence, property comparison, and business workflows.',
   niche:
     'Full-stack property intelligence platform for real estate market analysis and investor decision support.',
-  image: cover,
+  image: '/images/zametrix/zm-cover.webp',
   tags: ['Data Intelligence', 'Analytics', 'Geospatial', 'APIs'],
   slug: 'zametrix',
   services: [

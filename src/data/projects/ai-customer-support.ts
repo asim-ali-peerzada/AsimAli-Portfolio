@@ -10,7 +10,7 @@ export const aiCustomerSupport = {
     "Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement",
   niche:
     "Multi-Tenant AI SaaS Platform for Intelligent Automation & Customer Engagement",
-  image: cover,
+  image: '/images/ai-chatbot/ai-cover.webp',
   tags: ["RAG", "AI Automation", "FastAPI", "Multi-Tenant"],
   slug: "ai-assistant-platform",
   services: [

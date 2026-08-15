@@ -11,7 +11,7 @@ export const shipmentTrackerIms = {
     'Telecom logistics platform managing shipment lifecycles, inventory, automated email processing, installation workflows, and operational tracking.',
   niche:
     'Enterprise-grade inventory and shipment management platform bridging unstructured email notifications with a structured operational web dashboard.',
-  image: cover,
+  image: '/images/ims/ims-cover.webp',
   tags: ['IMAP', 'Workflow Automation', 'Queues', 'Inventory'],
   slug: 'shipment-tracker-&-ims',
   services: [

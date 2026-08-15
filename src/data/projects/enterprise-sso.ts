@@ -9,7 +9,7 @@ export const enterpriseSso = {
     'Centralized identity platform connecting multiple applications through secure authentication, access provisioning, and cross-application access control.',
   niche:
     'Centralized identity platform enabling secure cross-application access, role provisioning, JWT authentication, and TOTP-based multi-factor security.',
-  image: cover,
+  image: '/images/sso/sso-cover.webp',
   tags: ['Identity Platform', 'JWT', 'OAuth', 'MFA'],
   slug: 'enterprise-single-sign-on',
   services: [
