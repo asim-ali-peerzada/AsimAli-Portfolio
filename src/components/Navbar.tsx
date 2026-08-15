@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className="nav-anim fixed top-[30px] left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-[18px] rounded-2xl px-5 transition-all duration-300 pointer-events-auto"
+      className="nav-anim absolute top-[30px] left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-[18px] rounded-2xl px-5 transition-all duration-300 pointer-events-auto"
       style={{
         backgroundColor: "rgba(255, 255, 255, 0.03)",
         border: "1px solid rgba(255, 255, 255, 0.06)",

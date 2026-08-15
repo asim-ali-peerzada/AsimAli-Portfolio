@@ -1,4 +1,3 @@
-import Navbar from './Navbar';
 import Footer from './Footer';
 import ProjectDetailContent from './ProjectDetailContent';
 import { Toaster } from 'react-hot-toast';
@@ -11,7 +10,6 @@ interface ProjectDetailRootProps {
 export default function ProjectDetailRoot({ project }: ProjectDetailRootProps) {
   return (
     <>
-      <Navbar />
       <ProjectDetailContent project={project} />
       <Footer />
       <Toaster />

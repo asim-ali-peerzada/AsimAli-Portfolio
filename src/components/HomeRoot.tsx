@@ -48,8 +48,8 @@ export default function HomeRoot() {
 
   return (
     <>
-      <Navbar />
-      <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center">
+      <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center relative">
+        <Navbar />
         {/* Main 1140px Canvas Container */}
         <div className="w-full max-w-[1140px] px-5 sm:px-8 lg:px-0 pt-28 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-[50px] lg:gap-[100px] relative">
           

@@ -923,12 +923,14 @@ export default function ProjectDetailContent({
     (shot) => shot !== project.image,
   );
 
-  const handleBackToProjects = () => {
+  const handleBackToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
+    sessionStorage.removeItem("homepage_scroll");
     sessionStorage.setItem("nav_target", "projects");
-    window.location.href = "/";
+    window.location.href = "/#projects";
   };
 
   return (
@@ -939,7 +941,8 @@ export default function ProjectDetailContent({
       <div className="w-full max-w-[1140px] flex flex-col items-start gap-16 md:gap-24">
         {/* Top Breadcrumb / Back Link */}
         <div className="w-full flex items-center justify-between">
-          <button
+          <a
+            href="/#projects"
             onClick={handleBackToProjects}
             className="flex items-center gap-2 text-muted hover:text-white transition-colors group cursor-pointer font-display text-[14px] sm:text-[15px]"
           >
@@ -948,7 +951,7 @@ export default function ProjectDetailContent({
               className="text-orange group-hover:-translate-x-1 transition-transform"
             />
             <span>Back to Projects</span>
-          </button>
+          </a>
 
           <span className="text-[12px] sm:text-[13px] font-mono text-dim tracking-wider uppercase">
             Case Study · {project.title.split(" (")[0].split(" — ")[0]}
@@ -997,7 +1000,7 @@ export default function ProjectDetailContent({
           </div>
 
           {/* LARGE HERO SCREENSHOT */}
-          <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 mt-6 shadow-2xl">
+          <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 mt-6">
             <img
               src={project.image}
               alt={`${project.title} — ${project.niche}`}
@@ -1114,7 +1117,7 @@ export default function ProjectDetailContent({
             </div>
 
             <div className="w-full flex flex-col gap-12 sm:gap-14">
-              <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-2xl">
+              <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10">
                 <img
                   src={galleryShots[0]}
                   alt={`${project.title} — interface overview`}
@@ -1125,7 +1128,7 @@ export default function ProjectDetailContent({
               </div>
 
               {galleryShots.length > 1 && (
-                <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-2xl">
+                <div className="w-full rounded-2xl overflow-hidden bg-white/2 border border-white/10">
                   <img
                     src={galleryShots[1]}
                     alt={`${project.title} — detailed workflow`}
@@ -1171,7 +1174,7 @@ export default function ProjectDetailContent({
             <span className="text-orange font-mono text-[16px]">▼</span>
 
             {/* Layer 2: API & Authorization Layer */}
-            <div className="w-full max-w-[560px] p-4 sm:p-5 rounded-xl bg-white/[0.06] border border-orange/35 text-center shadow-[0_0_30px_rgba(244,108,56,0.12)]">
+            <div className="w-full max-w-[560px] p-4 sm:p-5 rounded-xl bg-white/[0.06] border border-orange/35 text-center">
               <h4 className="text-[16px] font-semibold text-white font-display">
                 {caseStudy.diagram.api.title}
               </h4>
@@ -1321,7 +1324,7 @@ export default function ProjectDetailContent({
               {galleryShots.slice(2, 6).map((shot: string, idx: number) => (
                 <div
                   key={idx}
-                  className="rounded-2xl overflow-hidden bg-white/2 border border-white/10 shadow-xl p-0"
+                  className="rounded-2xl overflow-hidden bg-white/2 border border-white/10 p-0"
                 >
                   <img
                     src={shot}
