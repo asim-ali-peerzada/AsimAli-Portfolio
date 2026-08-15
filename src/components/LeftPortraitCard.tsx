@@ -78,7 +78,7 @@ const LeftPortraitCard = () => {
             <FaGithub size={20} />
           </a>
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/the-asimali"
             target="_blank"
             rel="noopener noreferrer"
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
@@ -87,7 +87,7 @@ const LeftPortraitCard = () => {
             <FaLinkedinIn size={20} />
           </a>
           <a
-            href="mailto:asim@example.com"
+            href="mailto:asimalipeerzada@gmail.com"
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
             aria-label="Email"
           >

@@ -1316,7 +1316,8 @@ export default function ProjectDetailContent({
                 // Interface Details
               </span>
               <h2 className="text-[34px] sm:text-[48px] font-bold text-white leading-[115%] font-display mt-2">
-                Expanded <span className="text-white/20">Application Views</span>
+                Expanded{" "}
+                <span className="text-white/20">Application Views</span>
               </h2>
             </div>
 
