@@ -1,5 +1,6 @@
 import { aiCustomerSupport as rawAiCustomerSupport } from './ai-customer-support';
 import { ccms as rawCcms } from './ccms';
+import { closeoutPackageSystem as rawCloseoutPackageSystem } from './closeout-package-system';
 import { enterpriseSso as rawEnterpriseSso } from './enterprise-sso';
 import { genealogy as rawGenealogy } from './genealogy';
 import { shipmentTrackerIms as rawShipmentTrackerIms } from './shipment-tracker-ims';
@@ -22,6 +23,7 @@ function normalizeProject(p: any): any {
 
 const aiCustomerSupport = normalizeProject(rawAiCustomerSupport as any) as any;
 const ccms = normalizeProject(rawCcms as any) as any;
+const closeoutPackageSystem = normalizeProject(rawCloseoutPackageSystem as any) as any;
 const enterpriseSso = normalizeProject(rawEnterpriseSso as any) as any;
 const genealogy = normalizeProject(rawGenealogy as any) as any;
 const shipmentTrackerIms = normalizeProject(rawShipmentTrackerIms as any) as any;
@@ -33,6 +35,7 @@ export const projects = [
   genealogy,
   zametrix,
   shipmentTrackerIms,
+  closeoutPackageSystem,
   aiCustomerSupport,
 ] as const;
 

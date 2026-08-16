@@ -36,6 +36,141 @@ interface EngineeringCaseStudy {
 }
 
 const caseStudiesData: Record<string, EngineeringCaseStudy> = {
+  "close-out-package-system": {
+    headlineSplit: ["CLOSE-OUT PACKAGE", "MANAGEMENT SYSTEM"],
+    tagline:
+      "Telecom construction platform automating Verizon-format PDF deliverables, multi-stage photo workflows, GPS verification, and manager approval gates.",
+    descriptor: "Telecom Infrastructure · Headless Chromium PDF · Sequential Workflows",
+    problem:
+      "Telecom cell-site construction teams manually assembled hundreds of site photos and compliance checklists into client-specific PDFs. Disconnected field capture led to unverified photo locations, inconsistent document revisions, and prolonged approval delays before client submission.",
+    systemSummary:
+      "Architected a 13-domain modular monolith combining a 3-stage sequential field capture engine (Pre-Construction → Construction → Post-Completion) with GPS/EXIF verification, an automated approval readiness gate, and an isolated Browsershot queue supervisor that renders format-exact Close-Out Package PDFs with revision ledgers.",
+    roleIntro:
+      "Full-Stack Architect & Lead Backend Engineer: Designed the 13-domain modular monolith, built the Browsershot PDF layout engine, and implemented 455 automated test cases.",
+    roleBullets: [
+      {
+        label: "PDF Engine",
+        text: "Engineered algorithmic pagination calculating total page counts up front across checklists, category tables, and 2×2 photo grids rendered via Browsershot.",
+      },
+      {
+        label: "Sequential Workflow",
+        text: "Built a 3-stage state machine with draft autosave, rejection rework loops, and multi-table transactional package seeding.",
+      },
+      {
+        label: "Verifiable Media",
+        text: "Implemented GPS capture with EXIF rational parsing fallback, server-side HEIC-to-JPEG conversion, and immutable slot replacement chains.",
+      },
+      {
+        label: "Approval Readiness",
+        text: "Created a multi-rule programmatic report validating required site info, photo counts, and checklist responses before allowing final sign-off.",
+      },
+    ],
+    capabilities: [
+      {
+        num: "01",
+        title: "Format-Exact PDF Engine",
+        desc: "Automated Browsershot rendering matching Verizon deliverable standards with 2×2 photo grids and Page X (Y) numbering.",
+      },
+      {
+        num: "02",
+        title: "Sequential 3-Stage Workflow",
+        desc: "Strict field capture pipeline (Pre-Construction → Construction → Post-Completion) with resumable drafts and rejection rework.",
+      },
+      {
+        num: "03",
+        title: "Verifiable Photo Capture",
+        desc: "Location-verified photos with EXIF rational fallback parsing, server-side HEIC conversion, and immutable slot history.",
+      },
+      {
+        num: "04",
+        title: "Programmatic Readiness Gate",
+        desc: "Rule-based engine blocking final approval until site info, checklist responses, and required photo counts are 100% complete.",
+      },
+      {
+        num: "05",
+        title: "SSO & Bidirectional Sync",
+        desc: "AuthCenter token exchange with HMAC-SHA256-signed inbound sync webhooks and queued outbound account synchronization.",
+      },
+      {
+        num: "06",
+        title: "4-Tier Horizon Queue Topology",
+        desc: "Resource-isolated supervisors prioritizing high-priority notifications, CPU-heavy PDF generation, and transactional email.",
+      },
+    ],
+    diagram: {
+      client: {
+        title: "React 18 SPA (Inertia.js v2)",
+        sub: "Tailwind CSS · Zustand State · In-App Camera",
+      },
+      api: {
+        title: "Laravel 12 Modular Monolith",
+        sub: "13 Domain Modules · Action & DTO Architecture · Policy Gates",
+      },
+      services: [
+        {
+          title: "PDF Layout Engine",
+          desc: "Algorithmic pagination & Browsershot Chromium rendering",
+        },
+        {
+          title: "Workflow State Machine",
+          desc: "Sequential stage gating & approval readiness validation",
+        },
+        {
+          title: "Media & GPS Service",
+          desc: "EXIF rational extraction & HEIC-to-JPEG conversion",
+        },
+      ],
+      data: {
+        title: "Persistence & Storage",
+        items: [
+          "MySQL 8 Relational Database (38 Migrations)",
+          "Redis 6+ Queue, Cache & Session Store",
+          "Private Storage Disk for Versioned Deliverable PDFs",
+        ],
+      },
+      external: {
+        title: "Third-Party & Integrations",
+        items: [
+          "AuthCenter SSO (HMAC-SHA256 Token Sync)",
+          "Brevo Transactional Email API (Idempotent Sends)",
+          "Headless Chromium / Puppeteer Bridge",
+        ],
+      },
+    },
+    challenge: {
+      title: "Format-Exact PDF Rendering with Algorithmic Pagination Under Heavy Media Load",
+      body: "Telecom deliverables require an uncompromising physical document layout with dynamic page numbering (Page X of Y), 2×2 photo grids grouped by construction stage, and strict table boundaries without memory exhaustion.",
+      approach:
+        "Engineered an upfront pagination calculator that computes total page count before invoking Browsershot, chunking checklists into 18 items/page, categories into 30/page, and photos into 4/page while preserving stage headers across page breaks.",
+      decision:
+        "Isolated PDF generation into a dedicated 512MB Horizon queue supervisor ('pdf') with configurable timeouts and automatic temp-file cleanup hooks in finally blocks.",
+      tradeoff:
+        "Accepted asynchronous background rendering with client-side polling over synchronous HTTP generation, guaranteeing rock-solid web server responsiveness during 100+ photo compilations.",
+    },
+    outcomeParagraphs: [
+      "Eliminated 100% of manual PDF formatting and photo collation effort, shrinking close-out package turnaround time from days to automated minutes.",
+      "Achieved zero document rejections from Verizon engineers due to built-in programmatic approval readiness gates and format-exact rendering.",
+      "Delivered an industrial-grade engineering foundation verified by 455 automated test cases and PHPStan level-max static analysis.",
+    ],
+    techCategories: [
+      {
+        category: "Core Framework & Architecture",
+        items: ["Laravel 12 (PHP 8.2)", "React 18", "Inertia.js v2", "Modular Monolith (13 Domains)"],
+      },
+      {
+        category: "Document & Media Processing",
+        items: ["Headless Chromium (Browsershot)", "Intervention Image (HEIC)", "EXIF GPS Parser", "Spatie MediaLibrary"],
+      },
+      {
+        category: "Queues, Cache & Infrastructure",
+        items: ["Redis 6+", "Laravel Horizon (4 Supervisors)", "MySQL 8", "Brevo API"],
+      },
+      {
+        category: "Security & Testing",
+        items: ["AuthCenter SSO", "HMAC-SHA256 Webhooks", "Pest 3 (455 Tests)", "PHPStan Level Max"],
+      },
+    ],
+  },
   "sales-&-contact-management-(ccms)": {
     headlineSplit: ["CLIENT CONTACT", "MANAGEMENT SYSTEM"],
     tagline:
