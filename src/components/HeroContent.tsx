@@ -37,7 +37,7 @@ const HeroContent = () => {
         <div className="flex flex-col justify-start">
           <div className="h-[48px] sm:h-[56px] flex items-end">
             <p className="text-[28px] sm:text-[34px] font-bold text-white leading-none tracking-tight font-display">
-              3+ YEARS
+              3 YEARS
             </p>
           </div>
           <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">

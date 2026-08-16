@@ -2,7 +2,7 @@
 > Software Engineer from Punjab, Pakistan specializing in multi-tenant SaaS platforms, Laravel backends, and React applications.
 
 ## About
-- Software Engineer with 2+ years of experience
+- Software Engineer with 3 years of experience
 - Expertise: PHP, Laravel, React, MySQL, Redis, REST APIs, WebSockets, Docker, Git
 - Focus: Enterprise SaaS, multi-tenant architecture, RBAC, workflow automation
 - Location: Hasilpur, Pakistan (working globally)
