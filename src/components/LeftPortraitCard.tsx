@@ -94,7 +94,7 @@ const LeftPortraitCard = () => {
             <FaEnvelope size={20} />
           </a>
           <a
-            href="/resume.pdf"
+            href="/Asim_Ali_Resume.pdf"
             download
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
             aria-label="Download Resume"

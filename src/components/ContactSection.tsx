@@ -240,7 +240,7 @@ const ContactSection = () => {
             <p className="text-[14px] text-muted font-display text-center">
               or{" "}
               <a
-                href="/resume.pdf"
+                href="/Asim_Ali_Resume.pdf"
                 download
                 className="text-orange hover:underline"
               >

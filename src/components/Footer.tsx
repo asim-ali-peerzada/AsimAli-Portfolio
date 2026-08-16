@@ -45,7 +45,7 @@ const Footer = () => {
             <FaEnvelope size={18} />
           </a>
           <a
-            href="/resume.pdf"
+            href="/Asim_Ali_Resume.pdf"
             download
             className="text-orange hover:text-white transition-all transform hover:scale-110"
             aria-label="Download Resume"
