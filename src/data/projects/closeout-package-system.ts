@@ -4,7 +4,7 @@ export const closeoutPackageSystem = {
     'Telecom construction management platform automating Verizon-format PDF deliverables, multi-stage photo workflows, GPS verification, and manager approval gates.',
   niche:
     'Telecom Infrastructure Construction & Automated Close-Out Package (COP) Generation',
-  image: '/images/cop/388shots_so.png',
+  image: '/images/cop/cover.png',
   tags: ['Browsershot PDF', 'Workflow Automation', 'GPS / EXIF', 'Horizon Queues'],
   slug: 'close-out-package-system',
   services: [
