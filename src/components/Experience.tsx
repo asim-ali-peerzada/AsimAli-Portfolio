@@ -1,27 +1,25 @@
-import { ArrowUpRight } from 'lucide-react';
-
 const experiences = [
   {
     company: 'Surfiq Technologies',
-    role: 'Backend Software Engineer',
+    role: 'Backend Engineer (PHP / Laravel)',
     description:
-      'Building and maintaining business-critical web applications, backend services, integrations, and workflow-driven systems across CRM, logistics, workforce, identity, and SaaS domains.',
+      'Architecting and maintaining production backend systems across telecom, CRM, logistics, and workforce operations — including centralized SSO/OAuth2 identity infrastructure, multi-stage approval and PDF generation pipelines, IMAP email automation, and fine-grained RBAC/ABAC access control.',
     dates: '2024 — Present',
   },
   {
-    company: 'Independent Software Developer',
-    role: 'Freelance Software Development',
+    company: 'Independent & Contract Engineering',
+    role: 'Backend & Full-Stack Developer',
     description:
-      'Delivered custom software solutions for clients, translating business requirements into production-ready web applications, backend services, integrations, and operational workflows.',
+      'Designed and shipped custom web platforms and RESTful APIs for early-stage and SMB clients — owning database schema design, third-party payment and webhook integrations, authentication flows, and end-to-end production delivery.',
     dates: '2023 — 2024',
   },
 ];
 
 const Experience = () => {
   return (
-    <section id="experience" className="w-full flex flex-col items-start pt-[90px] lg:pt-[120px] pb-10">
+    <section id="experience" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10">
       {/* Section Heading */}
-      <h2 className="text-[42px] sm:text-[74px] lg:text-[90px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+      <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         PROFESSIONAL <br />
         <span className="text-ghost">EXPERIENCE</span>
       </h2>
@@ -33,35 +31,38 @@ const Experience = () => {
           const isLast = idx === experiences.length - 1;
 
           return (
-            <div key={idx} className="relative flex items-start gap-4 sm:gap-6 group">
+            <div key={exp.company} className="relative flex items-start gap-3 sm:gap-6 min-w-0">
               {/* Left Timeline Track */}
               <div className="relative flex flex-col items-center shrink-0 self-stretch">
                 {/* Connecting Line */}
                 {!isLast && (
-                  <div className="absolute top-7 bottom-0 w-[2px] bg-linear-to-b from-orange via-white/20 to-white/10" />
+                  <div className="absolute top-7 bottom-0 w-0.5 bg-linear-to-b from-orange via-white/20 to-white/10" />
                 )}
 
                 {/* Node / Stop Point Dot */}
                 <div
-                  className={`relative z-10 w-4 h-4 rounded-full mt-6 flex items-center justify-center transition-transform duration-300 group-hover:scale-125 ${
+                  className={`relative z-10 w-4 h-4 rounded-full mt-6 flex items-center justify-center ${
                     isFirst
                       ? 'bg-orange ring-4 ring-orange/20 shadow-[0_0_12px_rgba(244,108,56,0.5)]'
-                      : 'bg-white/40 border-2 border-canvas group-hover:bg-orange'
+                      : 'bg-white/40 border-2 border-canvas'
                   }`}
                 >
                   {isFirst && <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
                 </div>
               </div>
 
-              {/* Experience Card */}
-              <div className="link-row flex-1 flex items-start justify-between rounded-2xl p-5 sm:p-6 mb-4 cursor-pointer">
+              {/* Experience Entry. Deliberately not a link: there is no detail
+                  view or external proof behind it, so the card carries no
+                  pointer cursor, hover fill, or external-link arrow. The date
+                  sits top-right, where a recruiter scans first on a timeline. */}
+              <div className="flex-1 min-w-0 flex items-start justify-between gap-3 sm:gap-6 rounded-2xl p-4 sm:p-6 mb-4">
                 {/* Left Content */}
-                <div className="flex flex-col gap-2.5 flex-1 pr-6 max-w-[540px]">
+                <div className="flex flex-col gap-2.5 flex-1 min-w-0 max-w-135">
                   <div className="flex flex-col gap-0.5">
-                    <h3 className="text-[20px] sm:text-[23px] font-semibold text-white leading-[120%] font-display">
+                    <h3 className="text-[18px] sm:text-[23px] font-semibold text-white leading-[120%] font-display">
                       {exp.company}
                     </h3>
-                    <span className="text-[14px] sm:text-[15px] font-medium text-orange leading-[120%] font-display">
+                    <span className="text-[13.5px] sm:text-[15px] font-medium text-orange leading-[120%] font-display">
                       {exp.role}
                     </span>
                   </div>
@@ -71,15 +72,10 @@ const Experience = () => {
                   </p>
                 </div>
 
-                {/* Right Meta (Arrow + Date) */}
-                <div className="flex flex-col items-end justify-between shrink-0 self-stretch">
-                  <span className="text-[22px] text-orange transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
-                    <ArrowUpRight size={22} strokeWidth={2.5} />
-                  </span>
-                  <p className="text-[13px] sm:text-[14px] text-muted font-medium font-display mt-auto pt-4 whitespace-nowrap">
-                    {exp.dates}
-                  </p>
-                </div>
+                {/* Date, aligned with the company line */}
+                <p className="shrink-0 text-[12px] sm:text-[14px] text-muted font-medium font-display whitespace-nowrap pt-1 sm:pt-1.5">
+                  {exp.dates}
+                </p>
               </div>
             </div>
           );

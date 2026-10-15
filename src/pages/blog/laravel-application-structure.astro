@@ -1,0 +1,277 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackToHome from '../../components/BackToHome';
+import { buildBreadcrumb } from '../../lib/seo';
+
+const canonicalUrl = 'https://asimali.online/blog/laravel-application-structure/';
+const title = 'How I Structure a Laravel App for Maintenance';
+const description =
+  'A guide to structuring Laravel applications for long-term maintenance: service layers, Eloquent discipline, queues, state machines, and query hygiene.';
+
+const jsonLd = [
+  {
+    "@type": "BlogPosting",
+    "@id": `${canonicalUrl}#blogposting`,
+    "url": canonicalUrl,
+    "headline": title,
+    "description": description,
+    "datePublished": "2026-10-13",
+    "dateModified": "2026-10-13",
+    "author": { "@id": "https://asimali.online/#asim-ali" },
+    "publisher": { "@id": "https://asimali.online/#asim-ali" },
+    "mainEntityOfPage": canonicalUrl,
+    "knowsAbout": ["Laravel", "PHP", "Software Architecture", "MySQL", "Redis"]
+  },
+  buildBreadcrumb('blog/laravel-application-structure', 'How I Structure a Laravel App for Maintenance')
+];
+---
+
+<Layout
+  title={`${title} | Asim Ali`}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <main id="main-content" class="w-full">
+    <article class="mx-auto w-full max-w-[820px] px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 pb-16 flex flex-col">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8">
+        <a href="/blog" class="text-[13.5px] text-muted hover:text-white transition-colors w-fit font-display">&larr; All posts</a>
+        <BackToHome className="mb-0" />
+      </div>
+
+      <p class="text-[12px] uppercase tracking-[0.14em] text-orange font-semibold mb-4">Laravel · Architecture</p>
+      <h1 class="text-[34px] sm:text-[48px] font-bold text-white leading-[108%] tracking-normal font-display">
+        How I Structure a Laravel Application for Long-Term Maintenance
+      </h1>
+      <p class="text-[16px] sm:text-[18px] text-muted leading-[150%] font-display mt-6 max-w-[680px]">
+        Almost every Laravel codebase I have inherited was easy to write and
+        hard to live in. The features shipped on time in month one and became
+        progressively slower, harder to test, and scarier to change by month
+        twelve. Structure is what decides which kind of codebase yours becomes.
+      </p>
+      <time class="text-[13px] text-dim font-display mt-5 block" datetime="2026-10-13">
+        October 13, 2026 · 8 min read
+      </time>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          The maintenance test
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          I judge a structure by one question: <strong class="text-white">can a developer who has never
+          seen this project make a safe change in their first week?</strong> Not add a feature
+          with a walkthrough — make a small change and know, before deploying,
+          what it affects. Most Laravel applications fail this test not because
+          the framework is misused, but because business logic accumulates in
+          the wrong places until nobody can say what touching one thing breaks.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Everything below comes from production systems I have built or
+          maintained over three years — a territory-driven enterprise CRM, a
+          centralized SSO platform, logistics and inventory software, and a
+          document-generation platform for telecom construction. The patterns
+          are not exotic. They are the boring decisions that pay rent.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          1. Thin controllers, honest service layers
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The usual failure mode is a controller that validates, authorizes,
+          computes, writes, and emails in one method. Refactoring that into
+          service classes is standard advice — the part people get wrong is
+          making services <em>too</em> general. A service called
+          <code class="text-lime">DealService</code> that does validation, pricing,
+          notifications, and reporting is a controller with dependency injection.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          What works better: services named after the business operation they
+          own. In our CRM the target-allocation logic (cascade revenue targets
+          down a reporting chain with double-spend prevention) lives in one
+          service whose only job is that calculation. The quote-to-PDF
+          lifecycle lives in another. When someone asks "where do we change how
+          targets cascade?", the answer is one class, not a search across
+          controllers.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Two rules keep the layer honest: services return Eloquent models or
+          DTOs rather than arrays with shape-shifting keys, and services never
+          read the request object. If a service reaches into
+          <code class="text-lime">$request</code>, some controller has leaked its
+          transport layer into the domain.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          2. Model discipline without dogma
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Eloquent models are pleasant until they become the dumping ground for
+          every operation related to the entity. I let models own what is true
+          about them — scopes, accessors, relationship definitions, small
+          state-changing methods — and push anything that coordinates across
+          entities, talks to external services, or sends mail up into the
+          service layer or dedicated action classes.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The counter-intuitive part is that model bloat is usually a symptom
+          of missing objects, not an argument against Eloquent. When a model
+          passes 2000 lines, ask what concept nobody named. In the CRM it was
+          the reporting hierarchy itself: once <code class="text-lime">ReportingNode</code>
+          existed with cycle-safe traversal, the permission checks, query
+          scopes, and visibility rules all shrank to a few lines each.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          3. Authorization as data, not flags
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The single highest-leverage structural decision in the enterprise
+          systems I have built was treating access rules as data in the
+          database rather than booleans scattered through the codebase.
+          Laravel Gates and Policies give you the enforcement point; the
+          structure comes from modeling the substance.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          In a seven-level sales organization, territory grants for companies,
+          states, and cities propagate down the reporting chain and have to
+          revoke in cascade inside one transaction when a person is removed.
+          That is only correct and auditable if the grant chain is recorded as
+          data — rows you can query — instead of logic you must simulate. The
+          same principle applies to budget chains, approval workflows, and
+          entitlements: if a rule needs to change at runtime or be audited
+          after the fact, it is data, not code.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          4. Move deferred work to queues on day one, not month nine
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Every application starts with "this will never be slow enough to need
+          a queue", and the ones that keep that promise are the ones that put
+          the pattern in place early, so the first Excel import of 20,000 rows
+          gets dispatched instead of being inlined into a POST request. Our
+          queued workflows process bulk imports and document generation with
+          retry pipelines and idempotent jobs — and they took manual
+          data-entry effort down by 70% — but the structural benefit came
+          earlier: request handling stayed predictable for users and the
+          failure surface stayed visible for the team.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The rule I follow: if the operation reads like a list of things that
+          could fail independently (parse, persist, convert, email), each
+          independent step belongs in its own queued job with its own retry
+          semantics. One giant job that emails at the end is how duplicate
+          sends are born.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          5. Multi-stage processes deserve state machines
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Anything with stages — shipments moving from "in transit" to
+          "received by warehouse" to "installed", or construction packages
+          advancing through pre-construction, construction, and
+          post-completion — will collect edge cases like "can I reject a
+          document that was revised after approval?" if the states are
+          free-text columns. A finite state machine with explicit allowed
+          transitions answers those questions by construction. Our logistics
+          engine runs a 7-stage state machine and the document pipeline runs a
+          3-stage sequential one with rework loops; in both cases the state
+          machine is the smallest object in the system and the one I would
+          defend hardest.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          Bonus: state machines make history free. When every transition is an
+          event, the audit trail is a table, not an archaeology project.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          6. Query hygiene is a habit, not a rescue project
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The 45% latency reduction I landed on a genealogy graph API did not
+          come from one clever fix. It came from treating N+1 queries, missing
+          indexes, and un-cached hot paths as <strong class="text-white">defects</strong> with
+          the same severity as a failing test, every sprint. Concretely: eager
+          loading everywhere a relationship is rendered, deliberate index
+          coverage designed alongside the schema instead of bolted on after a
+          slow query log review, and Redis caching on the paths that read the
+          same expensive data repeatedly.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          The structural habit is discipline in code review: a pull request
+          that loops a collection with queries inside gets the same treatment
+          as one that breaks a test. Catch it at review time and "the API got
+          slower over six months" never happens.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          7. Tests protect behavior, not percentages
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          I aim coverage at the paths where mistakes are expensive: authorization,
+          money (target allocation, billing), state transitions, and
+          irreversible operations. The document-generation platform I
+          architected carries 455 automated test cases with PHPStan at max
+          level — not for the metric, but because a contractually mandated PDF
+          format has exactly one correct output and no consumer will report a
+          formatting bug politely. Tests earn their maintenance cost where
+          failure is silent or hard to reverse.
+        </p>
+      </div>
+
+      <div class="flex flex-col mt-12">
+        <h2 class="text-[26px] sm:text-[30px] font-bold text-white leading-[115%] font-display">
+          What this buys you
+        </h2>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          None of these patterns make the first month faster. Most of them cost
+          an afternoon each. What they buy is the twelfth month: new features
+          that slot into known places, incidents that are diagnosable from
+          structure instead of archaeology, and a codebase the next developer
+          — or you, six months from now — can work in safely.
+        </p>
+        <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
+          If you are inheriting a Laravel codebase that has drifted past this
+          point, that work is exactly what I do — see my
+          <a href="/laravel-developer" class="text-orange hover:underline">Laravel developer services</a>
+          or <a href="/php-developer" class="text-orange hover:underline">PHP developer</a> page.
+          And if you want the long version of any system mentioned here, the
+          <a href="/projects/ccms" class="text-orange hover:underline">enterprise CRM</a>,
+          <a href="/projects/shipment-tracker" class="text-orange hover:underline">logistics platform</a>, and
+          <a href="/projects/close-out-package-system" class="text-orange hover:underline">document generation system</a>
+          case studies are in my portfolio.
+        </p>
+      </div>
+
+      <div class="mt-14 rounded-2xl border border-orange/30 bg-orange/8 p-6 sm:p-8">
+        <h2 class="text-[22px] sm:text-[26px] font-bold text-white leading-[115%] font-display">
+          Working on a Laravel codebase that needs structure?
+        </h2>
+        <p class="text-[15px] text-white/85 leading-[160%] font-display mt-3">
+          I take on maintenance, refactoring, and performance work on
+          production Laravel applications. Remote, worldwide.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-5">
+          <a href="/#contact-form-section" class="rounded-lg bg-orange px-5 py-3 text-[14px] font-semibold text-white hover:opacity-90 transition-opacity">Get in touch</a>
+          <a href="/laravel-developer" class="rounded-lg border border-white/30 px-5 py-3 text-[14px] font-semibold text-white hover:bg-white/10 transition-colors">Laravel developer services</a>
+        </div>
+      </div>
+    </article>
+  </main>
+</Layout>

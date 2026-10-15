@@ -13,8 +13,19 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 
-const pageTitle = `${project.title} — ${project.niche} | Asim Ali`;
-const pageDescription = `${project.niche}. ${project.overview ? project.overview.slice(0, 155) : ''}...`;
+/**
+ * Keeps the title inside the ~60 char SERP budget. Project titles run long, so
+ * drop a trailing "| Asim Ali" suffix rather than letting Google truncate the
+ * word that carries the Laravel signal.
+ */
+const rawTitle = `${project.title} — Laravel Project by Asim Ali`;
+const pageTitle =
+  rawTitle.length <= 60 ? rawTitle : `${project.title.slice(0, 54).replace(/[\s—&(\/-]+$/, '')} | Asim Ali`;
+
+const overview = project.overview || '';
+const pageDescription = overview
+  ? `${overview.slice(0, 150).replace(/\s+\S*$/, '')}...`
+  : `${project.title}. A Laravel project by Asim Ali.`;
 const heroImage = project.image || 'https://asimali.online/opengraph-image.png';
 const canonicalUrl = `https://asimali.online/projects/${project.slug}`;
 
@@ -26,9 +37,9 @@ const projectJsonLd = [
     "name": project.title,
     "headline": `${project.title} — ${project.niche}`,
     "description": project.overview || project.niche,
-    "author": { "@id": "https://asimali.online/#asim-ali" },
-    "keywords": project.tags ? project.tags.join(', ') : '',
-    "creator": { "@id": "https://asimali.online/#asim-ali" }
+    "about": "Laravel",
+    "creator": { "@id": "https://asimali.online/#asim-ali" },
+    "keywords": ["Laravel", "PHP", ...(project.tags || [])].join(', ')
   },
   {
     "@type": "BreadcrumbList",

@@ -1,93 +1,106 @@
 import { ArrowUpRight, Server, Workflow } from "lucide-react";
 
+/**
+ * Hero stat tiles.
+ *
+ * Each `lines` array is rendered with explicit breaks so every value is exactly
+ * two lines tall. Free wrapping is width-dependent and produced a three-line
+ * tile whenever a phrase was long enough to overflow its column.
+ */
+const stats = [
+  {
+    lines: ['3 YEARS', 'EXPERIENCE'],
+    label: 'Production Delivery',
+    body: 'Building and maintaining production software across enterprise systems and SaaS products.',
+  },
+  {
+    lines: ['BUSINESS', 'SYSTEMS'],
+    label: 'Purpose-Built Platforms',
+    body: 'Software designed around real operational requirements, business rules, and user workflows.',
+  },
+  {
+    lines: ['WORKFLOW', 'AUTOMATION'],
+    label: 'Reliable Backend Processes',
+    body: 'APIs, queues, background jobs, integrations, and asynchronous processing.',
+  },
+];
+
 const HeroContent = () => {
   return (
     <div id="hero" className="w-full flex flex-col items-start pt-0 pb-10">
-      {/* Main Display Heading */}
+      {/* Main Display Heading.
+
+          The specialisation line lives INSIDE the h1 rather than in the
+          paragraph below it: it has to be part of the heading for the stack
+          keywords to carry any weight, but at display scale it has to read as a
+          kicker or it would wrap across four lines. */}
       <h1
-        className="entrance-anim text-[52px] sm:text-[86px] lg:text-[110px] font-bold text-white leading-[100%] tracking-normal font-display"
-        style={{ animationDelay: "0.45s" }}
+        className="entrance-anim text-[44px] sm:text-[76px] lg:text-[100px] font-bold text-white leading-[100%] tracking-normal font-display"
+        style={{ animationDelay: "0.02s" }}
       >
         BACKEND <br />
         <span className="text-ghost">ENGINEER</span>
+        <span className="mt-4 sm:mt-5 block text-[12px] sm:text-[14px] font-medium uppercase tracking-[0.09em] text-dim leading-[140%] text-balance">
+          System Architecture · APIs · Workflow Automation · Laravel
+        </span>
       </h1>
 
       {/* Compact Supporting Line */}
       <p
-        className="entrance-anim text-[18px] text-muted leading-[140%] font-normal font-display max-w-[480px] mt-6"
-        style={{ animationDelay: "0.6s" }}
+        className="entrance-anim text-[18px] text-muted leading-[140%] font-normal font-display max-w-140 mt-6 w-full"
+        style={{ animationDelay: "0.05s" }}
       >
-        Building secure, maintainable backend systems for SaaS platforms,
-        business operations, and complex workflows.{" "}
+        I architect secure, high-reliability backend systems for SaaS and
+        enterprise platforms—specializing in centralized SSO &amp; access control,
+        stateful workflow engines, background processing pipelines, and
+        high-throughput APIs.{" "}
       </p>
 
-      {/* Technical Anchor */}
-      <p
-        className="entrance-anim text-[13.5px] font-medium text-muted tracking-[0.02em] font-display mt-4"
-        style={{ animationDelay: "0.66s" }}
-      >
-        PHP · Laravel · REST APIs · SQL · Redis
-      </p>
+      {/* Stats / Proof Counters with fixed line baseline.
 
-      {/* Stats / Proof Counters with fixed line baseline */}
+          `lines` is an explicit array so each value occupies exactly two lines.
+          Letting the text wrap freely pushed "CUSTOM BUSINESS SYSTEMS" onto
+          three lines, which broke the shared baseline across the three tiles. */}
       <div
-        className="entrance-anim grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 my-8 w-full"
-        style={{ animationDelay: "0.72s" }}
+        // Always three columns once there is room for them. The value font
+        // scales with the container via query breakpoints, so "CUSTOM
+        // BUSINESS" still fits its column on a 1024px viewport where this
+        // column is only ~516px wide — without dropping the third tile onto a
+        // second row.
+        className="entrance-anim grid grid-cols-1 @[400px]:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-7 my-8 w-full"
+        style={{ animationDelay: "0.11s" }}
       >
-        <div className="flex flex-col justify-start">
-          <div className="h-[48px] sm:h-[56px] flex items-end">
-            <p className="text-[28px] sm:text-[34px] font-bold text-white leading-none tracking-tight font-display">
-              3 YEARS
+        {stats.map((stat) => (
+          <div key={stat.label} className="flex flex-col justify-start min-w-0">
+            <div className="min-h-11 sm:min-h-12.5 flex items-end">
+              <p className="text-[20px] @[400px]:text-[14px] @[540px]:text-[17px] @[680px]:text-[21px] font-bold text-white leading-[115%] tracking-tight font-display">
+                {stat.lines.map((line) => (
+                  <span key={line}>
+                    {line}
+                    {line !== stat.lines.at(-1) && <br />}
+                  </span>
+                ))}
+              </p>
+            </div>
+            <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">
+              {stat.label}
+            </p>
+            <p className="text-[13.5px] sm:text-[14px] text-muted leading-[140%] font-display mt-2 max-w-55">
+              {stat.body}
             </p>
           </div>
-          <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">
-            Professional Experience
-          </p>
-          <p className="text-[13.5px] sm:text-[14px] text-muted leading-[140%] font-display mt-2 max-w-[220px]">
-            Building and maintaining production software across enterprise
-            systems and SaaS products.
-          </p>
-        </div>
-
-        <div className="flex flex-col justify-start">
-          <div className="h-[48px] sm:h-[56px] flex items-end">
-            <p className="text-[20px] sm:text-[23px] font-bold text-white leading-[115%] tracking-tight font-display">
-              CUSTOM BUSINESS SYSTEMS
-            </p>
-          </div>
-          <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">
-            Operational Platforms
-          </p>
-          <p className="text-[13.5px] sm:text-[14px] text-muted leading-[140%] font-display mt-2 max-w-[220px]">
-            Purpose-built software for real operational needs.
-          </p>
-        </div>
-
-        <div className="flex flex-col justify-start">
-          <div className="h-[48px] sm:h-[56px] flex items-end">
-            <p className="text-[20px] sm:text-[23px] font-bold text-white leading-[115%] tracking-tight font-display">
-              AUTOMATED WORKFLOWS
-            </p>
-          </div>
-          <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">
-            Operational Software
-          </p>
-          <p className="text-[13.5px] sm:text-[14px] text-muted leading-[140%] font-display mt-2 max-w-[220px]">
-            APIs, queues, background jobs, integrations, and event-driven
-            systems.
-          </p>
-        </div>
+        ))}
       </div>
 
       {/* Two Pill Cards */}
       <div
-        className="entrance-anim w-full flex flex-col sm:flex-row gap-[20px] lg:gap-[30px] min-h-[240px]"
-        style={{ animationDelay: "0.85s" }}
+        className="entrance-anim w-full flex flex-col sm:flex-row gap-5 lg:gap-7.5 min-h-60"
+        style={{ animationDelay: "0.14s" }}
       >
         {/* Orange Card */}
         <a
           href="#experience"
-          className="relative flex-1 sm:w-[300px] rounded-[10px] bg-orange px-5 pb-[22px] pt-12 flex flex-col justify-between overflow-hidden group transition-transform duration-200 active:scale-98"
+          className="relative cursor-pointer flex-1 min-w-0 rounded-[10px] bg-orange px-5 pb-5.5 pt-6 flex flex-col justify-between overflow-hidden group transition-transform duration-200 active:scale-98"
         >
           {/* Decorative Doodle Background */}
           <svg
@@ -103,17 +116,18 @@ const HeroContent = () => {
             />
           </svg>
 
-          <div className="relative z-10 pt-2.5">
+          <div className="relative z-10">
             <Server size={28} className="text-white mb-4" strokeWidth={2} />
             <p className="text-[22px] font-semibold text-white leading-[110%] font-display">
-              Enterprise Software
+              Enterprise &amp; SaaS Systems
             </p>
-            <p className="text-[13.5px] font-normal text-white/80 leading-[145%] font-display mt-2.5 max-w-[250px]">
-              I build the backend systems behind CRM platforms, SaaS products,
-              operational tools, and business workflows.
+            <p className="text-[13.5px] font-normal text-white/80 leading-[145%] font-display mt-2.5">
+              I build backend systems for enterprise applications, SaaS platforms,
+              CRM products, and operational workflows that support real business
+              processes.
             </p>
             <p className="text-[12px] font-medium text-white/70 leading-[140%] font-display mt-3">
-              Laravel · APIs · RBAC · Multi-Tenant Systems · Integrations
+              Enterprise SaaS · Stateful Workflows · RBAC/ABAC · System Integrations
             </p>
           </div>
 
@@ -127,11 +141,11 @@ const HeroContent = () => {
         {/* Dark Slate Card (green accent) */}
         <a
           href="#projects"
-          className="relative flex-1 rounded-[10px] bg-[#1C2128] border border-lime/25 px-5 pb-[22px] pt-12 flex flex-col justify-between overflow-hidden group transition-transform duration-200 active:scale-98"
+          className="relative cursor-pointer flex-1 rounded-[10px] bg-[#1C2128] border border-lime/25 px-5 pb-5.5 pt-6 flex flex-col justify-between overflow-hidden group transition-transform duration-200 active:scale-98"
         >
           {/* Decorative Zigzag Doodle Background */}
           <svg
-            className="absolute inset-0 w-full h-full pointer-events-none opacity-25"
+            className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.07]"
             viewBox="0 0 400 240"
             fill="none"
           >
@@ -145,22 +159,22 @@ const HeroContent = () => {
             />
           </svg>
 
-          <div className="relative z-10 pt-2.5">
+          <div className="relative z-10">
             <Workflow
               size={28}
               className="text-lime mb-4"
               strokeWidth={2}
             />
             <p className="text-[22px] font-semibold text-white leading-[110%] font-display">
-              Built for the Real World
+              Built for Production
             </p>
-            <p className="text-[13.5px] font-normal text-white/75 leading-[145%] font-display mt-2.5 max-w-[250px]">
-              Secure architecture, maintainable code, background processing,
-              performance optimization, and integrations designed for long-term
-              maintenance.
+            <p className="text-[13.5px] font-normal text-white/75 leading-[145%] font-display mt-2.5">
+              I focus on secure architecture, reliable background processing,
+              database performance, and maintainable integrations—building systems
+              designed to handle real-world complexity and ongoing change.
             </p>
             <p className="text-[12px] font-medium text-lime/85 leading-[140%] font-display mt-3">
-              Security · Performance · Queues · Caching · Automation
+              Security · Performance · Queues · Caching · Integrations
             </p>
           </div>
 

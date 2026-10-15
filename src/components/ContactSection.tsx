@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Send } from "lucide-react";
 import toast from "react-hot-toast";
 
 const ContactSection = () => {
@@ -10,8 +11,12 @@ const ContactSection = () => {
   const [emailError, setEmailError] = useState<string | null>(null);
 
   const NAME_MAX = 50;
-  const MESSAGE_MAX = 300;
-  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Generous enough to paste a job description or a short spec without being
+  // truncated mid-sentence; the counter warns before the hard cap.
+  const MESSAGE_MAX = 1500;
+  // The TLD is constrained to letters so the trailing group can't overlap the
+// preceding `[^\s@]+`, which would make the match ambiguous and backtrack.
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
 
   const handleContactSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,19 +88,19 @@ const ContactSection = () => {
   return (
     <section
       id="contact-form-section"
-      className="w-full flex flex-col items-start pt-[90px] lg:pt-[120px] pb-10"
+      className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10"
     >
       {/* Section Heading */}
-      <h2 className="text-[42px] sm:text-[74px] lg:text-[90px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+      <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         LET'S BUILD <br />
         <span className="text-white/20">YOUR NEXT SYSTEM</span>
       </h2>
 
       {/* Body Copy */}
-      <p className="text-[16px] text-muted leading-[145%] font-normal font-display max-w-[560px] mt-4">
-        Whether you are looking to architect a secure SaaS platform, integrate
-        complex payment gateways, or automate operational workflows, I am ready
-        to help.
+      <p className="text-[15px] sm:text-[16px] text-muted leading-[145%] font-normal font-display max-w-140 mt-4 w-full">
+        Whether you are hiring for a backend engineering role, architecting a
+        multi-system SaaS platform, or automating complex operational workflows
+        — let&apos;s connect.
       </p>
 
       {/* Contact Form */}
@@ -103,41 +108,49 @@ const ContactSection = () => {
         onSubmit={handleContactSubmit}
         className="flex w-full flex-col gap-5 mt-10 sm:mt-12"
       >
-        <div className="flex flex-col sm:flex-row gap-5">
-          <div className="flex flex-1 flex-col gap-2">
-            <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
+        <div className="flex flex-col sm:flex-row gap-5 min-w-0">
+          <div className="flex flex-1 min-w-0 flex-col gap-2">
+            <label
+              htmlFor="contact-name"
+              className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1"
+            >
               <span>Name</span>
               <span className="text-orange">*</span>
             </label>
             <input
+              id="contact-name"
               type="text"
               required
               placeholder="Your Name"
               maxLength={NAME_MAX}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border focus:border-orange transition-colors"
+              className="bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full border border-white/10 focus:border-orange/60 focus:ring-2 focus:ring-orange/20 transition-[border-color,box-shadow]"
             />
           </div>
 
-          <div className="flex flex-1 flex-col gap-2">
-            <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
+          <div className="flex flex-1 min-w-0 flex-col gap-2">
+            <label
+              htmlFor="contact-email"
+              className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1"
+            >
               <span>Email</span>
               <span className="text-orange">*</span>
             </label>
             <input
+              id="contact-email"
               type="email"
               required
-              placeholder="Your@email.com"
+              placeholder="you@company.com"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 if (emailError) setEmailError(null);
               }}
-              className={`bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full focus:border transition-colors ${
+              className={`bg-surface-input text-white rounded-lg px-3.5 h-11 text-[14px] placeholder:text-[#999999] outline-none w-full transition-[border-color,box-shadow] ${
                 emailError
-                  ? "focus:border-[#FF2600] border border-[#FF2600]"
-                  : "focus:border-orange"
+                  ? "border-[#FF2600] focus:border-[#FF2600] focus:ring-[#FF2600]/20"
+                  : "border-white/10 focus:border-orange/60 focus:ring-orange/20"
               }`}
             />
             {emailError && (
@@ -149,18 +162,25 @@ const ContactSection = () => {
         </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1.5">
+              <label
+                htmlFor="contact-looking-for"
+                className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1.5"
+              >
                 <span>What are you looking for?</span>
                 <span className="text-dim text-[11px] font-normal">(optional)</span>
               </label>
               <div className="relative w-full">
                 <select
+                  id="contact-looking-for"
                   value={lookingFor}
                   onChange={(e) => setLookingFor(e.target.value)}
-                  className="appearance-none bg-surface-input text-white rounded-lg px-3.5 pr-10 h-11 text-[14px] outline-none w-full focus:border focus:border-orange transition-colors cursor-pointer"
+                  className="appearance-none bg-surface-input text-white rounded-lg px-3.5 pr-10 h-11 text-[14px] outline-none w-full border border-white/10 focus:border-orange/60 focus:ring-2 focus:ring-orange/20 transition-[border-color,box-shadow] cursor-pointer"
                 >
                   <option value="" disabled className="bg-canvas text-[#999999]">
                     Select…
+                  </option>
+                  <option value="Full-Time / Contract Role" className="bg-canvas text-white">
+                    Full-Time / Contract Role
                   </option>
                   <option value="New System" className="bg-canvas text-white">
                     New System
@@ -205,7 +225,10 @@ const ContactSection = () => {
 
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
-                <label className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1">
+                <label
+                  htmlFor="contact-message"
+                  className="text-[12px] font-medium text-[#888888] font-display flex items-center gap-1"
+                >
                   <span>Message</span>
                   <span className="text-orange">*</span>
                 </label>
@@ -220,21 +243,29 @@ const ContactSection = () => {
                 </span>
               </div>
               <textarea
+                id="contact-message"
                 required
-                placeholder="Tell me about your project, timeline, and requirements..."
+                placeholder="Tell me about the role, system architecture, or project requirements..."
                 maxLength={MESSAGE_MAX}
                 value={projectInfo}
                 onChange={(e) => setProjectInfo(e.target.value)}
-                className="bg-surface-input text-white rounded-lg px-3.5 py-3 text-[14px] placeholder:text-[#999999] outline-none w-full min-h-[110px] focus:border focus:border-orange transition-colors resize-none"
+                className="bg-surface-input text-white rounded-lg px-3.5 py-3 text-[14px] placeholder:text-[#999999] outline-none w-full min-h-27.5 border border-white/10 focus:border-orange/60 focus:ring-2 focus:ring-orange/20 transition-[border-color,box-shadow] resize-none"
               ></textarea>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-11 w-full rounded-lg bg-orange font-inter text-[14px] font-semibold text-white shadow-cta transition-transform active:scale-95 cursor-pointer disabled:opacity-50 mt-1"
+              className="h-11 w-full rounded-xl bg-orange font-inter text-[14px] font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.26),0_10px_28px_-14px_rgba(0,0,0,0.62),inset_0_1px_0_rgba(255,255,255,0.22)] transition-transform active:scale-[0.99] cursor-pointer disabled:opacity-50 mt-1 inline-flex items-center justify-center gap-2"
             >
-              {isSubmitting ? "Submitting..." : "Send a Direct Message"}
+              {isSubmitting ? (
+                "Submitting..."
+              ) : (
+                <>
+                  Send a Direct Message
+                  <Send size={15} strokeWidth={2.2} aria-hidden="true" />
+                </>
+              )}
             </button>
 
             <p className="text-[14px] text-muted font-display text-center">

@@ -9,10 +9,11 @@ import {
 const LeftPortraitCard = () => {
   return (
     <div
-      className="relative w-[344px] h-[640px] bg-white flex flex-col justify-start items-center gap-[24px] overflow-hidden"
+      // Fluid width. An inline `width: 344px` overrode Tailwind here and forced
+      // horizontal overflow on any viewport narrower than the card, which is
+      // what produced the dead space to the right of the page on mobile.
+      className="relative w-full max-w-86 h-160 bg-white flex flex-col justify-start items-center gap-6 overflow-hidden"
       style={{
-        width: "344px",
-        height: "640px",
         padding: "30px 20px",
         backgroundColor: "#FFFFFF",
         borderRadius: "16px",
@@ -21,7 +22,7 @@ const LeftPortraitCard = () => {
     >
       {/* 1. Portrait Image Container (Matching Framer reference: 304px x 310px, 16px radius, flat backdrop) */}
       <div
-        className="relative w-full h-[310px] overflow-hidden flex items-center justify-center shrink-0"
+        className="relative w-full max-w-76 h-77.5 overflow-hidden flex items-center justify-center shrink-0"
         style={{
           background: "#1B1E22",
           borderRadius: "16px",
@@ -30,7 +31,7 @@ const LeftPortraitCard = () => {
         <img
           src="/images/my-headshot/croped-mine.webp"
           alt="Asim Ali"
-          className="w-full h-full object-cover object-top filter contrast-[1.14] brightness-[1.02]"
+          className="w-full h-full object-cover object-top filter contrast-[1.14] brightness-[1.02] border border-black/6"
           style={{
             objectPosition: "center 12%",
           }}
@@ -51,10 +52,13 @@ const LeftPortraitCard = () => {
             <Flame size={14} fill="currentColor" />
           </div>
 
-          {/* Specialization Bio */}
-          <p className="text-[13.5px] font-medium text-dim leading-[135%] font-display max-w-[290px]">
-            Backend Software Engineer specializing in PHP/Laravel, APIs,
-            business systems, and backend architecture.
+          {/* Specialization Bio. "Specializing in" is deliberate: it signals
+              depth in a stack rather than a ceiling. Saying it here, rather than
+              in the job title, keeps the headline backend-first while giving
+              recruiters and ATS an unambiguous Laravel keyword match. */}
+          <p className="text-[13.5px] font-medium text-dim leading-[135%] font-display max-w-72.5 w-full">
+            Backend Engineer specializing in PHP and Laravel, architecting
+            enterprise systems, identity integrations, and automated workflows.
           </p>
 
           {/* Location */}

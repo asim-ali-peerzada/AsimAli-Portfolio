@@ -39,22 +39,41 @@ html {
   scrollbar-width: thin;
 }
 
-@keyframes fade-rise {
-  from { opacity: 0; transform: translateY(28px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Horizontal overflow is already suppressed by `body { overflow-x: hidden }`
+   further down this file. Do NOT add an overflow value to `html` here: body
+   overflow only propagates to the viewport while the root element's overflow
+   is `visible`. Setting `html` to `hidden` or `clip` cancels that propagation,
+   which turns `body` into a real scroll container — and the portrait card's
+   `position: sticky` silently stops working, so it scrolls away with the page
+   instead of pinning. */
+
+img {
+  max-width: 100%;
+}
+
+/* Entrance motion deliberately animates transform only — opacity is left at 1.
+
+   These rules used to fade from `opacity: 0`. Combined with `animation-fill-mode:
+   both`, that kept the hero invisible for the whole delay, so a refresh or a
+   cold cache showed a black screen with only the portrait card and nav bar
+   painted. Animating transform keeps the same "rise" polish while the content
+   is readable from the very first frame. */
+@keyframes rise-in {
+  from { transform: translateY(28px); }
+  to { transform: translateY(0); }
 }
 
 @keyframes nav-enter {
-  from { opacity: 0; transform: translateY(-14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(-14px); }
+  to { transform: translateY(0); }
 }
 
 .entrance-anim {
-  animation: fade-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .nav-anim {
-  animation: nav-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: nav-enter 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

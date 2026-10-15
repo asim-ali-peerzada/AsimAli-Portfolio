@@ -5,12 +5,13 @@ import shot3 from '@/assets/images/authcenter/700shots_so.png';
 
 export const enterpriseSso = {
   title: 'Enterprise Unified SSO',
+  badge: 'Production · Enterprise',
   description:
     'Centralized identity platform connecting multiple applications through secure authentication, access provisioning, and cross-application access control.',
   niche:
     'Centralized identity platform enabling secure cross-application access, role provisioning, JWT authentication, and TOTP-based multi-factor security.',
   image: '/images/sso/sso-cover.webp',
-  tags: ['Identity Platform', 'JWT', 'OAuth', 'MFA'],
+  tags: ['Single Sign-On', 'JWT Auth', 'TOTP 2FA', 'User Sync'],
   slug: 'enterprise-single-sign-on',
   services: [
     'Identity & Access Management (IAM)',
@@ -20,12 +21,20 @@ export const enterpriseSso = {
   ],
   industry: ['Cybersecurity', 'Enterprise IT'],
   timeFrame: '10 Weeks',
+  // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
+  // Left blank on purpose: an unverified date on a public CV is worse than none.
+  // Repo commit history is a starting point, not the answer - confirm with the user.
+  year: "",
   overview:
     'An enterprise-grade Single Sign-On (SSO) and access management ecosystem designed to centralize user authentication, automate access approval workflows, and synchronize user provisioning across multiple distinct enterprise domains and applications.',
   problem:
     'Managing user access across multiple internal and external applications creates severe administrative bottlenecks. Manual approval workflows lead to inconsistent onboarding/offboarding, weak security enforcement, and fragmented infrastructure data, increasing both operational overhead and security vulnerabilities.',
   solution:
     'Architected a centralized identity and access platform that eliminates manual access handling. The system provides secure, 2FA-fortified login and enforces strict role-based access control (RBAC). It introduces automated, approval-based access workflows, allowing administrators to seamlessly provision, synchronize, and monitor user access across connected external systems (such as CCMS, JobFinder, and Samsung) from a single administrative dashboard.',
+  // Short display values for the case-study header. The long-form `role`
+  // paragraph stays for the "What I built" section.
+  roleTitle: "Security Architect",
+  platform: "Identity Web Platform",
   role: 'Full-Stack Developer & Security Architect. Architected the core REST API infrastructure in Laravel and built the React frontend. Responsible for designing the JWT authentication flows, developing the external API synchronization logic, and implementing the queued background jobs for bulk data processing and automated email notifications.',
   highlights: [
     'Centralized Cross-Domain Sync: Engineered robust external system integrations that automatically synchronize user statuses, activations, and permissions across multiple connected enterprise applications.',

@@ -9,27 +9,36 @@ import shot7 from '@/assets/images/ft/921shots_so.png';
 
 export const genealogy = {
   title: 'Genealogy SaaS Platform',
+  badge: 'Production · SaaS',
   description:
-    'Multi-tenant genealogy platform combining interactive family trees, historical records, OCR data extraction, intelligent matching, and subscriptions.',
-  niche: 'Multi-Tenant Family History & Archival Platform',
+    'Collaborative genealogy platform combining interactive family trees, historical records, OCR data extraction, intelligent matching, and subscriptions.',
+  niche: 'Collaborative Family History & Archival Platform',
   image: '/images/ft/ft-platform-overview.webp',
-  tags: ['Multi-Tenant', 'OCR', 'AI Matching', 'SaaS'],
+  tags: ['Graph ABAC', 'BFS Family Search', 'OCR', 'Record Matching'],
   slug: 'genealogy-saas-platform',
   services: ['Enterprise SaaS Development', 'API Integrations', 'OCR Processing'],
   industry: ['Family History', 'Archival'],
   timeFrame: '10 Weeks',
+  // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
+  // Left blank on purpose: an unverified date on a public CV is worse than none.
+  // Repo commit history is a starting point, not the answer - confirm with the user.
+  year: "",
   overview:
-    'A multi-tenant platform preserving family history through intelligent record matching, OCR processing, and collaborative family trees.',
+    'A collaborative platform preserving family history through intelligent record matching, OCR processing, and collaborative family trees.',
   problem:
     'Family history research is fragmented across disconnected archives, proprietary formats, and manual record-matching processes. Researchers struggle to connect disparate historical records into coherent family narratives.',
   solution:
     'Built a scalable genealogy platform with NARA and OpenArch API integrations for automated historical record discovery. Implemented OCR-based document extraction and intelligent record-matching algorithms to connect family trees across distributed data sources.',
-  role: 'Lead Backend Developer - Architected the API layer, integrated external archival APIs, built the OCR processing pipeline, and designed the multi-tenant data isolation model.',
+  // Short display values for the case-study header. The long-form `role`
+  // paragraph stays for the "What I built" section.
+  roleTitle: "Lead Backend Developer",
+  platform: "SaaS Web App",
+  role: 'Lead Backend Developer - Architected the API layer, integrated external archival APIs, built the OCR processing pipeline, and designed the family-scoped access model.',
   highlights: [
     'NARA & OpenArch API integration for automated historical record discovery',
     'OCR-based document extraction and text recognition pipeline',
     'Intelligent record-matching algorithm for cross-source family tree connections',
-    'Multi-tenant architecture with isolated family tree data per lineage',
+    'Tiered family-scoped access control, gating tree visibility and edit rights per family role',
     'Collaborative tree editing with real-time sync across family members',
   ],
   keyTakeaway:

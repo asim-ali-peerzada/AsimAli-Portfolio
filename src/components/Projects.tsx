@@ -3,43 +3,65 @@ import { projects } from '@/data/projects';
 
 const Projects = () => {
   return (
-    <section id="projects" className="w-full flex flex-col items-start pt-[90px] lg:pt-[120px] pb-10">
+    <section id="projects" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10">
       {/* Section Heading */}
-      <h2 className="text-[42px] sm:text-[74px] lg:text-[90px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+      <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         RECENT <br />
         <span className="text-ghost">PROJECTS</span>
       </h2>
 
       {/* Project Rows List */}
       <div className="w-full flex flex-col gap-3 mt-10 sm:mt-14">
-        {projects.map((project, idx) => (
+        {projects.map((project) => (
           <a
-            key={idx}
+            key={project.slug}
             href={`/projects/${project.slug}`}
             className="link-row flex items-start justify-between rounded-2xl p-4 sm:p-5 relative group cursor-pointer"
           >
             {/* Left Image + Text */}
-            <div className="flex items-start gap-5 flex-1 pr-4">
-              <div className="w-[120px] sm:w-[130px] h-[125px] sm:h-[135px] rounded-lg overflow-hidden shrink-0 bg-white/5 border border-white/10 mt-0.5">
+            <div className="flex items-start gap-3 sm:gap-5 flex-1 min-w-0 pr-2 sm:pr-4">
+              {/* Covers render at their native aspect with no zoom, so what the tile
+                  shows is exactly the cover art. Note the source art is a
+                  composed mockup on a 1080x1350 backdrop, so the window sits
+                  inside generous padding rather than filling the tile. */}
+              <div className="w-21 sm:w-32.5 h-23 sm:h-33.75 rounded-lg overflow-hidden shrink-0 bg-white/5 border border-white/10 mt-0.5">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
-              <div className="flex flex-col gap-1.5 flex-1 max-w-[420px]">
+              <div className="flex flex-col gap-1.5 flex-1 min-w-0 max-w-105">
+                {project.badge && (
+                  <span
+                    className={`w-fit text-[10px] font-semibold uppercase tracking-[0.12em] rounded-full border px-2 py-0.5 font-display ${
+                      project.badge.startsWith('Personal')
+                        ? 'border-lime/30 bg-lime/10 text-lime'
+                        : 'border-white/12 bg-white/5 text-dim'
+                    }`}
+                  >
+                    {project.badge}
+                  </span>
+                )}
                 <h3 className="text-[20px] sm:text-[23px] font-semibold text-white leading-[115%] tracking-[-0.01em] font-display group-hover:text-white transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-[14px] sm:text-[15px] text-muted leading-[135%] font-display">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-1.5 mt-1.5">
+                {/* Tags always occupy exactly one line. nowrap prevents reflow to a
+                    second row; overflow-x-auto degrades to a swipe on narrow screens
+                    rather than clipping the last tag. Pill padding/gap are kept tight
+                    because the strip is capped at ~404px by the surrounding column —
+                    measured so all four tags fit flush at desktop widths. */}
+                <div className="flex flex-nowrap gap-1 mt-1.5 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
                   {project.tags?.map((tag: string) => (
                     <span
                       key={tag}
-                      className="text-[11px] font-medium text-white/90 bg-white/7 border border-white/12 rounded-md px-2.5 py-0.5 font-display tracking-wide"
+                      className="shrink-0 text-[11px] font-medium text-white/90 bg-white/7 border border-white/12 rounded-md px-1.5 py-0.5 font-display"
                     >
                       {tag}
                     </span>

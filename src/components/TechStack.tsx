@@ -1,54 +1,86 @@
-import { ShieldCheck, Zap } from "lucide-react";
-import { SiLaravel, SiMysql, SiPostman, SiRedis } from "react-icons/si";
-
-const techGroups = [
+/**
+ * Skills are stored as arrays rather than a dot-separated string so each one
+ * renders as its own chip. A run of "PHP · Laravel · OOP" reads as a single
+ * undifferentiated line; separated chips make each skill individually legible
+ * and scannable.
+ *
+ * Every pill here is present in at least one shipped repository. Generic
+ * baseline terms (HTML, CSS, OOP, SOLID) are deliberately excluded — they are
+ * assumed for a backend role and dilute the list.
+ */
+const skillGroups = [
   {
-    name: "Laravel & PHP",
-    role: "Core Backend & Architecture",
-    detail:
-      "Service layers, Eloquent ORM, robust RESTful API design & middleware.",
-    icon: SiLaravel,
-    iconColor: "#FF2D20",
+    category: 'Back-End',
+    skills: [
+      'PHP',
+      'Laravel',
+      'Python',
+      'FastAPI',
+      'REST APIs',
+      'Eloquent ORM',
+      'Queues & Horizon',
+      'Modular Monoliths',
+    ],
   },
   {
-    name: "MySQL & Databases",
-    role: "Schema & Query Optimization",
-    detail:
-      "Indexing strategies, complex relations, deep foreign keys & eager loading.",
-    icon: SiMysql,
-    iconColor: "#00618A",
+    category: 'Database & Performance',
+    skills: [
+      'MySQL',
+      'Redis',
+      'Pinecone Vector DB',
+      'Query Optimization',
+      'Chunked Batch Processing',
+      'N+1 Remediation',
+    ],
   },
   {
-    name: "Redis & Queue Jobs",
-    role: "Caching & Background Tasks",
-    detail:
-      "Distributed caching, high-throughput workers & job retry pipelines.",
-    icon: SiRedis,
-    iconColor: "#DC382D",
+    category: 'Security & Access Control',
+    skills: [
+      'OAuth 2.0 / SSO',
+      'PKCE (S256)',
+      'JWT (RS256)',
+      'TOTP 2FA',
+      'HMAC-SHA256',
+      'RBAC & Graph ABAC',
+      'Gates & Policies',
+    ],
   },
   {
-    name: "OAuth 2.0, JWT & 2FA",
-    role: "Security & Identity Systems",
-    detail:
-      "Enterprise SSO, multi-tenant RBAC, Google TOTP 2FA & token rotation.",
-    icon: ShieldCheck,
-    iconColor: "#F46C38",
+    category: 'AI & Integrations',
+    skills: [
+      'RAG Pipelines',
+      'Google Gemini API',
+      'Tesseract OCR',
+      'WhatsApp Cloud API',
+      'Microsoft Graph API',
+      'Stripe & PayPal',
+      'IMAP Parsing',
+      'Pusher / WebSockets',
+    ],
   },
   {
-    name: "WebSockets & APIs",
-    role: "Real-Time & Integrations",
-    detail:
-      "Pusher, Laravel Reverb, Microsoft Graph API & webhook ingestion engines.",
-    icon: Zap,
-    iconColor: "#E5A50A",
+    category: 'Tools & DevOps',
+    skills: [
+      'Git & GitHub',
+      'GitHub Actions (CI/CD)',
+      'PHPUnit / Pest',
+      'Laravel Telescope',
+      'Headless Chromium (Browsershot)',
+      'Linux',
+      'Postman',
+    ],
   },
   {
-    name: "Tooling & Testing",
-    role: "DevOps & Quality Assurance",
-    detail:
-      "Git / GitHub, Postman, PHPUnit, Linux CLI environments, and React.",
-    icon: SiPostman,
-    iconColor: "#FF6C37",
+    category: 'Front-End',
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Inertia.js',
+      'Laravel Blade',
+      'Tailwind CSS',
+      'Bootstrap',
+    ],
   },
 ];
 
@@ -56,49 +88,37 @@ const TechStack = () => {
   return (
     <section
       id="tech-stack"
-      className="w-full flex flex-col items-start pt-[90px] lg:pt-[120px] pb-10"
+      className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10"
     >
-      {/* Section Heading */}
-      <h2 className="text-[42px] sm:text-[74px] lg:text-[90px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
+      <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         TECHNOLOGY <br />
         <span className="text-ghost">STACK</span>
       </h2>
 
-      {/* Tech Stack 2-Column Equal-Height Grid */}
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-10 sm:mt-14 items-stretch">
-        {techGroups.map((tech, idx) => {
-          const Icon = tech.icon;
-          return (
-            <div
-              key={idx}
-              className="link-row flex items-start gap-4 rounded-2xl p-4 sm:p-5 bg-white/2 border border-white/7 hover:border-white/14 hover:bg-white/4 transition-all duration-200 cursor-pointer group h-full"
-            >
-              {/* 56x56 White Icon Container with strictly centered logo */}
-              <div className="w-[52px] h-[52px] sm:w-[56px] sm:h-[56px] rounded-xl bg-white flex items-center justify-center p-2.5 shadow-sm shrink-0 mt-0.5">
-                <Icon
-                  size={28}
-                  style={{ color: tech.iconColor }}
-                  className="shrink-0"
-                />
-              </div>
+      {/* Squared-off container — rounded-lg reads as a panel without the
+          pill-like softness of rounded-2xl. */}
+      <div className="w-full flex flex-col mt-8 sm:mt-12 rounded-lg border border-white/10 bg-white/3 divide-y divide-white/[0.07]">
+        {skillGroups.map((group) => (
+          <div
+            key={group.category}
+            className="flex flex-col lg:flex-row lg:gap-6 px-4 sm:px-5 py-4 sm:py-4.5 min-w-0"
+          >
+            <h3 className="text-[14px] font-semibold text-orange leading-[120%] font-display shrink-0 sm:w-47.5 lg:w-42">
+              {group.category}
+            </h3>
 
-              {/* Structured Content Block with unified vertical alignment */}
-              <div className="flex flex-col justify-between flex-1 h-full min-w-0">
-                <div>
-                  <h3 className="text-[18px] sm:text-[19.5px] font-semibold text-white leading-[120%] font-display group-hover:text-white transition-colors truncate">
-                    {tech.name}
-                  </h3>
-                  <span className="inline-block text-[12.5px] sm:text-[13px] font-medium text-orange/90 leading-[120%] font-display mt-0.5">
-                    {tech.role}
-                  </span>
-                </div>
-                <p className="text-[13px] sm:text-[13.5px] text-muted leading-[135%] font-display mt-2">
-                  {tech.detail}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+            <ul className="flex flex-wrap gap-1.5 mt-2.5 lg:mt-0 min-w-0">
+              {group.skills.map((skill) => (
+                <li
+                  key={skill}
+                  className="max-w-full rounded-md border border-white/10 bg-white/5 px-2 py-0.75 text-[12px] sm:text-[12.5px] font-medium leading-[130%] text-white/85 font-display"
+                >
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </section>
   );

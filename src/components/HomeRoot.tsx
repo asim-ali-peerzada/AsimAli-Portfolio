@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Navbar from './Navbar';
 import LeftPortraitCard from './LeftPortraitCard';
 import HeroContent from './HeroContent';
 import Projects from './Projects';
@@ -30,8 +29,8 @@ export default function HomeRoot() {
 
     const saved = sessionStorage.getItem(SCROLL_KEY);
     if (saved) {
-      const y = parseInt(saved, 10);
-      if (!isNaN(y)) {
+      const y = Number.parseInt(saved, 10);
+      if (!Number.isNaN(y)) {
         requestAnimationFrame(() => window.scrollTo(0, y));
       }
       sessionStorage.removeItem(SCROLL_KEY);
@@ -49,17 +48,18 @@ export default function HomeRoot() {
   return (
     <>
       <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center relative">
-        <Navbar />
-        {/* Main 1140px Canvas Container */}
-        <div className="w-full max-w-[1140px] px-5 sm:px-8 lg:px-0 pt-28 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-[50px] lg:gap-[100px] relative">
+        <div className="w-full max-w-285 px-5 sm:px-8 pt-28 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-12.5 lg:gap-25 relative">
           
           {/* Sticky Left Column (Centered on Mobile, Pinned on Desktop) */}
-          <aside className="w-full max-w-[344px] shrink-0 lg:sticky lg:top-[50px] z-20 flex justify-center">
+          <aside className="w-full max-w-86 shrink-0 lg:sticky lg:top-12.5 z-20 flex justify-center px-0">
             <LeftPortraitCard />
           </aside>
 
-          {/* Scrollable Right Column */}
-          <div className="flex-1 w-full max-w-[696px] flex flex-col items-start min-w-0">
+          {/* Scrollable Right Column — `@container` lets the hero stat grid
+              respond to its own width. Viewport breakpoints are not enough here:
+              this column's width depends on whether the portrait card is beside
+              it, so the same viewport size yields very different space. */}
+          <div className="@container flex-1 w-full max-w-174 flex flex-col items-start min-w-0">
             <HeroContent />
             <Projects />
             <Experience />

@@ -1,11 +1,22 @@
 export const closeoutPackageSystem = {
   title: 'Close-Out Package (COP) System',
+  badge: 'Production · Enterprise',
   description:
     'Telecom construction management platform automating Verizon-format PDF deliverables, multi-stage photo workflows, GPS verification, and manager approval gates.',
   niche:
     'Telecom Infrastructure Construction & Automated Close-Out Package (COP) Generation',
   image: '/images/cop/cover.png',
-  tags: ['Browsershot PDF', 'Workflow Automation', 'GPS / EXIF', 'Horizon Queues'],
+  tags: ['Chunked Uploads', 'PDF Pagination', 'Scoped RBAC', 'Workflows'],
+  // Full list shown as "Core capabilities" on the case-study header. `tags`
+  // above is the short set used on the home-page project card.
+  coreCapabilities: [
+    'Field Capture',
+    'GPS Verification',
+    'Approval Workflows',
+    'PDF Generation',
+    'Revision Tracking',
+    'Customer Delivery',
+  ],
   slug: 'close-out-package-system',
   services: [
     'Modular Monolith Architecture',
@@ -15,13 +26,21 @@ export const closeoutPackageSystem = {
   ],
   industry: ['Telecom Infrastructure', 'Construction Management'],
   timeFrame: '16 Weeks',
+  // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
+  // Left blank on purpose: an unverified date on a public CV is worse than none.
+  // Repo commit history is a starting point, not the answer - confirm with the user.
+  year: "",
   overview:
-    'A modular monolith platform engineered for telecom infrastructure construction. The system replaces manual close-out package assembly with a strictly governed field-capture workflow, rule-based manager approvals, and automated headless-Chromium PDF generation matching Verizon deliverable standards.',
+    'An enterprise telecom construction platform for managing Verizon cell-site close-out documentation from field capture to customer delivery. It brings staged photo collection, GPS verification, manager approvals, document revisions, and automated PDF generation into a single workflow, replacing manual package assembly with a traceable, approval-driven process.',
   problem:
     'Telecom cell-site construction teams manually assembled hundreds of site photos and compliance checklists into client-specific PDFs. Disconnected field capture led to unverified photo locations, inconsistent document revisions, and prolonged approval delays before client submission.',
   solution:
-    'Architected a 13-domain modular monolith combining a 3-stage sequential field capture engine (Pre-Construction → Construction → Post-Completion) with GPS/EXIF verification, an automated approval readiness gate, and an isolated Browsershot queue supervisor that renders format-exact Close-Out Package PDFs with revision ledgers.',
-  role: 'Full-Stack Software Architect & Lead Backend Engineer. Designed the 13-domain modular monolith from scratch, established the action/DTO architecture, built the Browsershot PDF layout engine, integrated bidirectional HMAC SSO synchronization, and implemented 455 automated test cases with PHPStan level-max type safety.',
+    'Engineered the deterministic pagination engine that replaced browser-driven page breaks, the four-phase resumable media upload protocol, and the relationship-scoped policy layer governing what each role can see across the package lifecycle. Included queue isolation so a burst of PDF renders cannot starve application work.',
+  // Short display values for the case-study header. The long-form `role`
+  // paragraph stays for the "What I built" section.
+  roleTitle: "Full Stack Developer",
+  platform: "Field Operations Web App",
+  role: 'Full Stack Developer across the domain modules, the headless-Chromium rendering pipeline and the policy layer governing what each role can see. Built the server-side pagination engine that replaced browser reflow, designed the four-phase resumable upload protocol, and wrote the adversarial authorization probe that surfaced six real defects including three cross-role privilege escalations.',
   highlights: [
     'Format-Exact PDF Engine: Algorithmic pagination computing page counts across checklists, category tables, and 2×2 photo grids rendered via headless Chromium.',
     'Sequential Workflow State Machine: Three-stage sequential advancement with draft autosave, rejection rework loops, and multi-table transactional seeding.',
@@ -43,11 +62,22 @@ export const closeoutPackageSystem = {
     'Brevo Transactional Email',
   ],
   screenshots: [
-    '/images/cop/388shots_so.png',
-    '/images/cop/230shots_so.png',
-    '/images/cop/316shots_so (1).png',
-    '/images/cop/386shots_so.png',
-    '/images/cop/833shots_so.png',
-    '/images/cop/871shots_so.png',
+    '/images/cop-v2/screenshot-rocks (28).webp',
+    '/images/cop-v2/screenshot-rocks (12).webp',
+    '/images/cop-v2/screenshot-rocks (27).webp',
+    '/images/cop-v2/screenshot-rocks (18).webp',
+    '/images/cop-v2/screenshot-rocks (22).webp',
+    '/images/cop-v2/screenshot-rocks (13).webp',
+    '/images/cop-v2/screenshot-rocks (23).webp',
+    '/images/cop-v2/screenshot-rocks (25).webp',
+    '/images/cop-v2/screenshot-rocks (20).webp',
+    '/images/cop-v2/screenshot-rocks (21).webp',
+    '/images/cop-v2/screenshot-rocks (15).webp',
+    '/images/cop-v2/screenshot-rocks (26).webp',
+    '/images/cop-v2/screenshot-rocks (24).webp',
+    '/images/cop-v2/screenshot-rocks (19).webp',
+    '/images/cop-v2/screenshot-rocks (14).webp',
+    '/images/cop-v2/screenshot-rocks (16).webp',
+    '/images/cop-v2/screenshot-rocks (17).webp',
   ],
 };

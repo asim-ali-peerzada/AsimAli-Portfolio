@@ -13,13 +13,17 @@ import shot11 from '@/assets/images/ccms/82shots_so.png';
 import shot12 from '@/assets/images/ccms/88shots_so.png';
 
 export const ccms = {
-  title: 'CCMS (Client Contact Management System)',
+  title: 'CCMS — Enterprise Sales & CRM',
+  badge: 'Production · Enterprise',
   description:
     'Production enterprise sales & client CRM with territory-based data isolation, manager-approved pipelines, cascade revenue targets, and quote-to-PDF workflows.',
   niche: 'Enterprise Sales & Client CRM',
   image: '/images/ccms/3-2.webp',
-  tags: ['Territory RBAC', 'Approval Pipelines', 'Cascade Targets', 'Real-Time'],
-  slug: 'sales-&-contact-management-(ccms)',
+  // Capability tags — what this system does. Tech stack lives in `tools` below.
+  // Keep 4-5 and short enough to render on a single line.
+  tags: ['Territory RBAC', 'Approvals', 'Cascade Targets', 'Quote to PDF'],
+  // (4 tags, single line — see Projects.tsx)
+  slug: 'ccms',
   services: [
     'Enterprise CRM Development',
     'Role-Based Data Isolation',
@@ -28,12 +32,20 @@ export const ccms = {
   ],
   industry: ['CRM & Sales', 'Enterprise Operations'],
   timeFrame: '12 Weeks',
+  // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
+  // Left blank on purpose: an unverified date on a public CV is worse than none.
+  // Repo commit history is a starting point, not the answer - confirm with the user.
+  year: "",
   overview:
     'A production enterprise CRM for a hierarchical sales organization (Sales Rep → Manager → Director → VP → President → CFO → CEO), unifying client companies/accounts/contacts, territory-based data isolation, manager-approved sales pipelines, cascade revenue-target planning, and a quote-to-order document lifecycle with PDF generation and email — all synced with a company-wide SSO directory.',
   problem:
     'The organization tracked client records in manual spreadsheets, had no mechanism to isolate data by sales territory, routed leads by hand, and planned revenue targets without any enforcement that a manager could not over-allocate or double-spend budget down the reporting chain.',
   solution:
     'Engineered a Laravel + React (MUI) CRM where nearly every permission derives from the reporting hierarchy. Granular company/state/city territory grants propagate down the org and revoke in cascade; pipeline deals move through a manager-approved workflow; revenue targets cascade from global buckets with double-spend prevention; and quotes flow through approval to branded, sequentially-numbered PDFs emailed to clients.',
+  // Short display values for the case-study header. The long-form `role`
+  // paragraph stays for the "What I built" section.
+  roleTitle: "Lead Backend Architect",
+  platform: "Enterprise Web App",
   role:    'Lead Backend Architect. Designed the Laravel relational schema and service layer (territory propagation, target allocation, hierarchy, notifications), built the policy-gated authorization and query-scope isolation, integrated AuthCenter SSO with HMAC-signed bidirectional user sync, and engineered the Dompdf quote pipeline and bulk-import path for 20K+ rows.',
   highlights: [
     'Territory Access Control with Cascade Revocation: Granular company/state/city grants that aggregate up the reporting hierarchy and revoke from every subordinate inside one transaction when removed — preventing data leakage at any level.',

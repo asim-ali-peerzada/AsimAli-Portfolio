@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = 'Asim Ali — Backend Engineer specializing in Laravel, distributed systems, multi-tenant architecture, and event-driven workflows. Based in Pakistan, working globally.',
+  description = 'Asim Ali is a Backend Engineer specializing in PHP and Laravel, building enterprise SaaS platforms, role- and graph-scoped access control, identity integrations, and stateful workflow systems. Available worldwide.',
   image = 'https://asimali.online/opengraph-image.png',
   type = 'website',
   canonicalUrl,
@@ -22,6 +22,7 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
 const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 
 import '@/styles/global.css';
+import Navbar from '../components/Navbar';
 
 const baseSchemaGraph = [
   {
@@ -39,8 +40,9 @@ const baseSchemaGraph = [
     "givenName": "Asim",
     "familyName": "Ali",
     "url": "https://asimali.online/",
-    "jobTitle": "Software Engineer",
-    "description": "Asim Ali is a Software Engineer from Punjab, Pakistan with 3 years of experience specializing in PHP, Laravel, React, and building scalable enterprise web applications.",
+    "jobTitle": "Backend Engineer",
+    "alternateName": ["Backend Engineer", "PHP Developer", "Laravel Developer", "Software Engineer"],
+    "description": "Asim Ali is a Backend Engineer specializing in PHP and Laravel, architecting enterprise systems, identity integrations, and automated workflows. Based in Punjab, Pakistan, with 3 years of professional experience building enterprise SaaS platforms, role- and graph-scoped access control, and stateful workflow systems.",
     "image": "https://asimali.online/opengraph-image.png",
     "address": {
       "@type": "PostalAddress",
@@ -52,12 +54,11 @@ const baseSchemaGraph = [
     "knowsAbout": [
       "PHP", "Laravel", "React", "JavaScript", "TypeScript",
       "MySQL", "Redis", "REST API", "WebSockets", "Docker", "Git",
-      "Multi-Tenant SaaS", "RBAC", "JWT Authentication", "SSO",
+      "Enterprise SaaS", "RBAC", "ABAC", "JWT Authentication", "SSO",
       "Queue-Based Processing", "ETL Pipelines", "OCR",
       "RAG Engines", "Vector Databases", "LLM Integration"
     ],
     "knowsLanguage": ["en", "ur"],
-    "hasCredential": "Software Engineering",
     "sameAs": [
       "https://linkedin.com/in/the-asimali",
       "https://github.com/asim-ali-peerzada"
@@ -117,7 +118,7 @@ const mergedSchemaGraph = jsonLd
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="Asim Ali" />
-  <meta name="keywords" content="Asim Ali, Laravel developer, PHP developer, backend developer, enterprise SaaS, multi-tenant, RBAC, REST API, React developer, full stack developer, software engineer Pakistan, freelance Laravel developer, CRM development, SSO implementation, workflow automation" />
+  <meta name="keywords" content="Asim Ali, backend engineer, PHP developer, Laravel developer, enterprise SaaS, RBAC, ABAC, REST API, OAuth 2.0, SSO implementation, workflow automation, queue processing, CRM development, software engineer Pakistan" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
@@ -156,6 +157,9 @@ const mergedSchemaGraph = jsonLd
   >
     Skip to main content
   </a>
+  {/* pathname is injected at build time so the server-rendered HTML already
+      highlights the right nav item, instead of correcting after hydration. */}
+  <Navbar pathname={Astro.url.pathname} client:load />
   <slot />
 </body>
 </html>

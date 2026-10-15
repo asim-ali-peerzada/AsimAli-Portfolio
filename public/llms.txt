@@ -1,44 +1,41 @@
-# Asim Ali — Laravel Backend Architect & Enterprise Systems Engineer
-> Software Engineer from Punjab, Pakistan specializing in multi-tenant SaaS platforms, Laravel backends, and React applications.
+# Asim Ali — Backend Engineer (PHP / Laravel)
+
+> Asim Ali is a Backend Engineer specializing in PHP and Laravel, from Punjab, Pakistan, with 3 years of professional experience building enterprise SaaS platforms, role- and graph-scoped access control, identity integrations, and stateful workflow systems. Available worldwide.
 
 ## About
-- Software Engineer with 3 years of experience
-- Expertise: PHP, Laravel, React, MySQL, Redis, REST APIs, WebSockets, Docker, Git
-- Focus: Enterprise SaaS, multi-tenant architecture, RBAC, workflow automation
-- Location: Hasilpur, Pakistan (working globally)
-
-## Core Expertise
-- Laravel Backend Development — Enterprise APIs, multi-tenant architecture, RBAC, queue processing
-- React Frontend Engineering — Component architecture, state management, Tailwind CSS
-- Multi-Tenant SaaS Platforms — Data isolation, subscription billing, tenant-aware access control
-- REST API Design — Sanctum authentication, rate limiting, secure API architecture
-- Database Engineering — MySQL optimization, complex relational schemas, migration strategies
-- Real-Time Systems — WebSocket integration with Pusher, event-driven architecture
-- Workflow Automation — IMAP email parsing, ETL pipelines, background job processing
-- AI Integration — RAG engines, Pinecone vector DB, OpenAI/Gemini LLM integration
-- Identity & Security — JWT, TOTP 2FA, Single Sign-On (SSO), Google 2FA
-- OCR & Data Processing — Document extraction, intelligent record matching, fuzzy search
-
-## Projects
-- [AI Assistant Platform](https://asimali.online/projects/ai-assistant-platform): Multi-tenant AI SaaS with RAG engine, Laravel 12 + FastAPI + React 19 + Pinecone
-- [CCMS — Enterprise CRM](https://asimali.online/projects/sales-&-contact-management-(ccms)): 5-tier RBAC CRM with state-based lead routing, Laravel 11 + React + MySQL + Pusher
-- [Enterprise SSO](https://asimali.online/projects/enterprise-single-sign-on): Centralized identity platform with JWT + TOTP 2FA + cross-domain token blacklisting
-- [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Multi-tenant family history platform with NARA/OpenArch API + OCR + record matching
-- [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports
-- [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker-&-ims): Automated logistics with IMAP email parsing + queue workers + item-level tracking
+- Backend engineer specializing in PHP and Laravel, 3 years of professional experience
+- Expertise: PHP, Laravel, MySQL, Redis, REST APIs, OAuth 2.0, JWT, queues, React
+- Focus: Enterprise SaaS, role- and graph-scoped access control, stateful workflow systems
+- Currently: Backend Software Engineer at Surfiq Technologies (2024–present)
+- Previously: Independent Software Developer (2023–2024)
+- Location: Hasilpur, Punjab, Pakistan (working globally)
 
 ## Services
-- Enterprise SaaS Development
-- Laravel Backend Architecture
-- React Frontend Development
-- CRM & Sales Automation
-- Identity & Access Management
-- Workflow Automation
-- API Integration
-- AI & LLM Integration
+- [Blog — Laravel & Backend Engineering Notes](https://asimali.online/blog): Practical articles from production Laravel systems.
+- [How I Structure a Laravel Application for Long-Term Maintenance](https://asimali.online/blog/laravel-application-structure): Service layers, model discipline, authorization as data, queues, state machines, and query hygiene.
+
+## Core Expertise
+- Laravel Backend Development — Enterprise APIs, modular domain architecture, RBAC, queue processing
+- PHP Development — Service layers, Eloquent ORM, constructor injection, strict typing
+- SaaS Platforms — Subscription billing, workspace-scoped access control, audit trails
+- REST API Design — Sanctum and Passport authentication, rate limiting, secure API architecture
+- Database Engineering — MySQL optimization, complex relational schemas, indexing strategy, N+1 remediation
+- Redis & Queue Jobs — Caching, background task processing, retry pipelines, distributed workers
+- Identity & Security — JWT, OAuth 2.0, RBAC, TOTP 2FA, Single Sign-On (SSO)
+- Workflow Automation — IMAP email parsing, ETL pipelines, state machines, background job processing
+- AI Integration — RAG engines, vector databases, LLM integration, OCR data extraction
+- Real-Time Systems — WebSocket integration with Pusher, event-driven architecture
+
+## Projects
+- [AI Assistant Platform](https://asimali.online/projects/ai-assistant-platform): AI automation platform with RAG engine, Laravel 12 + FastAPI + React 19 + Pinecone - [CCMS — Enterprise CRM](https://asimali.online/projects/ccms): 5-tier RBAC CRM with state-based lead routing, Laravel 11 + React + MySQL + Pusher
+- [Enterprise SSO](https://asimali.online/projects/enterprise-single-sign-on): Centralized identity platform with JWT + TOTP 2FA + cross-domain token blacklisting
+- [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Collaborative family history platform with NARA/OpenArch API + OCR + record matching
+- [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports - [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker): Automated logistics with IMAP email parsing + queue workers + item-level tracking
+- [Close-Out Package System](https://asimali.online/projects/close-out-package-system): Telecom construction management with GPS/EXIF photo verification and approval gates
 
 ## Contact
 - Website: https://asimali.online
+- Contact form: https://asimali.online/#contact-form-section
 - Email: asimalipeerzada@gmail.com
 - LinkedIn: https://linkedin.com/in/the-asimali
 - GitHub: https://github.com/asim-ali-peerzada
