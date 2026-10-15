@@ -41,7 +41,7 @@ const HeroContent = () => {
         BACKEND <br />
         <span className="text-ghost">ENGINEER</span>
         <span className="mt-4 sm:mt-5 block text-[12px] sm:text-[14px] font-medium uppercase tracking-[0.09em] text-dim leading-[140%] text-balance">
-          System Architecture · APIs · Workflow Automation · Laravel
+          System Architecture · PHP & Laravel · REST APIs · Workflow Automation
         </span>
       </h1>
 

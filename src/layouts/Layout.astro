@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = 'Asim Ali is a Backend Engineer specializing in PHP and Laravel, building enterprise SaaS platforms, role- and graph-scoped access control, identity integrations, and stateful workflow systems. Available worldwide.',
+  description = 'PHP Laravel developer and backend engineer building enterprise SaaS, REST APIs, secure identity, and workflow automation. Hire a PHP Laravel backend engineer for scalable systems.',
   image = 'https://asimali.online/opengraph-image.png',
   type = 'website',
   canonicalUrl,
@@ -44,6 +44,11 @@ const baseSchemaGraph = [
     "alternateName": ["Backend Engineer", "PHP Developer", "Laravel Developer", "Software Engineer"],
     "description": "Asim Ali is a Backend Engineer specializing in PHP and Laravel, architecting enterprise systems, identity integrations, and automated workflows. Based in Punjab, Pakistan, with 3 years of professional experience building enterprise SaaS platforms, role- and graph-scoped access control, and stateful workflow systems.",
     "image": "https://asimali.online/opengraph-image.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "asimalipeerzada@gmail.com",
+      "contactType": "professional"
+    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Hasilpur",
@@ -53,7 +58,7 @@ const baseSchemaGraph = [
     "email": "asimalipeerzada@gmail.com",
     "knowsAbout": [
       "PHP", "Laravel", "React", "JavaScript", "TypeScript",
-      "MySQL", "Redis", "REST API", "WebSockets", "Docker", "Git",
+      "MySQL", "Redis", "REST API", "WebSockets", "Git",
       "Enterprise SaaS", "RBAC", "ABAC", "JWT Authentication", "SSO",
       "Queue-Based Processing", "ETL Pipelines", "OCR",
       "RAG Engines", "Vector Databases", "LLM Integration"
@@ -115,10 +120,11 @@ const mergedSchemaGraph = jsonLd
   </script>
 
   <!-- SEO Meta Tags -->
-  <title>{title}</title>
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<title>{title}</title>
   <meta name="description" content={description} />
   <meta name="author" content="Asim Ali" />
-  <meta name="keywords" content="Asim Ali, backend engineer, PHP developer, Laravel developer, enterprise SaaS, RBAC, ABAC, REST API, OAuth 2.0, SSO implementation, workflow automation, queue processing, CRM development, software engineer Pakistan" />
+  <meta name="keywords" content="Asim Ali, PHP Laravel developer, Laravel developer, PHP developer, backend engineer, software developer, hire Laravel developer, hire backend engineer, enterprise SaaS, REST API, OAuth 2.0, SSO, workflow automation, queue processing" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
