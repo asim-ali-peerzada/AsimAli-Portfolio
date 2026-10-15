@@ -15,14 +15,6 @@ export const zametrix = {
     'Market Analytics',
   ],
   slug: 'zametrix',
-  services: [
-    'Enterprise SaaS Development',
-    'Full-Stack Architecture',
-    'Data Aggregation & Analytics',
-    'Workflow Automation & CRM Integration',
-  ],
-  industry: ['Real Estate', 'PropTech'],
-  timeFrame: '12 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -44,16 +36,6 @@ export const zametrix = {
     'Market Pulse & Comparison Engine: Integrated analytics-driven features that allow users to generate investment snapshots, analyze community pulses, and visually compare infrastructure and pricing across different societies and phases.',
     'Integrated CRM & Lead Routing: Built a dedicated lead management module to handle investment queries, track lead statuses, manage assignment workflows, and maintain a detailed history of client interactions.',
     'Modern Full-Stack Experience: Delivered a highly responsive, PWA-supported frontend using React, TypeScript, and TanStack Query, backed by a scalable Laravel REST API utilizing repository/service patterns and Redis caching for optimal performance.',
-  ],
-  keyTakeaway:
-    'Property intelligence requires a structured data pipeline where field-collected market data goes through rigorous moderation before reaching investors. Combining RBAC with automated workflows ensures data quality at scale.',
-  tools: [
-    'Laravel (PHP) & MySQL',
-    'React (TypeScript, Vite)',
-    'Tailwind CSS & Framer Motion',
-    'Laravel Sanctum & Spatie (RBAC)',
-    'Redis (Caching)',
-    'DomPDF (Report Generation)',
   ],
   screenshots: [
     '/images/zam-v2/screenshot-rocks (84).webp',

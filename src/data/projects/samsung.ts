@@ -24,13 +24,6 @@ export const samsungMigration = {
     'Hardware Print Bridge',
   ],
   slug: 'samsung-migration',
-  services: [
-    'Backend Systems Architecture',
-    'Data Pipeline & ETL',
-    'Performance Engineering',
-    'Third-Party Hardware Integration',
-  ],
-  industry: ['Telecom', 'Infrastructure'],
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -53,16 +46,6 @@ export const samsungMigration = {
     'Virtualized Port Assignment Grid: A 42-column grid over large record sets, virtualized for scroll performance with inline editing, deferred input state and optimistic saves, plus a column-visibility control so engineers see the fields their task needs.',
     'Port Mapping Intelligence: Radio ports are deduplicated with an explicit removed-value sentinel, and VDU quadrants are assigned cyclically from the gNodeB ID, with circuit-path keywords mapped to their CA, BMC and OAM ports.',
     'Cross-Stack Label Printing: The browser cannot drive a label printer directly, so a small .NET service sits between — authenticating to the Laravel API with a service token, then driving the Brother SDK over COM interop to print equipment labels.',
-  ],
-  keyTakeaway:
-    'The hard part of migrating telecom infrastructure was never storing the data — it was deriving it correctly and being able to prove, per field, whether a human or a rule produced it. Building the provenance trail alongside the automation is what makes the output safe to hand to a field crew.',
-  tools: [
-    'Laravel 12 (PHP 8.2+) & MySQL',
-    'PhpSpreadsheet / Maatwebsite Excel',
-    'Laravel Queues & Redis',
-    'React 19 + Vite',
-    'TanStack Table + React Virtual',
-    '.NET Print Bridge + Brother b-PAC SDK',
   ],
   // Read in the order the work happens: open a project, read what extraction
   // produced, correct it on the assignment grid, then render and print.

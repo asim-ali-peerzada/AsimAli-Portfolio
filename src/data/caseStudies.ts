@@ -41,22 +41,6 @@ export interface EngineeringCaseStudy {
   captions?: string[];
   /** Groups shown as pill tabs above the showcase. */
   showcaseGroups?: ShowcaseGroup[];
-  diagram: {
-    client: { title: string; sub: string };
-    api: { title: string; sub: string };
-    services: { title: string; desc: string }[];
-    data: { title: string; items: string[] };
-    external: { title: string; items: string[] };
-  };
-  challenge: {
-    title: string;
-    body: string;
-    approach: string;
-    decision: string;
-    tradeoff: string;
-  };
-  outcomeParagraphs: string[];
-  techCategories: { category: string; items: string[] }[];
 }
 
 const caseStudiesData: Record<string, EngineeringCaseStudy> = {
@@ -182,84 +166,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Collaboration", items: [11, 12, 13] },
       { label: "Commercial & delivery", items: [14, 15, 16] },
     ],
-    diagram: {
-    client: {
-      title: "React 18 SPA (Inertia.js v2)",
-      sub: "Vite 7 \u00b7 Tailwind CSS \u00b7 Axios Chunked Upload Client",
-    },
-    api: {
-      title: "Laravel 12 Modular Monolith",
-      sub: "22 Domain Modules \u00b7 26 Policies \u00b7 Action & DTO Architecture",
-    },
-    services: [
-      {
-        title: "Deterministic PDF Engine",
-        desc: "Two Chromium drivers behind one renderer, with chunked pagination and server-side merging",
-      },
-      {
-        title: "Resumable Media Pipeline",
-        desc: "Stateless HMAC-SHA256 upload tokens, 5 MB chunks, quota enforcement and async conversion",
-      },
-      {
-        title: "Authorization & User Sync",
-        desc: "26 domain policies plus an AuthCenter user sync signed with HMAC-SHA256",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (107 Migrations)",
-        "Redis-Backed Queue (77 Queued Jobs)",
-        "Private Disk for Versioned Package PDFs",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "Samsung AuthCenter SSO (HMAC-SHA256 Signed User Sync)",
-        "Queue-Backed Transactional Email",
-        "Headless Chromium / Browserless Bridge",
-      ],
-    },
-    },
-    challenge: {
-      title: "Rendering a 300-photo close-out package deterministically under a customer-facing deadline",
-      body: "The deliverable is a physical document with fixed page geometry \u2014 dynamic Page X of Y numbering, a fixed four-photo grid grouped by construction stage, and table boundaries that cannot drift. At 300 photos a single Chromium render is a memory and timeout problem, and because page breaks belonged to CSS reflow, the output could not be tested or split.",
-      approach:
-        "Removed the browser from pagination decisions: fixed-layout page boxes with an 880px pixel budget, four photos per page, twelve site details per page, thirty picture categories per page, and checklist row heights tiered by label length (66/48/32px). Total page count is computed before Chromium is invoked, and rendering is isolated on a dedicated supervisor capped at 2 processes and 512 MB.",
-      decision:
-        "Put rendering behind a driver abstraction so the same pipeline runs against local Chromium or a remote Browserless host, and let the renderer choose image transport by reachability \u2014 signed short-lived URLs, or inline base64 when the host is unreachable \u2014 instead of assuming the renderer can always fetch a file path.",
-      tradeoff:
-        "Accepted asynchronous rendering with client-side polling over synchronous HTTP generation, keeping web-server responsiveness during large compilations. Every image failure degrades to the original file rather than failing a customer-facing document.",
-    },
-    outcomeParagraphs: [
-      "Page layout became deterministic and unit-testable without launching a browser, and the silent 255-page truncation on large packages is fixed.",
-      "Uploads survive interrupted cellular transfers and page navigation, with duplicate chunks, incomplete uploads and storage exhaustion each handled explicitly rather than surfacing as a stack trace.",
-      "Authorization was validated against an independent spec derived from domain rules rather than against itself, and the cross-tenant defects it found were fixed at the point of the withdrawal action.",
-      "Customer-facing delivery is guarded against duplicate sends by four independent mechanisms, and scheduled emails receive a freshly signed link at send time instead of one that expires while queued.",
-    ],
-    techCategories: [
-      {
-        category: "Backend",
-        items: ["PHP 8.2", "Laravel 12", "Horizon", "Redis"],
-      },
-      {
-        category: "Frontend",
-        items: ["React 18", "Inertia.js v2", "Tailwind CSS"],
-      },
-      {
-        category: "Documents & media",
-        items: ["Browsershot", "Headless Chromium", "Browserless", "Intervention Image"],
-      },
-      {
-        category: "Reliability & security",
-        items: ["HMAC-SHA256 tokens", "Queue isolation", "External AuthCenter SSO"],
-      },
-      {
-        category: "Testing",
-        items: ["Pest", "Feature tests", "Adversarial authorization probe"],
-      },
-    ],
   },
   "ccms": {
     headlineSplit: ["CLIENT CONTACT", "MANAGEMENT SYSTEM"],
@@ -358,78 +264,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Follow-up & communication", items: [14, 15, 16] },
       { label: "Users & access", items: [18, 17] },
     ],
-    diagram: {
-    client: {
-      title: "React 18 SPA (TypeScript)",
-      sub: "Vite \u00b7 Tailwind CSS \u00b7 Material UI \u00b7 Recharts",
-    },
-    api: {
-      title: "Laravel 11 REST API",
-      sub: "Resource Controllers \u00b7 5 Policies \u00b7 Sanctum Tokens",
-    },
-    services: [
-      {
-        title: "Territory Propagation",
-        desc: "Grants aggregate up the reporting hierarchy and revoke across the subtree in one transaction",
-      },
-      {
-        title: "Race-Free Quote Numbering",
-        desc: "Sequential quote numbers issued under a cache lock so two requests cannot collide",
-      },
-      {
-        title: "Chunked Contact Import",
-        desc: "1,000-row chunks with phone normalisation, US state inference and duplicate resolution",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (117 Migrations)",
-        "Database-Backed Queue (7 Queued Jobs)",
-        "Database Cache & Session Store",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "AuthCenter SSO (Token-Exchange Provisioning)",
-        "Transactional Email API",
-        "Pusher Real-Time Updates",
-      ],
-    },
-    },
-    challenge: {
-      title: "Money Flows Down the Chain Without Double-Spending",
-      body: "A global revenue target is carved into regional buckets and assigned CEO → CFO → President → VP → …, and every rung must not over-allocate. Naive sums double-count cascading redistributions and let budgets shrink below what has already been distributed onward.",
-      approach:
-        'Bucket-level validation (global ≥ sum of regions), "direct assignments only" sums keyed on the bucket creator, downline checks on updates, consumed-target deletion guards, and bottom-up cascade deletes — all executed within atomic database transactions.',
-      decision:
-        "Recorded budget chains as explicit relational data (who gave whom money from which bucket) so cascade math and consumed-target detection are computable instead of inferred from transient state.",
-      tradeoff:
-        "Prioritized strict financial invariants and transactional consistency over update speed because corrupted allocation data would propagate into downstream reporting.",
-    },
-    outcomeParagraphs: [
-      "Replaced spreadsheet-driven sales operations with a centralized CRM enforcing territory-scoped access, hierarchical approvals, target allocation rules, and quote workflows across the organization.",
-      "The system brought client management, pipeline operations, organizational visibility, target planning, and quoting into a single operational platform.",
-    ],
-    techCategories: [
-      {
-        category: "Core Application",
-        items: ["Laravel", "React", "MySQL", "TypeScript"],
-      },
-      {
-        category: "Authentication & Security",
-        items: ["Laravel Sanctum", "RBAC", "HMAC-SHA256", "Policy Gates"],
-      },
-      {
-        category: "Real-Time & Integrations",
-        items: ["Pusher WebSockets", "Microsoft Graph API", "SMTP"],
-      },
-      {
-        category: "Data & Document Processing",
-        items: ["Laravel Queues", "Dompdf Engine", "20K+ Chunked Bulk Import"],
-      },
-    ],
   },
   "enterprise-single-sign-on": {
     headlineSplit: ["ENTERPRISE UNIFIED", "SINGLE SIGN-ON"],
@@ -511,79 +345,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Access requests", items: [2] },
       { label: "Applications & settings", items: [3, 4] },
       { label: "Analytics", items: [1] },
-    ],
-    diagram: {
-    client: {
-      title: "React 18 Admin Portal",
-      sub: "Vite 7 \u00b7 Tailwind CSS \u00b7 Material UI",
-    },
-    api: {
-      title: "Laravel 12 Auth Service",
-      sub: "OAuth 2.0 Authorization Server \u00b7 RS256 Signing",
-    },
-    services: [
-      {
-        title: "OAuth 2.0 + PKCE",
-        desc: "Authorization code flow with mandatory S256 challenge on every public client",
-      },
-      {
-        title: "Token Lifecycle",
-        desc: "RS256-signed access tokens with a refresh flow and a revoked-JWT denylist keyed by JTI",
-      },
-      {
-        title: "Cross-Domain Sync",
-        desc: "Internal endpoints authenticated by HMAC-SHA256 for bidirectional user provisioning",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (43 Migrations)",
-        "Revoked-JWT Denylist (RS256 JTI)",
-        "Database-Backed Queue (12 Queued Jobs)",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "TOTP / Google Authenticator (2FA)",
-        "Transactional Email API",
-      ],
-    },
-    },
-    challenge: {
-      title:
-        "Instant Cross-Domain Token Invalidation in Distributed Applications",
-      body: "Stateless JWT tokens cannot be revoked natively until expiry. When an employee is offboarded or a security incident occurs, session access across all connected applications must terminate immediately.",
-      approach:
-        "Implemented a hybrid token strategy: short-lived access tokens paired with a centralized Redis token blacklist and webhook event dispatching to invalidate client sessions in real time.",
-      decision:
-        "Adopted standard RS256 asymmetric signing keys so child applications can independently verify tokens while only the central SSO hub holds the private signing key.",
-      tradeoff:
-        "Prioritized instant revocation safety and auditability over pure offline statelessness by introducing a sub-millisecond Redis check on sensitive operations.",
-    },
-    outcomeParagraphs: [
-      "Unified corporate authentication into a single secure gateway, eliminating duplicate credentials and reducing employee onboarding friction by 80%.",
-      "Achieved zero-trust multi-factor security across all connected enterprise platforms with comprehensive audit logging.",
-    ],
-    techCategories: [
-      {
-        category: "Core Identity",
-        items: ["Laravel", "React", "MySQL", "Redis"],
-      },
-      {
-        category: "Security & Auth",
-        items: [
-          "OAuth 2.0",
-          "JWT (RS256)",
-          "Google TOTP 2FA",
-          "Token Blacklisting",
-        ],
-      },
-      {
-        category: "Infrastructure & Jobs",
-        items: ["Laravel Queues", "Recharts Analytics", "SMTP"],
-      },
     ],
   },
   "genealogy-saas-platform": {
@@ -671,78 +432,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Finding people and proving them", items: [4, 5, 6] },
       { label: "Memories, import & shared access", items: [7, 8, 9] },
     ],
-    diagram: {
-    client: {
-      title: "React 19 SPA (TypeScript)",
-      sub: "Vite \u00b7 Tailwind CSS \u00b7 Interactive Lineage Canvas",
-    },
-    api: {
-      title: "Laravel 12 REST API",
-      sub: "Branch-Scoped Authorization \u00b7 8 Policies",
-    },
-    services: [
-      {
-        title: "Graph-Aware Access Matrix",
-        desc: "Five roles evaluated against the branch a caller sits in, not a flat role table",
-      },
-      {
-        title: "Lineage Traversal",
-        desc: "Breadth-first graph context so ancestors and descendants resolve from one traversal",
-      },
-      {
-        title: "Record Extraction",
-        desc: "OCR pipelines over scanned pages, surfaced with their source and confidence",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (135 Migrations)",
-        "Branch-Scoped Record Store",
-        "Database-Backed Queue (21 Queued Jobs)",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "Archival Record APIs (NARA / OpenArch)",
-        "Object Storage for Scans & Media",
-      ],
-    },
-    },
-    challenge: {
-      title: "Fuzzy Matching & Recursive Graph Traversal on Historical Records",
-      body: "Historical records frequently feature misspelled names, incomplete birth dates, and varying phonetics across decades. Querying deep generational graphs while correlating historical records posed severe performance challenges.",
-      approach:
-        "Implemented Double Metaphone phonetic matching combined with Levenshtein distance scoring inside background queue workers, pre-computing record suggestions asynchronously.",
-      decision:
-        "Employed an adjacency list model with indexed path materialized views in MySQL to execute deep ancestor and descendant queries in single round trips.",
-      tradeoff:
-        "Prioritized instantaneous tree rendering in the browser by offloading fuzzy record matching and archive discovery to background queues.",
-    },
-    outcomeParagraphs: [
-      "Transformed weeks of manual archive searching into automated background discoveries, connecting historical documents directly to family lineages.",
-      "Provided families with an intuitive, real-time collaborative workspace backed by rigorous tenant privacy controls.",
-    ],
-    techCategories: [
-      {
-        category: "Core Platform",
-        items: ["Laravel", "React", "MySQL", "Redis"],
-      },
-      {
-        category: "Algorithms & Extraction",
-        items: [
-          "OCR Engine",
-          "Double Metaphone",
-          "Levenshtein Scoring",
-          "GEDCOM",
-        ],
-      },
-      {
-        category: "Integrations",
-        items: ["NARA API", "OpenArch API", "Pusher WebSockets"],
-      },
-    ],
   },
   zametrix: {
     headlineSplit: ["ZAMETRIX REAL ESTATE", "DATA INTELLIGENCE"],
@@ -825,73 +514,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
     ],
     showcaseGroups: [
       { label: "Market intelligence", items: [1, 2] },
-    ],
-    diagram: {
-    client: {
-      title: "React SPA (TypeScript)",
-      sub: "Vite \u00b7 Tailwind CSS \u00b7 TanStack Query",
-    },
-    api: {
-      title: "Laravel REST API",
-      sub: "Sanctum Tokens \u00b7 Spatie Role-Based Access",
-    },
-    services: [
-      {
-        title: "Moderation Workflow",
-        desc: "Submitted market updates queue for review and are promoted only once approved",
-      },
-      {
-        title: "Comparison Engine",
-        desc: "Side-by-side property comparison across societies, phases and infrastructure metrics",
-      },
-      {
-        title: "Lead & CRM Module",
-        desc: "Investment enquiries routed through tracked statuses with interaction history",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (MySQL)",
-        "Admin Verification Queue",
-        "Portfolio Finance Records",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "PDF Report Generation (DomPDF)",
-      ],
-    },
-    },
-    challenge: {
-      title:
-        "Guaranteeing Data Integrity in Crowdsourced Real Estate Reporting",
-      body: "Ensuring that market pricing submitted by field agents across hundreds of sectors undergoes rigorous moderation before influencing public valuation algorithms.",
-      approach:
-        "Built an event-driven moderation queue where raw submissions are staged in isolated draft states and audited with change-differential tracking prior to publication.",
-      decision:
-        "Designed a unified repository pattern separating transactional updates from optimized analytical read models cached in Redis.",
-      tradeoff:
-        "Prioritized high-trust data verification and pricing accuracy over unmoderated real-time publishing velocity.",
-    },
-    outcomeParagraphs: [
-      "Delivered an enterprise PropTech intelligence platform empowering investors with verified price trends, structured moderation, and location comparison.",
-      "Replaced ad-hoc listings with a disciplined, verified market pulse engine backed by automated lead routing.",
-    ],
-    techCategories: [
-      {
-        category: "Core Stack",
-        items: ["Laravel", "React", "TypeScript", "MySQL", "Redis"],
-      },
-      {
-        category: "Architecture & RBAC",
-        items: ["Repository Pattern", "Spatie RBAC", "Sanctum Auth"],
-      },
-      {
-        category: "Tooling & Output",
-        items: ["DomPDF Generator", "TanStack Query", "Tailwind CSS"],
-      },
     ],
   },
   "shipment-tracker": {
@@ -978,74 +600,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Getting data in", items: [4, 5, 6] },
       { label: "Access", items: [7] },
     ],
-    diagram: {
-    client: {
-      title: "Operational Dashboard",
-      sub: "Blade + Livewire \u00b7 Tailwind CSS \u00b7 Vite",
-    },
-    api: {
-      title: "Laravel 12 REST + Mail Ingest",
-      sub: "IMAP Polling \u00b7 Lifecycle State Machine",
-    },
-    services: [
-      {
-        title: "IMAP Ingestion",
-        desc: "A mailbox poller classifies inbound notifications into typed shipment events",
-      },
-      {
-        title: "Lifecycle State Machine",
-        desc: "Nine explicit shipment states with guarded transitions between them",
-      },
-      {
-        title: "Item-Level Ledger",
-        desc: "Expected versus received quantity tracked per line, not per shipment",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (23 Migrations)",
-        "Database-Backed Queue (2 Queued Jobs)",
-        "Per-Line Quantity Ledger",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "IMAP Mailbox (Webklex)",
-        "SMTP Relay for Status Notifications",
-      ],
-    },
-    },
-    challenge: {
-      title:
-        "Resilient Data Extraction from Unpredictable Multi-Vendor Email Formats",
-      body: "Carrier and supplier dispatch emails varied significantly in formatting, character encoding, and structure. Missing a single part number or tracking code compromised downstream field technician installations.",
-      approach:
-        "Engineered a resilient heuristic parser with fallback regex extraction strategies, validation schemas, and an automated quarantine queue for unparseable emails requiring manual review.",
-      decision:
-        "Modeled the entire shipment lifecycle around a strict finite state machine, preventing impossible status leaps and guaranteeing transactional consistency on inventory counts.",
-      tradeoff:
-        "Enforced atomic database transactions on item quantity mutations to prioritize zero inventory discrepancy over raw ingestion velocity.",
-    },
-    outcomeParagraphs: [
-      "Eliminated 100% of manual logistics data entry from incoming emails and established complete end-to-end traceability for critical telecom hardware.",
-      "Provided field engineering teams with real-time inventory visibility, preventing misplaced equipment and installation delays.",
-    ],
-    techCategories: [
-      {
-        category: "Core Backend",
-        items: ["Laravel", "MySQL", "Livewire", "Blade"],
-      },
-      {
-        category: "Automation & Parsing",
-        items: ["Webklex IMAP", "Laravel Queues", "Heuristic Regex Engine"],
-      },
-      {
-        category: "Security & Monitoring",
-        items: ["Enterprise SSO", "Laravel Telescope", "Audit Logs"],
-      },
-    ],
   },
   "ai-assistant-platform": {
     headlineSplit: ["OMNICHANNEL AI", "ASSISTANT PLATFORM"],
@@ -1129,75 +683,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Channels & conversations", items: [4, 5] },
       { label: "Workspace access", items: [6] },
     ],
-    diagram: {
-    client: {
-      title: "React 19 Operations UI",
-      sub: "Vite 7 \u00b7 TanStack Query \u00b7 Chat Workspace",
-    },
-    api: {
-      title: "Laravel 12 Control Plane",
-      sub: "Workspace-Scoped RBAC \u00b7 Webhook Routing",
-    },
-    services: [
-      {
-        title: "Retrieval Pipeline",
-        desc: "Documents chunked and embedded, then queried with workspace-scoped metadata filters",
-      },
-      {
-        title: "Inference Service",
-        desc: "A Python FastAPI service handles the model work so the control plane stays in PHP",
-      },
-      {
-        title: "Voice Pipeline",
-        desc: "Speech-to-text in, retrieval and generation, speech-to-text out",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (Laravel Control Plane)",
-        "Pinecone Vector Store (Namespace Isolation)",
-        "Python FastAPI Inference Service",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "WhatsApp Business Cloud API",
-        "Instagram & Facebook Messenger Webhooks",
-        "Whisper STT \u00b7 OpenAI \u00b7 ElevenLabs TTS",
-      ],
-    },
-    },
-    challenge: {
-      title:
-        "Tenant-Isolated Semantic Retrieval with Sub-500ms Response Latency",
-      body: "Executing semantic search across proprietary documents while strictly preventing cross-tenant data leakage and maintaining low conversational latency for real-time customer widgets.",
-      approach:
-        "Implemented metadata filtering at the vector database query layer, ensuring vector lookups are strictly constrained to the authenticated tenant workspace ID alongside Redis caching for frequent context embeddings.",
-      decision:
-        "Decoupled the synchronous HTTP request from heavy embedding pipelines via background queue workers, providing immediate UI feedback during large document uploads.",
-      tradeoff:
-        "Chose a dedicated Python/FastAPI microservice for AI computation rather than keeping everything in PHP, optimizing for native vector and ML library performance.",
-    },
-    outcomeParagraphs: [
-      "Enabled secure, enterprise-grade AI automation with isolated business knowledge bases, sub-500ms response latency, and multimodal voice capabilities.",
-      "Provided organizations with an auditable platform to ground generative AI in internal documentation safely.",
-    ],
-    techCategories: [
-      {
-        category: "AI & Microservices",
-        items: ["Python", "FastAPI", "Pinecone Vector DB", "LangChain"],
-      },
-      {
-        category: "Core Business API",
-        items: ["Laravel", "React", "MySQL", "Redis"],
-      },
-      {
-        category: "Multimodal & Billing",
-        items: ["Whisper STT", "ElevenLabs TTS", "Stripe Billing"],
-      },
-    ],
   },
   "samsung-migration": {
     headlineSplit: ["SAMSUNG NETWORK", "MIGRATION & DIAGRAMS"],
@@ -1278,56 +763,6 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Extract: parsed records", items: [1, 2] },
       { label: "Map and visualize", items: [3, 4] },
     ],
-    diagram: {
-    client: {
-      title: "React 19 SPA (Vite)",
-      sub: "MUI 7 \u00b7 TanStack Table \u00b7 React Virtual",
-    },
-    api: {
-      title: "Laravel 12 REST API",
-      sub: "Queue Worker \u00b7 Sanctum Tokens \u00b7 AuthCenter SSO",
-    },
-    services: [
-      {
-        title: "Extraction Engine",
-        desc: "Config-driven regex with priority ordering, confidence scoring and unknown-pattern logging",
-      },
-      {
-        title: "Port Mapping",
-        desc: "Three services derive radio ports and VDU quadrants from the extracted circuit data",
-      },
-      {
-        title: "Print Bridge",
-        desc: "A .NET service drives the label-printer SDK over COM interop on the app's behalf",
-      },
-    ],
-    data: {
-      title: "Persistence & Storage",
-      items: [
-        "Relational Database (21 Migrations)",
-        "48-Field Network Record",
-        "Auto-Population Provenance JSON",
-      ],
-    },
-    external: {
-      title: "Third-Party & Integrations",
-      items: [
-        "Samsung AuthCenter SSO (Code-Exchange Flow)",
-        "Brother b-PAC SDK via .NET Print Bridge",
-      ],
-    },
-    },
-    challenge: {
-      title: "",
-      body: "",
-      approach: "",
-      decision: "",
-      tradeoff: "",
-    },
-    outcomeParagraphs: [
-      "The hard part of migrating telecom infrastructure was never storing the data — it was deriving it correctly and being able to prove, per field, whether a human or a rule produced it. Building the provenance trail alongside the automation is what makes the output safe to hand to a field crew.",
-    ],
-    techCategories: [],
   },
 };
 

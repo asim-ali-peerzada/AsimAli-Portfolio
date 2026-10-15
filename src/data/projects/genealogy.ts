@@ -14,9 +14,6 @@ export const genealogy = {
     'Record Matching',
   ],
   slug: 'genealogy-saas-platform',
-  services: ['Enterprise SaaS Development', 'API Integrations', 'OCR Processing'],
-  industry: ['Family History', 'Archival'],
-  timeFrame: '10 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -39,9 +36,6 @@ export const genealogy = {
     'Tiered family-scoped access control, gating tree visibility and edit rights per family role',
     'Collaborative tree editing with real-time sync across family members',
   ],
-  keyTakeaway:
-    'Historical record processing at scale requires robust OCR pipelines and intelligent fuzzy-matching algorithms. Combining API integrations with automated extraction transforms weeks of manual research into seconds of computation.',
-  tools: ['Laravel', 'MySQL', 'OCR Engine', 'Redis', 'Pusher'],
   // Read from the images themselves, in the order the product is used:
   // arrive, empty tree, populated tree, explore it, trace people, prove them,
   // ingest more, attach memories, share it.

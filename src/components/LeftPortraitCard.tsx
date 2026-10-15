@@ -1,10 +1,6 @@
 import { Flame, MapPin } from "lucide-react";
-import {
-  FaEnvelope,
-  FaFileDownload,
-  FaGithub,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { Download, Mail } from "lucide-react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const LeftPortraitCard = () => {
   return (
@@ -95,7 +91,7 @@ const LeftPortraitCard = () => {
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
             aria-label="Email"
           >
-            <FaEnvelope size={20} />
+            <Mail size={20} />
           </a>
           <a
             href="/Asim_Ali_Resume.pdf"
@@ -103,7 +99,7 @@ const LeftPortraitCard = () => {
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
             aria-label="Download Resume"
           >
-            <FaFileDownload size={20} />
+            <Download size={20} />
           </a>
         </div>
       </div>

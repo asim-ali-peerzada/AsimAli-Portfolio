@@ -23,10 +23,6 @@ export interface Project {
   image: string;
   tags?: string[];
   coreCapabilities?: string[];
-  services?: string[];
-  industry?: string[];
-  tools?: string[];
-  timeFrame?: string;
   /** Blank hides the slot on the card. */
   year?: string;
   overview?: string;
@@ -36,7 +32,6 @@ export interface Project {
   platform?: string;
   role?: string;
   highlights?: string[];
-  keyTakeaway?: string;
   screenshots?: string[];
 }
 

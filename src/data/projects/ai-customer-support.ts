@@ -14,14 +14,6 @@ export const aiCustomerSupport = {
     'WhatsApp API',
   ],
   slug: "ai-assistant-platform",
-  services: [
-    "Enterprise SaaS Development",
-    "AI & LLM Integration (RAG)",
-    "Microservices Architecture",
-    "Business Workspace Backend",
-  ],
-  industry: ["AI", "SaaS", "Customer Engagement"],
-  timeFrame: "12 Weeks",
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -43,16 +35,6 @@ export const aiCustomerSupport = {
     "Workspace Data Separation: Implemented strict role-based access controls (RBAC), ensuring secure administration of users, billing, and AI settings across isolated business workspaces.",
     "Voice & Multimodal Workflows: Integrated advanced speech-to-text (Whisper/Deepgram) and text-to-speech (ElevenLabs/OpenAI) pipelines, facilitating fluid, real-time voice interactions alongside traditional text-based channels.",
     "Background Processing & Observability: Utilized Laravel queues for heavy data ingestion jobs and integrated observability tools (Telescope, Pulse) to monitor API latency, AI interaction health, and system audits.",
-  ],
-  keyTakeaway:
-    "AI-powered automation must be backed by robust backend architecture to be production-ready. Decoupling AI processing into a dedicated microservice while keeping business logic in Laravel ensures scalability, maintainability, and strict role-based access control.",
-  tools: [
-    "Laravel (PHP)",
-    "FastAPI (Python)",
-    "React (Vite, Tailwind)",
-    "Pinecone (Vector DB)",
-    "OpenAI / Google Gemini",
-    "LangChain / LangGraph",
   ],
   // Ordered as the pipeline works: what it knows, where the knowledge comes
   // from, how it reaches people, what it actually says, then workspace access.

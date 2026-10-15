@@ -16,14 +16,6 @@ export const ccms = {
   ],
   // (4 tags, single line — see Projects.tsx)
   slug: 'ccms',
-  services: [
-    'Enterprise CRM Development',
-    'Role-Based Data Isolation',
-    'Pipeline & Approval Workflows',
-    'Quote-to-Order Automation',
-  ],
-  industry: ['CRM & Sales', 'Enterprise Operations'],
-  timeFrame: '12 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -45,18 +37,6 @@ export const ccms = {
     'Pipeline Approval Workflow: Deal tracking through pending → submitted → approved/rejected, gated by a policy that resolves the creator\u2019s current direct manager at runtime.',
     'Target & Budget Allocation Engine: Revenue targets cascade from global buckets down the org chain with double-spend prevention, downline protection, and bottom-up cascade deletes.',
     'Quote → PDF → Email Lifecycle: Two-stage approvals, race-free sequential quote numbers under a cache lock, Dompdf PDF generation, and ZIP-batched emailing.',
-  ],
-  keyTakeaway:
-    'Enterprise data isolation lives or dies at the query layer. Recording territory grants and budget chains as data — not flags — makes hierarchy-aware visibility and cascade math correct, auditable, and safe to change.',
-  tools: [
-    'PHP (Laravel)',
-    'React + MUI',
-    'MySQL',
-    'Laravel Sanctum',
-    'Pusher Realtime',
-    'Dompdf (PDF)',
-    'Microsoft Graph (Teams)',
-    'AuthCenter SSO',
   ],
   // Ordered as a walkthrough, not by capture filename: the pipeline the
   // business runs on first, then the target and hierarchy engine underneath it,

@@ -113,16 +113,6 @@ function buildCaseStudy(project: Project): EngineeringCaseStudy {
       title: h.split(':')[0]?.trim() || `Capability ${i + 1}`,
       desc: h.includes(':') ? h.split(':').slice(1).join(':').trim() : h,
     })),
-    diagram: null as never,
-    challenge: {
-      title: '',
-      body: '',
-      approach: '',
-      decision: '',
-      tradeoff: '',
-    },
-    outcomeParagraphs: project.keyTakeaway ? [project.keyTakeaway] : [],
-    techCategories: [],
   };
 }
 

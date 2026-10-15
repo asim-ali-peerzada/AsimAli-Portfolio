@@ -15,14 +15,6 @@ export const shipmentTrackerIms = {
     'Lifecycle States',
   ],
   slug: 'shipment-tracker',
-  services: [
-    'Workflow Automation & ETL',
-    'Backend Systems Architecture',
-    'Logistics & Inventory Management',
-    'Third-Party API & IMAP Integration',
-  ],
-  industry: ['Telecom', 'Logistics'],
-  timeFrame: '14 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -44,15 +36,6 @@ export const shipmentTrackerIms = {
     'Granular Item-Level Tracking: Built a highly detailed inventory ledger tracking individual part numbers, actively monitoring item quantities across statuses such as shipped, received, missing, installed, and transferred.',
     'Dynamic Logistics Workflow: Developed a state-machine-like workflow tracking the real-world lifecycle of a shipment (e.g., In Transit, Received by GC, Inside Company Van, Installed, Transferred).',
     'Admin Governance & SSO: Integrated seamless Single Sign-On (SSO) via an external AuthCenter, fortified with role-based access controls and an automated notification system for tracking failure alerts and configuration changes.',
-  ],
-  keyTakeaway:
-    'Automating logistics workflows from unstructured email ingestion to structured inventory tracking eliminates manual bottlenecks and provides the real-time visibility needed to maintain operational integrity at scale.',
-  tools: [
-    'Laravel (PHP) & MySQL',
-    'Webklex IMAP (Email Parsing)',
-    'Laravel Queues & Telescope',
-    'Blade, Livewire, Tailwind CSS, Vite',
-    'External SSO Integration',
   ],
   // Ordered as the operation actually runs: watch the board, open one shipment,
   // attach its evidence, take the source documents in, then the automation and

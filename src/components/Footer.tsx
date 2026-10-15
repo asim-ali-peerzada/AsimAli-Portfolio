@@ -1,4 +1,5 @@
-import { FaEnvelope, FaFileDownload, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Download, Mail } from 'lucide-react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -71,7 +72,7 @@ const Footer = () => {
             className="text-orange hover:text-white transition-all transform hover:scale-110"
             aria-label="Email"
           >
-            <FaEnvelope size={18} />
+            <Mail size={18} />
           </a>
           <a
             href="/Asim_Ali_Resume.pdf"
@@ -79,7 +80,7 @@ const Footer = () => {
             className="text-orange hover:text-white transition-all transform hover:scale-110"
             aria-label="Download Resume"
           >
-            <FaFileDownload size={18} />
+            <Download size={18} />
           </a>
         </div>
 

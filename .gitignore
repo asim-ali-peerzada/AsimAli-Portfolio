@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local audit / analysis notes
+all-project-details/
+.project-detail-ref-design-images/
+.staging-screenshots/
+
+# Astro generated files outside root .astro
+src/components/.astro/
+# common local-only files
+*.log
+.DS_Store

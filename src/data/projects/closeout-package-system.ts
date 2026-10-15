@@ -16,14 +16,6 @@ export const closeoutPackageSystem = {
     'Approval Workflows',
   ],
   slug: 'close-out-package-system',
-  services: [
-    'Modular Monolith Architecture',
-    'Automated PDF Document Engine',
-    'Multi-Stage Sequential Workflows',
-    'SSO Identity & User Synchronization',
-  ],
-  industry: ['Telecom Infrastructure', 'Construction Management'],
-  timeFrame: '16 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -46,18 +38,6 @@ export const closeoutPackageSystem = {
     'Approval Readiness Gate: Multi-rule programmatic report validating required site info, photo counts, and checklist responses before allowing final sign-off.',
     'Transactional Email with Idempotency: Brevo API integration via custom notification channels with unique idempotency keys preventing duplicate sends on retries.',
     '4-Tier Queue Topology: Isolated Horizon supervisors dedicating separate resource limits to CPU-heavy PDF generation, fast emails, and background events.',
-  ],
-  keyTakeaway:
-    'Critical enterprise deliverables require strict architectural boundaries. Isolating CPU-intensive Chromium PDF rendering into dedicated queue tiers while enforcing sequential workflow state machines ensures predictable system performance and zero data corruption.',
-  tools: [
-    'Laravel 12 (PHP 8.2)',
-    'React 18 (Inertia.js v2)',
-    'Headless Chromium (Browsershot)',
-    'Redis & Laravel Horizon',
-    'MySQL 8',
-    'Tailwind CSS',
-    'AuthCenter SSO (HMAC-SHA256)',
-    'Brevo Transactional Email',
   ],
   screenshots: [
     '/images/cop-v2/screenshot-rocks (28).webp',

@@ -19,14 +19,6 @@ export const enterpriseSso = {
     'User Sync',
   ],
   slug: 'enterprise-single-sign-on',
-  services: [
-    'Identity & Access Management (IAM)',
-    'Enterprise Security Architecture',
-    'Third-Party API Synchronization',
-    'Data Integration & Background Processing',
-  ],
-  industry: ['Cybersecurity', 'Enterprise IT'],
-  timeFrame: '10 Weeks',
   // Set the real year(s) before publishing, e.g. "2025" or "2025 - 2026".
   // Left blank on purpose: an unverified date on a public CV is worse than none.
   // Repo commit history is a starting point, not the answer - confirm with the user.
@@ -48,15 +40,6 @@ export const enterpriseSso = {
     'Approval-Based Access Pipelines: Developed automated request workflows enabling users to request domain-specific access, which admins can securely review, approve, or reject via the central dashboard.',
     'Bulk Infrastructure Data Processing: Built a high-performance background processing engine using Laravel Queues to handle bulk Excel uploads, allowing admins to seamlessly import, filter, and monitor site access data.',
     'Admin Governance & Analytics: Delivered a comprehensive React-based control panel utilizing Recharts and Material UI to provide real-time analytics, user activity tracking, and cross-domain access monitoring.',
-  ],
-  keyTakeaway:
-    'A well-designed SSO system is the cornerstone of enterprise security. Centralizing identity with JWT and TOTP ensures both seamless user experience and robust protection against unauthorized access.',
-  tools: [
-    'Laravel (PHP) & REST APIs',
-    'React (Vite, Tailwind CSS, Material UI)',
-    'JWT Authentication & Google 2FA',
-    'Queue & Job-based Processing',
-    'Recharts (Analytics) & SMTP',
   ],
   screenshots: [
     '/images/sso-v2/screenshot-rocks (29).webp',
