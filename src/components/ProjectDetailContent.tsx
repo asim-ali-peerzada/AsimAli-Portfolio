@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import { useEffect } from 'react';
+import { useLayoutEffect as useEffect } from 'react';
 import { projects, type Project } from '@/data/projects';
 import BackToHome from './BackToHome';
 import ProjectCaseStudy from './ProjectCaseStudy';
@@ -17,6 +17,10 @@ interface ProjectDetailContentProps {
  */
 export default function ProjectDetailContent({ project }: ProjectDetailContentProps) {
   useEffect(() => {
+    // Only reset on the initial navigation jump. If the user has already
+    // scrolled before this client effect fires (e.g. hydration lag), forcing
+    // the page to the top is exactly the jump they report — leave them.
+    if (window.scrollY > 20) return;
     window.scrollTo(0, 0);
   }, [project.slug]);
 
@@ -57,7 +61,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
         >
           <a
             href={`/projects/${prevProject.slug}`}
-            className="group flex flex-col gap-1.5 min-w-0"
+            className="group flex flex-col gap-2 min-w-0 rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">
               Previous
@@ -70,7 +74,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
 
           <a
             href={`/projects/${nextProject.slug}`}
-            className="group flex flex-col items-end gap-1.5 min-w-0 text-right"
+            className="group flex flex-col items-end gap-2 min-w-0 rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 text-right transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">
               Next

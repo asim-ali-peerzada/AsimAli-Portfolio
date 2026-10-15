@@ -32,6 +32,7 @@
 - [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Collaborative family history platform with NARA/OpenArch API + OCR + record matching
 - [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports - [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker): Automated logistics with IMAP email parsing + queue workers + item-level tracking
 - [Close-Out Package System](https://asimali.online/projects/close-out-package-system): Telecom construction management with GPS/EXIF photo verification and approval gates
+- [Samsung Network Migration & Diagrams](https://asimali.online/projects/samsung-migration): Telecom 4G-to-5G migration tooling - circuit-path regex extraction with confidence scoring, cascading auto-population with field provenance, 42-column virtualized grid, .NET print bridge to Brother label printers - Laravel 12 + React 19
 
 ## Contact
 - Website: https://asimali.online

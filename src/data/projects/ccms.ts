@@ -1,17 +1,3 @@
-import cover from '@/assets/images/ccms/107shots_so.png';
-import shot1 from '@/assets/images/ccms/131shots_so.png';
-import shot2 from '@/assets/images/ccms/166shots_so.png';
-import shot3 from '@/assets/images/ccms/203shots_so.png';
-import shot4 from '@/assets/images/ccms/27shots_so.png';
-import shot5 from '@/assets/images/ccms/282shots_so_1.png';
-import shot6 from '@/assets/images/ccms/293shots_so.png';
-import shot7 from '@/assets/images/ccms/301shots_so.png';
-import shot8 from '@/assets/images/ccms/348shots_so.png';
-import shot9 from '@/assets/images/ccms/374shots_so.png';
-import shot10 from '@/assets/images/ccms/637shots_so.png';
-import shot11 from '@/assets/images/ccms/82shots_so.png';
-import shot12 from '@/assets/images/ccms/88shots_so.png';
-
 export const ccms = {
   title: 'CCMS — Enterprise Sales & CRM',
   badge: 'Production · Enterprise',
@@ -22,6 +8,12 @@ export const ccms = {
   // Capability tags — what this system does. Tech stack lives in `tools` below.
   // Keep 4-5 and short enough to render on a single line.
   tags: ['Territory RBAC', 'Approvals', 'Cascade Targets', 'Quote to PDF'],
+  coreCapabilities: [
+    'Territory RBAC',
+    'Approvals',
+    'Cascade Targets',
+    'Quote to PDF',
+  ],
   // (4 tags, single line — see Projects.tsx)
   slug: 'ccms',
   services: [
@@ -44,8 +36,8 @@ export const ccms = {
     'Engineered a Laravel + React (MUI) CRM where nearly every permission derives from the reporting hierarchy. Granular company/state/city territory grants propagate down the org and revoke in cascade; pipeline deals move through a manager-approved workflow; revenue targets cascade from global buckets with double-spend prevention; and quotes flow through approval to branded, sequentially-numbered PDFs emailed to clients.',
   // Short display values for the case-study header. The long-form `role`
   // paragraph stays for the "What I built" section.
-  roleTitle: "Lead Backend Architect",
-  platform: "Enterprise Web App",
+  roleTitle: "Backend Engineer",
+  platform: "Enterprise B2B Sales & CRM Platform",
   role:    'Lead Backend Architect. Designed the Laravel relational schema and service layer (territory propagation, target allocation, hierarchy, notifications), built the policy-gated authorization and query-scope isolation, integrated AuthCenter SSO with HMAC-signed bidirectional user sync, and engineered the Dompdf quote pipeline and bulk-import path for 20K+ rows.',
   highlights: [
     'Territory Access Control with Cascade Revocation: Granular company/state/city grants that aggregate up the reporting hierarchy and revoke from every subordinate inside one transaction when removed — preventing data leakage at any level.',
@@ -66,19 +58,28 @@ export const ccms = {
     'Microsoft Graph (Teams)',
     'AuthCenter SSO',
   ],
+  // Ordered as a walkthrough, not by capture filename: the pipeline the
+  // business runs on first, then the target and hierarchy engine underneath it,
+  // then territory and accounts, then the people-facing queues, then access.
   screenshots: [
-    cover,
-    shot1,
-    shot2,
-    shot3,
-    shot4,
-    shot5,
-    shot6,
-    shot7,
-    shot8,
-    shot9,
-    shot10,
-    shot11,
-    shot12,
+    '/images/ccms-v2/screenshot-rocks (44).webp', // dashboard
+    '/images/ccms-v2/screenshot-rocks (51).webp', // sales quote register
+    '/images/ccms-v2/screenshot-rocks (47).webp', // quote pipeline allocation
+    '/images/ccms-v2/screenshot-rocks (48).webp', // generated sales report
+    '/images/ccms-v2/screenshot-rocks (45).webp', // dashboard, opportunity view
+    '/images/ccms-v2/screenshot-rocks (49).webp', // target allocations by user
+    '/images/ccms-v2/screenshot-rocks (50).webp', // target distribution hierarchy
+    '/images/ccms-v2/screenshot-rocks (35).webp', // org hierarchy chart
+    '/images/ccms-v2/screenshot-rocks (34).webp', // smart profiles
+    '/images/ccms-v2/screenshot-rocks (39).webp', // sales rep drawer
+    '/images/ccms-v2/screenshot-rocks (36).webp', // contacts
+    '/images/ccms-v2/screenshot-rocks (37).webp', // contact import field mapping
+    '/images/ccms-v2/screenshot-rocks (42).webp', // company invitations
+    '/images/ccms-v2/screenshot-rocks (43).webp', // companies + messages
+    '/images/ccms-v2/screenshot-rocks (46).webp', // follow-up queues
+    '/images/ccms-v2/screenshot-rocks (41).webp', // communication logs
+    '/images/ccms-v2/screenshot-rocks (52).webp', // action items
+    '/images/ccms-v2/screenshot-rocks (38).webp', // sales user profile
+    '/images/ccms-v2/screenshot-rocks (40).webp', // user activity log
   ],
 };

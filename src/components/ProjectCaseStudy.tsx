@@ -428,18 +428,25 @@ export default function ProjectCaseStudy({ project }: { readonly project: Projec
   const cs = buildCaseStudy(project);
   const shortTitle = project.title.split(' (')[0].split(' — ')[0];
 
-  // Six screenshots: the opening image plus one after each of the middle
-  // sections. Projects with fewer simply render fewer.
-  const shots = (project.screenshots || []).slice(0, 17);
+  // The opening image plus one per middle section. Projects with fewer simply
+  // render fewer.
+  //
+  // This was `slice(0, 17)`, which silently dropped screenshots 18+ from any
+  // project that had them — CCMS reached 19 and lost its last two images with
+  // no error. There is no layout reason for a cap: the Showcase tabs already
+  // keep each group short, and the plain gallery is a vertical stack.
+  const shots = project.screenshots || [];
 
   // Showcase is opt-in per project so the rollout can be judged on one page
   // before it is applied to the rest.
   const isShowcase = cs.layout === 'showcase';
   // Captions are authored per screenshot; fall back to the raw screenshot list
   // so a project that opts in without writing captions still renders.
-  const gallery: GalleryItem[] = (cs.gallery?.length ? cs.gallery : shots).map((g: any) =>
-    typeof g === 'string' ? { src: g, caption: '' } : g
-  );
+  // Captions are authored by index; the paths come from project.screenshots.
+  const gallery: GalleryItem[] = shots.map((src, i) => ({
+    src,
+    caption: cs.captions?.[i] ?? '',
+  }));
 
   // "What I built" — engineering contributions only. Deliberately capped at a
   // handful: a reader should get the three or four decisions that characterise
@@ -638,7 +645,7 @@ export default function ProjectCaseStudy({ project }: { readonly project: Projec
           href={cs.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-12 inline-flex w-fit items-center gap-2 rounded-lg bg-orange px-5 py-3 text-[14px] font-semibold text-white transition-opacity hover:opacity-90 font-display"
+          className="mt-12 inline-flex w-fit items-center gap-2 rounded-lg bg-cta px-5 py-3 text-[14px] font-semibold text-white transition-opacity hover:opacity-90 font-display"
         >
           View live system
           <ArrowUpRight size={16} strokeWidth={2.5} />

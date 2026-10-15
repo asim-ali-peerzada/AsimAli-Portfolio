@@ -1,9 +1,3 @@
-import cover from '@/assets/images/ims/16shots_so.png';
-import shot1 from '@/assets/images/ims/562shots_so.png';
-import shot2 from '@/assets/images/ims/821shots_so.png';
-import shot3 from '@/assets/images/ims/833shots_so.png';
-import shot4 from '@/assets/images/ims/875shots_so.png';
-import shot5 from '@/assets/images/ims/897shots_so.png';
 
 export const shipmentTrackerIms = {
   title: 'Shipment Tracker & IMS',
@@ -14,6 +8,12 @@ export const shipmentTrackerIms = {
     'Enterprise-grade inventory and shipment management platform bridging unstructured email notifications with a structured operational web dashboard.',
   image: '/images/ims/ims-cover.webp',
   tags: ['IMAP Parsing', 'Queue Jobs', 'Item Tracking', 'Lifecycle States'],
+  coreCapabilities: [
+    'IMAP Parsing',
+    'Queue Jobs',
+    'Item Tracking',
+    'Lifecycle States',
+  ],
   slug: 'shipment-tracker',
   services: [
     'Workflow Automation & ETL',
@@ -28,15 +28,15 @@ export const shipmentTrackerIms = {
   // Repo commit history is a starting point, not the answer - confirm with the user.
   year: "",
   overview:
-    'An automated, enterprise-grade inventory and shipment management platform designed to bridge unstructured email notifications with a structured operational web dashboard. The system enforces strict business rules, item-level tracking, and automated lifecycle management for engineering-order logistics.',
+    'A telecom supply-chain and logistics platform that replaces manual engineering-order (EO) tracking with unattended IMAP email ingestion and a live operational dashboard. It automatically polls, classifies, and parses vendor EO and shipment emails into structured line items—enforcing a guarded nine-state lifecycle from notice receipt and warehouse verification through field installation and equipment transfers.',
   problem:
     'Logistics and engineering teams were heavily reliant on manual data entry to process shipment updates arriving via email. This fragmented communication led to slow, error-prone record-keeping, creating severe operational blind spots in tracking shipment lifecycles, identifying missing parts, and managing field technician assignments.',
   solution:
     'Architected an automated data pipeline that connects directly to an IMAP mailbox to fetch, parse, and classify incoming unstructured email notifications into structured shipment records. The system utilizes background queue processing for reliable data extraction and enforces a multi-step business workflow, allowing administrative teams to track item-level quantities, flag missing equipment, and monitor technician transfers through a centralized, SSO-secured dashboard.',
   // Short display values for the case-study header. The long-form `role`
   // paragraph stays for the "What I built" section.
-  roleTitle: "Backend Systems Architect",
-  platform: "Operations Web App",
+  roleTitle: "Backend Engineer",
+  platform: "Telecom Supply-Chain & Logistics Platform",
   role: 'Backend Systems Architect & Full-Stack Engineer. Designed and developed the core automation workflows, specifically focusing on the IMAP email processing and data extraction engines. Architected the relational database schema to support complex shipment lifecycles and item-level inventory math, integrated the external SSO authentication, and built the administrative monitoring dashboards using Laravel, Blade, and Livewire.',
   highlights: [
     'Automated Email Ingestion Engine: Engineered a robust IMAP integration utilizing custom parsing logic to extract structured shipment and engineering-order details directly from raw email content.',
@@ -54,12 +54,17 @@ export const shipmentTrackerIms = {
     'Blade, Livewire, Tailwind CSS, Vite',
     'External SSO Integration',
   ],
+  // Ordered as the operation actually runs: watch the board, open one shipment,
+  // attach its evidence, take the source documents in, then the automation and
+  // access surfaces that feed it.
   screenshots: [
-    cover,
-    shot1,
-    shot2,
-    shot3,
-    shot4,
-    shot5,
+    '/images/ims-v2/screenshot-rocks (64).webp', // shipments control room
+    '/images/ims-v2/screenshot-rocks (67).webp', // shipment detail
+    '/images/ims-v2/screenshot-rocks (65).webp', // shipment accessory
+    '/images/ims-v2/screenshot-rocks (66).webp', // media upload
+    '/images/ims-v2/screenshot-rocks (63).webp', // upload documents
+    '/images/ims-v2/screenshot-rocks (68).webp', // email automation logs
+    '/images/ims-v2/screenshot-rocks (69).webp', // system settings
+    '/images/ims-v2/screenshot-rocks (70).webp', // technicians
   ],
 };

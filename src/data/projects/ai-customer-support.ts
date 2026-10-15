@@ -1,8 +1,3 @@
-import cover from '@/assets/images/ai_chatbot/357shots_so.png';
-import shot1 from '@/assets/images/ai_chatbot/60shots_so.png';
-import shot2 from '@/assets/images/ai_chatbot/749shots_so.png';
-import shot3 from '@/assets/images/ai_chatbot/909shots_so.png';
-import shot4 from '@/assets/images/ai_chatbot/967shots_so.png';
 
 export const aiCustomerSupport = {
   title: "AI Assistant Platform",
@@ -12,6 +7,12 @@ export const aiCustomerSupport = {
   niche: "Omnichannel AI Automation · RAG · Voice · WhatsApp Cloud API",
   image: '/images/ai-chatbot/ai-cover.webp',
   tags: ["FastAPI", "RAG Pipeline", "Pinecone Vector DB", "WhatsApp API"],
+  coreCapabilities: [
+    'FastAPI',
+    'RAG Pipeline',
+    'Pinecone Vector DB',
+    'WhatsApp API',
+  ],
   slug: "ai-assistant-platform",
   services: [
     "Enterprise SaaS Development",
@@ -26,15 +27,15 @@ export const aiCustomerSupport = {
   // Repo commit history is a starting point, not the answer - confirm with the user.
   year: "",
   overview:
-    "A comprehensive AI automation platform engineered to unify business operations, intelligent automation, and customer engagement. The system utilizes a microservices architecture, bridging a React-based operational dashboard, a Laravel administrative backend, and a high-performance FastAPI intelligence engine to deliver text, voice, and document-based AI capabilities.",
+    "An omnichannel AI customer-engagement and workflow automation platform built as a personal R&D system exploring Python and applied AI architecture. It pairs a React operational dashboard with a FastAPI intelligence service—combining Pinecone vector search (RAG), document ingestion, STT/TTS voice pipelines, and Meta WhatsApp Cloud API webhooks for automated customer support.",
   problem:
     "Businesses increasingly require AI automation but struggle to securely integrate it with their proprietary data. Implementing intelligent chatbots often leads to disconnected workflows with poor data separation, lacking the proper backend infrastructure to securely manage access control, document processing, and multi-channel customer conversations.",
   solution:
     "Architected a full-stack platform that securely separates business workspace data while providing advanced conversational AI. The platform leverages a Python/FastAPI microservice for Retrieval-Augmented Generation (RAG) and multimodal processing, governed by a robust Laravel API layer that strictly enforces RBAC, subscription billing, and audit logging. This enables businesses to seamlessly inject proprietary documents into the AI's knowledge base via a high-performance React UI.",
   // Short display values for the case-study header. The long-form `role`
   // paragraph stays for the "What I built" section.
-  roleTitle: "Full-Stack Architect",
-  platform: "Web App + AI Service",
+  roleTitle: "Backend & AI Engineer",
+  platform: "FastAPI Automation & RAG Service",
   role: "Full-Stack Architect & Lead Engineer. Independently designed and developed the entire system from the ground up, establishing the Laravel API foundation, engineering the FastAPI AI service layer, and building the React frontend. Focus was on scalable product design, ensuring strict role-based access control, seamless cross-service API communication, and high-performance background job processing.",
   highlights: [
     "Microservices AI Architecture: Decoupled the application logic by routing core business operations through a Laravel API while delegating heavy LLM tasks and Vector DB (Pinecone) queries to a dedicated FastAPI engine.",
@@ -53,11 +54,15 @@ export const aiCustomerSupport = {
     "OpenAI / Google Gemini",
     "LangChain / LangGraph",
   ],
+  // Ordered as the pipeline works: what it knows, where the knowledge comes
+  // from, how it reaches people, what it actually says, then workspace access.
   screenshots: [
-    cover,
-    shot1,
-    shot2,
-    shot3,
-    shot4,
+    '/images/ai-v2/screenshot-rocks (77).webp', // public landing
+    '/images/ai-v2/screenshot-rocks (78).webp', // overview
+    '/images/ai-v2/screenshot-rocks (80).webp', // the brain
+    '/images/ai-v2/screenshot-rocks (82).webp', // documents
+    '/images/ai-v2/screenshot-rocks (79).webp', // integrations
+    '/images/ai-v2/screenshot-rocks (81).webp', // inbox
+    '/images/ai-v2/screenshot-rocks (83).webp', // settings
   ],
 };

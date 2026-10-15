@@ -14,6 +14,7 @@
   --color-dim: #6A6B6E;
   --color-ghost: #333333;
   --color-orange: #F46C38;
+  --color-cta: #E26032;
   --color-lime: #C5FF41;
   --color-surface-nav: rgba(255, 255, 255, 0.03);
   --color-surface-tooltip: rgba(255, 255, 255, 0.1);
@@ -30,6 +31,7 @@
   --dim: #6A6B6E;
   --ghost: #333333;
   --orange: #F46C38;
+  --cta: #E26032;
   --lime: #C5FF41;
 }
 

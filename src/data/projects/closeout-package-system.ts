@@ -10,12 +10,10 @@ export const closeoutPackageSystem = {
   // Full list shown as "Core capabilities" on the case-study header. `tags`
   // above is the short set used on the home-page project card.
   coreCapabilities: [
-    'Field Capture',
-    'GPS Verification',
+    'Chunked Uploads',
+    'PDF Pagination',
+    'Scoped RBAC',
     'Approval Workflows',
-    'PDF Generation',
-    'Revision Tracking',
-    'Customer Delivery',
   ],
   slug: 'close-out-package-system',
   services: [
@@ -38,8 +36,8 @@ export const closeoutPackageSystem = {
     'Engineered the deterministic pagination engine that replaced browser-driven page breaks, the four-phase resumable media upload protocol, and the relationship-scoped policy layer governing what each role can see across the package lifecycle. Included queue isolation so a burst of PDF renders cannot starve application work.',
   // Short display values for the case-study header. The long-form `role`
   // paragraph stays for the "What I built" section.
-  roleTitle: "Full Stack Developer",
-  platform: "Field Operations Web App",
+  roleTitle: "Backend Engineer",
+  platform: "Telecom Field Operations Platform",
   role: 'Full Stack Developer across the domain modules, the headless-Chromium rendering pipeline and the policy layer governing what each role can see. Built the server-side pagination engine that replaced browser reflow, designed the four-phase resumable upload protocol, and wrote the adversarial authorization probe that surfaced six real defects including three cross-role privilege escalations.',
   highlights: [
     'Format-Exact PDF Engine: Algorithmic pagination computing page counts across checklists, category tables, and 2×2 photo grids rendered via headless Chromium.',

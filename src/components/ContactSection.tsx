@@ -256,7 +256,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-11 w-full rounded-xl bg-orange font-inter text-[14px] font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.26),0_10px_28px_-14px_rgba(0,0,0,0.62),inset_0_1px_0_rgba(255,255,255,0.22)] transition-transform active:scale-[0.99] cursor-pointer disabled:opacity-50 mt-1 inline-flex items-center justify-center gap-2"
+              className="h-11 w-full rounded-xl bg-cta font-inter text-[14px] font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.26),0_10px_28px_-14px_rgba(0,0,0,0.62),inset_0_1px_0_rgba(255,255,255,0.22)] transition-transform active:scale-[0.99] cursor-pointer disabled:opacity-50 mt-1 inline-flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 "Submitting..."

@@ -129,7 +129,14 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
         // A nav item can be a home-page section anchor, a page link, or both —
         // Contact is a form at the foot of the home page *and* its own page.
         // On the home page the anchor wins; elsewhere fall back to the URL.
-        const isUrlMatch = pathname === item.href;
+        // "Projects" points at "/#projects" because on the home page it is a
+        // scroll anchor. On a project detail page that literal path never
+        // matches, which left the dock with no active item at all. Match the
+        // route prefix instead so the section reads as active wherever the
+        // visitor actually is.
+        const isUrlMatch =
+          pathname === item.href ||
+          (item.id === "projects" && pathname.startsWith("/projects"));
         const isActive = item.id
           ? pathname === "/"
             ? activeSection === item.id

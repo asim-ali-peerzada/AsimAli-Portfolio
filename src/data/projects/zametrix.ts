@@ -1,12 +1,3 @@
-import cover from '@/assets/images/zametrix/15shots_so.png';
-import shot1 from '@/assets/images/zametrix/30shots_so.png';
-import shot2 from '@/assets/images/zametrix/317shots_so.png';
-import shot3 from '@/assets/images/zametrix/375shots_so.png';
-import shot4 from '@/assets/images/zametrix/422shots_so.png';
-import shot5 from '@/assets/images/zametrix/460shots_so.png';
-import shot6 from '@/assets/images/zametrix/503shots_so.png';
-import shot7 from '@/assets/images/zametrix/610shots_so.png';
-import shot8 from '@/assets/images/zametrix/806shots_so.png';
 
 export const zametrix = {
   title: 'Zametrix — Real Estate Intelligence',
@@ -17,6 +8,12 @@ export const zametrix = {
     'Full-stack property intelligence platform for real estate market analysis and investor decision support.',
   image: '/images/zametrix/zm-cover.webp',
   tags: ['PropTech', 'Moderation', 'Lead Routing', 'Market Analytics'],
+  coreCapabilities: [
+    'PropTech',
+    'Moderation',
+    'Lead Routing',
+    'Market Analytics',
+  ],
   slug: 'zametrix',
   services: [
     'Enterprise SaaS Development',
@@ -31,15 +28,15 @@ export const zametrix = {
   // Repo commit history is a starting point, not the answer - confirm with the user.
   year: "",
   overview:
-    'A comprehensive, full-stack property intelligence platform engineered to digitize real estate market analysis and investor decision support. The system unifies a public-facing intelligence portal with secure, role-based operational dashboards for field agents, territory partners, and administrative moderators.',
+    'A property intelligence SaaS platform built to turn raw field-survey data into structured real estate market analytics and investor decision signals. It unifies a public comparison and scoring portal with role-gated workflows for field agents, OTP-verified territory partners, and moderators—aggregating multi-snapshot block reports into weighted investment recommendations.',
   problem:
     'The real estate industry suffers from fragmented, inconsistent, and unstructured property data. Investors lack reliable location-based intelligence, field agents rely on manual reporting, and administrative teams struggle with weak visibility and inefficient moderation workflows for verifying market updates.',
   solution:
     'Architected a centralized, multi-role intelligence platform that standardizes property data collection and moderation. The system allows authenticated agents and partners to submit structured market updates and price pulses, which are then routed through an administrative verification workflow. Once approved, this data feeds into a public analytics portal where users can compare locations, explore property trends, and generate insights, all supported by a built-in CRM for lead handling.',
   // Short display values for the case-study header. The long-form `role`
   // paragraph stays for the "What I built" section.
-  roleTitle: "Full-Stack Engineer",
-  platform: "SaaS Web App",
+  roleTitle: "Backend & Full-Stack Engineer",
+  platform: "Real Estate Intelligence SaaS",
   role: 'Full-Stack Architect & Developer. Designed and integrated the backend REST APIs in Laravel, architected the role-based access control and administrative moderation workflows, and built the frontend user experience using React and TypeScript. Responsible for the end-to-end implementation of the property intelligence reporting systems, partner onboarding modules, and analytics-driven dashboards.',
   highlights: [
     'Multi-Role Data Workflows: Engineered a complex role-based architecture (Admin, Partner, Agent, Public) using Spatie, ensuring strict access control over data submission, moderation, and territory management.',
@@ -59,14 +56,7 @@ export const zametrix = {
     'DomPDF (Report Generation)',
   ],
   screenshots: [
-    cover,
-    shot1,
-    shot2,
-    shot3,
-    shot4,
-    shot5,
-    shot6,
-    shot7,
-    shot8,
+    '/images/zam-v2/screenshot-rocks (84).webp',
+    '/images/zam-v2/screenshot-rocks (85).webp',
   ],
 };

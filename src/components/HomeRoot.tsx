@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import LeftPortraitCard from './LeftPortraitCard';
 import HeroContent from './HeroContent';
 import Projects from './Projects';
@@ -12,7 +12,7 @@ import { Toaster } from 'react-hot-toast';
 const SCROLL_KEY = 'homepage_scroll';
 
 export default function HomeRoot() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const navTarget = sessionStorage.getItem('nav_target');
     if (navTarget) {
       sessionStorage.removeItem('nav_target');
@@ -30,7 +30,7 @@ export default function HomeRoot() {
     const saved = sessionStorage.getItem(SCROLL_KEY);
     if (saved) {
       const y = Number.parseInt(saved, 10);
-      if (!Number.isNaN(y)) {
+      if (!Number.isNaN(y) && window.scrollY < 20) {
         requestAnimationFrame(() => window.scrollTo(0, y));
       }
       sessionStorage.removeItem(SCROLL_KEY);
