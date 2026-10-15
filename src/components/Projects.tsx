@@ -37,7 +37,7 @@ const Projects = () => {
               <div className="flex flex-col gap-1.5 flex-1 min-w-0 max-w-105">
                 {project.badge && (
                   <span
-                    className={`w-fit max-w-full inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.10em] rounded-full border px-2.5 py-0.5 font-display whitespace-nowrap ${
+                    className={`w-fit max-w-full inline-flex items-center text-[10px] font-semibold uppercase tracking-widest rounded-full border px-2.5 py-0.5 font-display whitespace-nowrap ${
                       project.badge.startsWith('Personal')
                         ? 'border-lime/30 bg-lime/10 text-lime'
                         : 'border-white/12 bg-white/5 text-dim'
@@ -54,7 +54,7 @@ const Projects = () => {
                 </p>
                 {/* Tags row with smooth right gradient mask indicator on mobile */}
                 <div className="relative w-full overflow-hidden mt-1.5">
-                  <div className="flex flex-nowrap gap-1 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden pr-6 [mask-image:linear-gradient(to_right,black_85%,transparent_100%)]">
+                  <div className="flex flex-nowrap gap-1 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden pr-6 mask-[linear-gradient(to_right,black_85%,transparent_100%)]">
                     {project.tags?.map((tag: string) => (
                       <span
                         key={tag}

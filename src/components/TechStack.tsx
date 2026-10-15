@@ -97,7 +97,7 @@ const TechStack = () => {
 
       {/* Squared-off container — rounded-lg reads as a panel without the
           pill-like softness of rounded-2xl. */}
-      <div className="w-full flex flex-col mt-8 sm:mt-12 rounded-lg border border-white/10 bg-white/3 divide-y divide-white/[0.07]">
+      <div className="w-full flex flex-col mt-8 sm:mt-12 rounded-lg border border-white/10 bg-white/3 divide-y divide-white/7">
         {skillGroups.map((group) => (
           <div
             key={group.category}

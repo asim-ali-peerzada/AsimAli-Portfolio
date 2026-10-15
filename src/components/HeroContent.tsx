@@ -64,7 +64,7 @@ const HeroContent = () => {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="flex flex-col justify-start min-w-0 p-4 sm:p-0 rounded-xl sm:rounded-none bg-white/[0.025] sm:bg-transparent border border-white/[0.06] sm:border-none"
+            className="flex flex-col justify-start min-w-0 p-4 sm:p-0 rounded-xl sm:rounded-none bg-white/2.5 sm:bg-transparent border border-white/6 sm:border-none"
           >
             <div className="sm:min-h-12 flex items-baseline sm:items-end">
               <p className="text-[17px] sm:text-[14px] md:text-[17px] lg:text-[21px] font-bold text-white leading-[115%] tracking-tight font-display">
@@ -75,7 +75,7 @@ const HeroContent = () => {
                 ))}
               </p>
             </div>
-            <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.05em] sm:tracking-[0.06em] text-orange font-semibold font-display mt-2 sm:mt-3 whitespace-nowrap">
+            <p className="text-[11px] sm:text-[12px] uppercase tracking-wider sm:tracking-[0.06em] text-orange font-semibold font-display mt-2 sm:mt-3 whitespace-nowrap">
               {stat.label}
             </p>
             <p className="text-[13px] sm:text-[14px] text-muted leading-[140%] font-display mt-1 sm:mt-2 sm:max-w-55">
