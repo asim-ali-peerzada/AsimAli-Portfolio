@@ -30,7 +30,7 @@ export const closeoutPackageSystem = {
   // paragraph stays for the "What I built" section.
   roleTitle: "Backend Engineer",
   platform: "Telecom Field Operations Platform",
-  role: 'Full Stack Developer across the domain modules, the headless-Chromium rendering pipeline and the policy layer governing what each role can see. Built the server-side pagination engine that replaced browser reflow, designed the four-phase resumable upload protocol, and wrote the adversarial authorization probe that surfaced six real defects including three cross-role privilege escalations.',
+  role: 'Full Stack Developer across the domain modules, the headless-Chromium rendering pipeline and the policy layer governing what each role can see. Built the server-side pagination engine that replaced browser reflow, designed the four-phase resumable upload protocol, and wrote an adversarial authorization probe across role and project-scope boundaries to find access-control mistakes early.',
   highlights: [
     'Format-Exact PDF Engine: Algorithmic pagination computing page counts across checklists, category tables, and 2×2 photo grids rendered via headless Chromium.',
     'Sequential Workflow State Machine: Three-stage sequential advancement with draft autosave, rejection rework loops, and multi-table transactional seeding.',

@@ -57,31 +57,31 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
         {/* Prev / next */}
         <nav
           aria-label="Project navigation"
-          className="w-full mt-20 pt-8 border-t border-white/10 grid grid-cols-2 gap-4"
+          className="w-full mt-16 sm:mt-20 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
         >
           <a
             href={`/projects/${prevProject.slug}`}
-            className="group flex flex-col gap-2 min-w-0 rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 transition-colors hover:border-white/20 hover:bg-white/5"
+            className="group flex flex-col gap-1.5 sm:gap-2 min-w-0 rounded-xl sm:rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">
               Previous
             </span>
-            <span className="flex items-center gap-1.5 text-[14px] font-medium text-muted group-hover:text-white transition-colors font-display">
-              <ArrowLeft size={14} strokeWidth={2} className="shrink-0" />
-              <span className="truncate">{prevProject.title}</span>
+            <span className="flex items-center gap-1.5 text-[14px] sm:text-[15px] font-medium text-muted group-hover:text-white transition-colors font-display min-w-0">
+              <ArrowLeft size={16} strokeWidth={2} className="shrink-0" />
+              <span className="truncate block flex-1">{prevProject.title}</span>
             </span>
           </a>
 
           <a
             href={`/projects/${nextProject.slug}`}
-            className="group flex flex-col items-end gap-2 min-w-0 rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 text-right transition-colors hover:border-white/20 hover:bg-white/5"
+            className="group flex flex-col items-start sm:items-end gap-1.5 sm:gap-2 min-w-0 rounded-xl sm:rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 text-left sm:text-right transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">
               Next
             </span>
-            <span className="flex items-center gap-1.5 text-[14px] font-medium text-muted group-hover:text-white transition-colors font-display">
-              <span className="truncate">{nextProject.title}</span>
-              <ArrowUpRight size={14} strokeWidth={2} className="shrink-0" />
+            <span className="flex items-center gap-1.5 text-[14px] sm:text-[15px] font-medium text-muted group-hover:text-white transition-colors font-display min-w-0 w-full sm:w-auto justify-between sm:justify-end">
+              <span className="truncate block">{nextProject.title}</span>
+              <ArrowUpRight size={16} strokeWidth={2} className="shrink-0" />
             </span>
           </a>
         </nav>

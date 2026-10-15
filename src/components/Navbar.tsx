@@ -115,12 +115,12 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
   return (
     <nav
       // Fixed: the bar stays visible after scrolling on every page.
-      className="nav-anim fixed top-5 left-1/2 -translate-x-1/2 z-50 flex h-12 items-center gap-1 sm:gap-2 rounded-2xl px-2.5 sm:px-3 transition-all duration-300 pointer-events-auto max-w-[calc(100vw-16px)] overflow-visible"
+      className="nav-anim fixed top-[max(0.75rem,env(safe-area-inset-top))] sm:top-5 left-1/2 -translate-x-1/2 z-50 flex h-11 sm:h-12 items-center gap-0.5 sm:gap-2 rounded-full sm:rounded-2xl px-2 sm:px-3 transition-all duration-300 pointer-events-auto max-w-[calc(100vw-20px)] sm:max-w-fit shadow-2xl overflow-visible"
       style={{
-        backgroundColor: "rgba(21, 19, 18, 0.75)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        backgroundColor: "rgba(21, 19, 18, 0.88)",
+        border: "1px solid rgba(255, 255, 255, 0.12)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
         animationDelay: "0s",
       }}
     >
@@ -153,14 +153,14 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
             onClick={(e) => handleNavClick(e, item.href)}
             aria-label={item.label}
             aria-current={ariaCurrent}
-            className={`group relative flex h-9.5 w-8.5 sm:w-9.5 items-center justify-center rounded-xl transition-all duration-200 cursor-pointer ${
+            className={`group relative flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full sm:rounded-xl transition-all duration-200 cursor-pointer ${
               isActive
-                ? "bg-white/10 text-orange shadow-sm"
+                ? "bg-white/12 text-orange shadow-sm"
                 : "text-white/60 hover:text-white hover:bg-white/5 active:scale-95"
             }`}
           >
             <IconComponent
-              size={19}
+              size={17}
               strokeWidth={isActive ? 2.2 : 1.75}
               className={isActive ? "text-orange" : "transition-colors group-hover:text-white"}
             />

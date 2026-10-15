@@ -48,7 +48,7 @@ export default function HomeRoot() {
   return (
     <>
       <main id="main-content" className="w-full bg-canvas min-h-screen flex flex-col items-center relative">
-        <div className="w-full max-w-285 px-5 sm:px-8 pt-28 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-12.5 lg:gap-25 relative">
+        <div className="w-full max-w-285 px-4 sm:px-8 pt-20 sm:pt-36 pb-20 flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-25 relative">
           
           {/* Sticky Left Column (Centered on Mobile, Pinned on Desktop) */}
           <aside className="w-full max-w-86 shrink-0 lg:sticky lg:top-12.5 z-20 flex justify-center px-0">

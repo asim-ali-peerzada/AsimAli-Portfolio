@@ -17,7 +17,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10">
+    <section id="experience" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10 scroll-mt-18 sm:scroll-mt-24">
       {/* Section Heading */}
       <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         PROFESSIONAL <br />

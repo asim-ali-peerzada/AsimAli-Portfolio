@@ -3,7 +3,7 @@ import { projects } from '@/data/projects';
 
 const Projects = () => {
   return (
-    <section id="projects" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10">
+    <section id="projects" className="w-full flex flex-col items-start pt-22.5 lg:pt-30 pb-10 scroll-mt-18 sm:scroll-mt-24">
       {/* Section Heading */}
       <h2 className="text-[34px] xs:text-[38px] sm:text-[64px] lg:text-[84px] font-bold text-white text-left leading-[100%] tracking-normal font-display">
         RECENT <br />
@@ -37,7 +37,7 @@ const Projects = () => {
               <div className="flex flex-col gap-1.5 flex-1 min-w-0 max-w-105">
                 {project.badge && (
                   <span
-                    className={`w-fit text-[10px] font-semibold uppercase tracking-[0.12em] rounded-full border px-2 py-0.5 font-display ${
+                    className={`w-fit max-w-full inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.10em] rounded-full border px-2.5 py-0.5 font-display whitespace-nowrap ${
                       project.badge.startsWith('Personal')
                         ? 'border-lime/30 bg-lime/10 text-lime'
                         : 'border-white/12 bg-white/5 text-dim'
@@ -52,20 +52,18 @@ const Projects = () => {
                 <p className="text-[14px] sm:text-[15px] text-muted leading-[135%] font-display">
                   {project.description}
                 </p>
-                {/* Tags always occupy exactly one line. nowrap prevents reflow to a
-                    second row; overflow-x-auto degrades to a swipe on narrow screens
-                    rather than clipping the last tag. Pill padding/gap are kept tight
-                    because the strip is capped at ~404px by the surrounding column —
-                    measured so all four tags fit flush at desktop widths. */}
-                <div className="flex flex-nowrap gap-1 mt-1.5 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
-                  {project.tags?.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="shrink-0 text-[11px] font-medium text-white/90 bg-white/7 border border-white/12 rounded-md px-1.5 py-0.5 font-display"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Tags row with smooth right gradient mask indicator on mobile */}
+                <div className="relative w-full overflow-hidden mt-1.5">
+                  <div className="flex flex-nowrap gap-1 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden pr-6 [mask-image:linear-gradient(to_right,black_85%,transparent_100%)]">
+                    {project.tags?.map((tag: string) => (
+                      <span
+                        key={tag}
+                        className="shrink-0 text-[11px] font-medium text-white/90 bg-white/7 border border-white/12 rounded-md px-1.5 py-0.5 font-display"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

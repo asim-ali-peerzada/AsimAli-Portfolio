@@ -1,7 +1,7 @@
 
 export const aiCustomerSupport = {
   title: "AI Assistant Platform",
-  badge: 'Personal R&D · Python / FastAPI',
+  badge: 'Personal R&D · Python',
   description:
     "Omnichannel AI automation system built with FastAPI, combining RAG pipelines, Pinecone vector search, voice AI, and Meta WhatsApp Cloud API workflows.",
   niche: "Omnichannel AI Automation · RAG · Voice · WhatsApp Cloud API",

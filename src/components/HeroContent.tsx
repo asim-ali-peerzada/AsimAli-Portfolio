@@ -35,19 +35,19 @@ const HeroContent = () => {
           keywords to carry any weight, but at display scale it has to read as a
           kicker or it would wrap across four lines. */}
       <h1
-        className="entrance-anim text-[44px] sm:text-[76px] lg:text-[100px] font-bold text-white leading-[100%] tracking-normal font-display"
+        className="entrance-anim text-[36px] sm:text-[76px] lg:text-[100px] font-bold text-white leading-[104%] tracking-tight sm:tracking-normal font-display"
         style={{ animationDelay: "0.02s" }}
       >
         BACKEND <br />
         <span className="text-ghost">ENGINEER</span>
-        <span className="mt-4 sm:mt-5 block text-[12px] sm:text-[14px] font-medium uppercase tracking-[0.09em] text-dim leading-[140%] text-balance">
+        <span className="mt-3.5 sm:mt-5 block text-[11px] sm:text-[14px] font-medium uppercase tracking-[0.08em] sm:tracking-[0.09em] text-dim leading-[140%] text-balance">
           System Architecture · PHP & Laravel · REST APIs · Workflow Automation
         </span>
       </h1>
 
       {/* Compact Supporting Line */}
       <p
-        className="entrance-anim text-[18px] text-muted leading-[140%] font-normal font-display max-w-140 mt-6 w-full"
+        className="entrance-anim text-[15px] sm:text-[18px] text-muted leading-[150%] sm:leading-[140%] font-normal font-display max-w-140 mt-4 sm:mt-6 w-full"
         style={{ animationDelay: "0.05s" }}
       >
         I architect secure, high-reliability backend systems for SaaS and
@@ -56,36 +56,29 @@ const HeroContent = () => {
         high-throughput APIs.{" "}
       </p>
 
-      {/* Stats / Proof Counters with fixed line baseline.
-
-          `lines` is an explicit array so each value occupies exactly two lines.
-          Letting the text wrap freely pushed "CUSTOM BUSINESS SYSTEMS" onto
-          three lines, which broke the shared baseline across the three tiles. */}
+      {/* Stats / Proof Counters with fixed line baseline */}
       <div
-        // Always three columns once there is room for them. The value font
-        // scales with the container via query breakpoints, so "CUSTOM
-        // BUSINESS" still fits its column on a 1024px viewport where this
-        // column is only ~516px wide — without dropping the third tile onto a
-        // second row.
-        className="entrance-anim grid grid-cols-1 @[400px]:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-7 my-8 w-full"
+        className="entrance-anim grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 my-6 sm:my-8 w-full"
         style={{ animationDelay: "0.11s" }}
       >
         {stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col justify-start min-w-0">
-            <div className="min-h-11 sm:min-h-12.5 flex items-end">
-              <p className="text-[20px] @[400px]:text-[14px] @[540px]:text-[17px] @[680px]:text-[21px] font-bold text-white leading-[115%] tracking-tight font-display">
+          <div
+            key={stat.label}
+            className="flex flex-col justify-start min-w-0 p-4 sm:p-0 rounded-xl sm:rounded-none bg-white/[0.025] sm:bg-transparent border border-white/[0.06] sm:border-none"
+          >
+            <div className="sm:min-h-12 flex items-baseline sm:items-end">
+              <p className="text-[17px] sm:text-[14px] md:text-[17px] lg:text-[21px] font-bold text-white leading-[115%] tracking-tight font-display">
                 {stat.lines.map((line) => (
-                  <span key={line}>
+                  <span key={line} className="inline sm:block mr-1.5 sm:mr-0">
                     {line}
-                    {line !== stat.lines.at(-1) && <br />}
                   </span>
                 ))}
               </p>
             </div>
-            <p className="text-[12px] sm:text-[12.5px] uppercase tracking-[0.06em] text-muted font-semibold font-display mt-3">
+            <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.05em] sm:tracking-[0.06em] text-orange font-semibold font-display mt-2 sm:mt-3 whitespace-nowrap">
               {stat.label}
             </p>
-            <p className="text-[13.5px] sm:text-[14px] text-muted leading-[140%] font-display mt-2 max-w-55">
+            <p className="text-[13px] sm:text-[14px] text-muted leading-[140%] font-display mt-1 sm:mt-2 sm:max-w-55">
               {stat.body}
             </p>
           </div>

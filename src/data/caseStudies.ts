@@ -74,7 +74,7 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       },
       {
         label: "Project-scoped authorization",
-        text: "Four roles see the same objects at different lifecycle stages, so authorization was a design problem rather than a CRUD one: each ability resolves role, relationship scope and workflow state together. An open customer feedback round is the customer's private draft \u2014 staff see nothing at all, not even image counts, so nobody can watch a customer compose a review. I then wrote a 48-case adversarial probe from the domain rules before reading my own implementation; it surfaced six real defects, three of them cross-project / cross-customer scope holes where one customer could withdraw another's message.",
+        text: "Four roles see the same objects at different lifecycle stages, so authorization was a design problem rather than a CRUD one: each ability resolves role, relationship scope and workflow state together. An open customer feedback round is the customer's private draft \u2014 staff see nothing at all, not even image counts, so nobody can watch a customer compose a review. I then wrote a 48-case adversarial probe from the domain rules before reading my own implementation; it caught boundary issues in role, scope, and feedback ownership, which I corrected before release.",
       },
       {
         label: "Reliable customer communication",

@@ -8,17 +8,11 @@ const LeftPortraitCard = () => {
       // Fluid width. An inline `width: 344px` overrode Tailwind here and forced
       // horizontal overflow on any viewport narrower than the card, which is
       // what produced the dead space to the right of the page on mobile.
-      className="relative w-full max-w-86 h-160 bg-white flex flex-col justify-start items-center gap-6 overflow-hidden"
-      style={{
-        padding: "30px 20px",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "16px",
-        boxSizing: "border-box",
-      }}
+      className="relative w-full max-w-86 h-auto sm:h-160 bg-white flex flex-col justify-start items-center gap-5 sm:gap-6 overflow-hidden p-5 sm:p-[30px_20px] rounded-2xl box-border"
     >
       {/* 1. Portrait Image Container (Matching Framer reference: 304px x 310px, 16px radius, flat backdrop) */}
       <div
-        className="relative w-full max-w-76 h-77.5 overflow-hidden flex items-center justify-center shrink-0"
+        className="relative w-full max-w-76 h-64 sm:h-77.5 overflow-hidden flex items-center justify-center shrink-0"
         style={{
           background: "#1B1E22",
           borderRadius: "16px",

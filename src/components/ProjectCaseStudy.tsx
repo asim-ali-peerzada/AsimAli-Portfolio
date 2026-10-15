@@ -629,18 +629,6 @@ export default function ProjectCaseStudy({ project }: { readonly project: Projec
         ))
       )}
 
-      {/* Live link */}
-      {cs.liveUrl && (
-        <a
-          href={cs.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-12 inline-flex w-fit items-center gap-2 rounded-lg bg-cta px-5 py-3 text-[14px] font-semibold text-white transition-opacity hover:opacity-90 font-display"
-        >
-          View live system
-          <ArrowUpRight size={16} strokeWidth={2.5} />
-        </a>
-      )}
     </div>
   );
 }
