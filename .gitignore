@@ -28,6 +28,9 @@ all-project-details/
 .project-detail-ref-design-images/
 .staging-screenshots/
 
+# local code-analysis tool state
+.codegraph/
+
 # Astro generated files outside root .astro
 src/components/.astro/
 # common local-only files

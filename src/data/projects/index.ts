@@ -3,6 +3,7 @@ import { ccms as rawCcms } from './ccms';
 import { closeoutPackageSystem as rawCloseoutPackageSystem } from './closeout-package-system';
 import { enterpriseSso as rawEnterpriseSso } from './enterprise-sso';
 import { genealogy as rawGenealogy } from './genealogy';
+import { jobPortal as rawJobPortal } from './job-portal';
 import { samsungMigration as rawSamsungMigration } from './samsung';
 import { shipmentTrackerIms as rawShipmentTrackerIms } from './shipment-tracker-ims';
 import { zametrix as rawZametrix } from './zametrix';
@@ -55,6 +56,7 @@ const ccms = normalizeProject(rawCcms);
 const closeoutPackageSystem = normalizeProject(rawCloseoutPackageSystem);
 const enterpriseSso = normalizeProject(rawEnterpriseSso);
 const genealogy = normalizeProject(rawGenealogy);
+const jobPortal = normalizeProject(rawJobPortal);
 const samsungMigration = normalizeProject(rawSamsungMigration);
 const shipmentTrackerIms = normalizeProject(rawShipmentTrackerIms);
 const zametrix = normalizeProject(rawZametrix);
@@ -63,6 +65,7 @@ export const projects: Project[] = [
   closeoutPackageSystem,
   enterpriseSso,
   ccms,
+  jobPortal,
   genealogy,
   aiCustomerSupport,
   zametrix,

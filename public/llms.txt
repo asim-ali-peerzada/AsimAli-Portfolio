@@ -27,11 +27,14 @@
 - Real-Time Systems — WebSocket integration with Pusher, event-driven architecture
 
 ## Projects
-- [AI Assistant Platform](https://asimali.online/projects/ai-assistant-platform): AI automation platform with RAG engine, Laravel 12 + FastAPI + React 19 + Pinecone - [CCMS — Enterprise CRM](https://asimali.online/projects/ccms): 5-tier RBAC CRM with state-based lead routing, Laravel 11 + React + MySQL + Pusher
-- [Enterprise SSO](https://asimali.online/projects/enterprise-single-sign-on): Centralized identity platform with JWT + TOTP 2FA + cross-domain token blacklisting
-- [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Collaborative family history platform with NARA/OpenArch API + OCR + record matching
-- [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports - [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker): Automated logistics with IMAP email parsing + queue workers + item-level tracking
 - [Close-Out Package System](https://asimali.online/projects/close-out-package-system): Telecom construction management with GPS/EXIF photo verification and approval gates
+- [Enterprise SSO](https://asimali.online/projects/enterprise-single-sign-on): Centralized identity platform with JWT + TOTP 2FA + cross-domain token blacklisting
+- [CCMS — Enterprise CRM](https://asimali.online/projects/ccms): 5-tier RBAC CRM with state-based lead routing, Laravel 11 + React + MySQL + Pusher
+- [Job Portal — Recruitment & Onboarding](https://asimali.online/projects/job-portal): Recruitment platform with AuthCenter SSO sync, document-heavy onboarding, certification tracking and analytics - Laravel 11 + Blade/Tailwind + MySQL/Redis
+- [Genealogy SaaS](https://asimali.online/projects/genealogy-saas-platform): Collaborative family history platform with NARA/OpenArch API + OCR + record matching
+- [AI Assistant Platform](https://asimali.online/projects/ai-assistant-platform): AI automation platform with RAG engine, Laravel 12 + FastAPI + React 19 + Pinecone
+- [Zametrix](https://asimali.online/projects/zametrix): 4-role property intelligence platform with admin verification + analytics + PDF reports
+- [Shipment Tracker & IMS](https://asimali.online/projects/shipment-tracker): Automated logistics with IMAP email parsing + queue workers + item-level tracking
 - [Samsung Network Migration & Diagrams](https://asimali.online/projects/samsung-migration): Telecom 4G-to-5G migration tooling - circuit-path regex extraction with confidence scoring, cascading auto-population with field provenance, 42-column virtualized grid, .NET print bridge to Brother label printers - Laravel 12 + React 19
 
 ## Contact

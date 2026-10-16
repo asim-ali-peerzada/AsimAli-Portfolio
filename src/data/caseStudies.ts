@@ -764,6 +764,100 @@ const caseStudiesData: Record<string, EngineeringCaseStudy> = {
       { label: "Map and visualize", items: [3, 4] },
     ],
   },
+  "job-portal": {
+    headlineSplit: ["RECRUITMENT &", "ONBOARDING PORTAL"],
+    tagline:
+      "End-to-end recruitment platform covering job publishing, candidate applications, document-heavy onboarding and employee administration — with external SSO identity sync and a live analytics layer.",
+    descriptor: "Recruitment Platform · Document Onboarding · SSO Identity Sync",
+    problem:
+      "Hiring spans two audiences: candidates finding and applying for roles, and a back office publishing jobs, reviewing applicants and collecting the certifications and policies a hire must complete before they can start. Split across a job board, an inbox and a folder of documents, nothing holds a single record of where a candidate stands or which hire is cleared to work.",
+    systemSummary:
+      "A Laravel monolith with Blade and Tailwind on the front and an external AuthCenter for identity. Applications move through a six-state pipeline with queued notifications; documents, certifications and policy acknowledgments are tracked per user and per job with an audit trail; and a computed onboarding percentage drives both the hire-facing progress bar and the admin dashboard, which is built from session-deduplicated visits resolved through cached geolocation.",
+    roleIntro:
+      "Full-Stack Developer across the recruitment modules, the document-and-onboarding pipeline, the AuthCenter integration and the analytics behind the admin dashboard.",
+    roleBullets: [
+      {
+        label: "AuthCenter SSO with HMAC-signed sync",
+        text: "Sign-in is federated rather than local-only: an SSO redirect and callback flow against an external AuthCenter, Google social login as a second path, and a signed back-channel where AuthCenter POSTs user lifecycle events to an HMAC-verified endpoint. The sync APIs sit behind bearer-token middleware that compares secrets in constant time, and status changes propagate back through a queued job so a slow identity provider never blocks a request.",
+      },
+      {
+        label: "Document, certification and policy pipeline",
+        text: "Documents are uploaded singly or in batch, assigned to a specific user and job, and moved through approval or rejection. Certifications carry their own expiry dates, and policy acknowledgments record the IP address and user-agent at the moment of consent — so compliance is a queryable audit trail rather than a reconstruction from memory.",
+      },
+      {
+        label: "Onboarding progress engine",
+        text: "Onboarding completion is computed from the documents actually assigned, uploaded and acknowledged, not ticked by hand — one percentage that the hire sees as a progress bar and the administrator reads as a workload signal.",
+      },
+      {
+        label: "Analytics with cached geolocation",
+        text: "The dashboard is built from tracked page visits, deduplicated per session so a refresh is not a new visit. IP geolocation resolves through cached lookups with 5–30 minute TTLs instead of an API call per pageview, feeding conversion rates, geographic applicant mapping and monthly job-activity charts.",
+      },
+      {
+        label: "Job postings as a lifecycle",
+        text: "Postings move through a draft-to-publish workflow with duplication and starring, and an expiry date that a scheduled command enforces every minute — an old role closes itself rather than being discovered as stale. Uploaded cover photos run through a GD quality loop that steps JPEG quality from 85 down toward 40 until the file fits its 300 KB target.",
+      },
+      {
+        label: "Applicant pipeline and queued notifications",
+        text: "An application carries a resume, cover letter, custom answers and tagged skills, and moves through Shortlisted, Interview, Hired, Rejected, Resume Reviewed and Pending states. Duplicate applications and applications to expired jobs are blocked before insert, and both new applications and status changes notify the right side of the desk through queued email.",
+      },
+    ],
+    capabilities: [
+      {
+        num: "01",
+        title: "Full recruitment lifecycle",
+        icon: "Layers",
+        desc: "Job posting through application review to hire, onboarding and the employee record — one system instead of a job board, an inbox and a document folder.",
+      },
+      {
+        num: "02",
+        title: "Document & certification pipeline",
+        icon: "FileCheck2",
+        desc: "Single and batch uploads assigned per user and per job, approval and rejection states, certification expiry tracking, and soft-deleted history kept for audit.",
+      },
+      {
+        num: "03",
+        title: "Onboarding & policy compliance",
+        icon: "FileDiff",
+        desc: "A computed onboarding percentage, emergency-contact capture with signed consent, and policy acknowledgments logged with IP and user-agent.",
+      },
+      {
+        num: "04",
+        title: "SSO & identity sync",
+        icon: "ShieldCheck",
+        desc: "External AuthCenter single sign-on with HMAC-signed bidirectional user sync, bearer-token middleware, and Google social login.",
+      },
+      {
+        num: "05",
+        title: "Job lifecycle & publishing",
+        icon: "LayoutTemplate",
+        desc: "Draft-to-publish postings with duplication, star tracking, GD cover-photo compression, and scheduled close-out of expired roles.",
+      },
+      {
+        num: "06",
+        title: "Analytics & tracking",
+        icon: "MapPin",
+        desc: "Session-deduplicated visit tracking with cached IP geolocation, conversion rates, and geographic applicant mapping on the admin dashboard.",
+      },
+    ],
+    layout: "showcase",
+    captions: [
+      "The candidate's entry point: keyword, state, recency and category filters over live openings, with employment type and location on the row so a search can be judged without opening every job.",
+      "A role page carries the whole decision — location, employment and pay structure, position count and the description — and the apply action holds state: once applied, the page says so instead of offering it again.",
+      "The candidate's dashboard keeps that state visible: every application with its current standing, here Hired for the Columbus role and Applied for Phoenix, so the pipeline is legible from the applicant's side.",
+      "After a hire, the same account becomes an onboarding workspace. The job filter scopes every document to one position, the progress bar computes completion, and assigned documents, personal uploads, company policies and certifications each have their own shelf.",
+      "The admin console opens on distribution — jobs per month by status, the applicant funnel as a donut, and a hiring-pattern trend for the selected month.",
+      "Manage Jobs is the posting lifecycle: Close, Pending and All tabs, live candidate counts with an invite path, and salary and publishing status per row — a posting is a state machine, not a form submission.",
+      "The recruiter-side library organizes documents by category across candidates, surfaces totals and recent uploads first, and keeps each file traceable to its job and upload date.",
+      "Job Portal Analytics turns activity into operating numbers: visits, conversion from visit to application, the most applied, viewed and searched jobs, and the geography applicants arrive from.",
+    ],
+    // Index 0 is deliberately absent: it is already the hero image above, so
+    // listing it here would render the same screenshot twice.
+    showcaseGroups: [
+      { label: "Candidate experience", items: [1, 2, 3] },
+      { label: "Recruiter console", items: [4, 5, 6] },
+      { label: "Analytics", items: [7] },
+    ],
+  },
 };
 
 export { caseStudiesData };
