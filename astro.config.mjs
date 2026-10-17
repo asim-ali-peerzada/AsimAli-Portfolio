@@ -9,7 +9,8 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  site: 'https://asimali.is-a.dev',
+  site: 'https://asim-ali-peerzada.github.io',
+  base: '/AsimAli-Portfolio',
   output: 'static',
   // Legacy project slugs contained raw "&" "(" ")" which break sharing and
   // look unprofessional in SERPs. Pages now live at clean slugs; these keys
