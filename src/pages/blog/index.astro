@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import BackToHome from '../../components/BackToHome';
 import { buildBreadcrumb } from '../../lib/seo';
 
-const canonicalUrl = 'https://asimali.online/blog/';
+const canonicalUrl = 'https://asimali.is-a.dev/blog/';
 
 const posts = [
   {
@@ -18,12 +18,12 @@ const posts = [
 const jsonLd = [
   {
     "@type": "Blog",
-    "@id": "https://asimali.online/blog/#blog",
+    "@id": "https://asimali.is-a.dev/blog/#blog",
     "url": canonicalUrl,
     "name": "Asim Ali — Laravel & Backend Engineering Blog",
     "description":
       "Practical notes on Laravel application architecture, database optimization, queue-based processing, and backend engineering from production enterprise systems.",
-    "author": { "@id": "https://asimali.online/#asim-ali" }
+    "author": { "@id": "https://asimali.is-a.dev/#asim-ali" }
   },
   buildBreadcrumb('blog', 'Blog')
 ];

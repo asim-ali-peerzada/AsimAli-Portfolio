@@ -1,8 +1,8 @@
-# asimali.online
+# asimali.is-a.dev
 
 Personal portfolio of Asim Ali — backend developer working mainly in PHP and Laravel.
 
-**Live:** <https://asimali.online>
+**Live:** <https://asimali.is-a.dev>
 
 Built with [Astro](https://astro.build) with React islands and Tailwind CSS, deployed to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 

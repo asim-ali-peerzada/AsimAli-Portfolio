@@ -34,4 +34,4 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
-Sitemap: https://asimali.online/sitemap-index.xml
+Sitemap: https://asimali.is-a.dev/sitemap-index.xml

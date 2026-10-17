@@ -11,13 +11,13 @@ interface Props {
 const {
   title,
   description = 'PHP Laravel developer and backend engineer building enterprise SaaS, REST APIs, secure identity, and workflow automation. Hire a PHP Laravel backend engineer for scalable systems.',
-  image = 'https://asimali.online/opengraph-image.png',
+  image = 'https://asimali.is-a.dev/opengraph-image.png',
   type = 'website',
   canonicalUrl,
   jsonLd,
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.href : 'https://asimali.online';
+const siteUrl = Astro.site ? Astro.site.href : 'https://asimali.is-a.dev';
 const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
 const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 
@@ -27,23 +27,23 @@ import Navbar from '../components/Navbar';
 const baseSchemaGraph = [
   {
     "@type": "WebSite",
-    "@id": "https://asimali.online/#website",
-    "url": "https://asimali.online/",
+    "@id": "https://asimali.is-a.dev/#website",
+    "url": "https://asimali.is-a.dev/",
     "name": "Asim Ali - Software Developer Portfolio",
     "description": "Official portfolio of Asim Ali, a Software Engineer from Punjab, Pakistan specializing in Laravel, React, and scalable web applications.",
-    "publisher": { "@id": "https://asimali.online/#asim-ali" }
+    "publisher": { "@id": "https://asimali.is-a.dev/#asim-ali" }
   },
   {
     "@type": "Person",
-    "@id": "https://asimali.online/#asim-ali",
+    "@id": "https://asimali.is-a.dev/#asim-ali",
     "name": "Asim Ali",
     "givenName": "Asim",
     "familyName": "Ali",
-    "url": "https://asimali.online/",
+    "url": "https://asimali.is-a.dev/",
     "jobTitle": "Backend Engineer",
     "alternateName": ["Backend Engineer", "PHP Developer", "Laravel Developer", "Software Engineer"],
     "description": "Asim Ali is a Backend Engineer specializing in PHP and Laravel, architecting enterprise systems, identity integrations, and automated workflows. Based in Punjab, Pakistan, with 3 years of professional experience building enterprise SaaS platforms, role- and graph-scoped access control, and stateful workflow systems.",
-    "image": "https://asimali.online/opengraph-image.png",
+    "image": "https://asimali.is-a.dev/opengraph-image.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "asimalipeerzada@gmail.com",
@@ -73,8 +73,8 @@ const baseSchemaGraph = [
     "@type": "ProfessionalService",
     "name": "Asim Ali — Software Engineering Services",
     "description": "Enterprise SaaS development, Laravel backend architecture, React frontend development, CRM automation, identity management, and AI integration services.",
-    "provider": { "@id": "https://asimali.online/#asim-ali" },
-    "url": "https://asimali.online/",
+    "provider": { "@id": "https://asimali.is-a.dev/#asim-ali" },
+    "url": "https://asimali.is-a.dev/",
     "areaServed": "Worldwide",
     "serviceType": [
       "Enterprise SaaS Development",

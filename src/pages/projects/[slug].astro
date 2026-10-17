@@ -26,8 +26,8 @@ const overview = project.overview || '';
 const pageDescription = overview
   ? `${overview.slice(0, 150).replace(/\s+\S*$/, '')}...`
   : `${project.title}. A Laravel project by Asim Ali.`;
-const heroImage = project.image || 'https://asimali.online/opengraph-image.png';
-const canonicalUrl = `https://asimali.online/projects/${project.slug}`;
+const heroImage = project.image || 'https://asimali.is-a.dev/opengraph-image.png';
+const canonicalUrl = `https://asimali.is-a.dev/projects/${project.slug}`;
 
 const projectJsonLd = [
   {
@@ -38,7 +38,7 @@ const projectJsonLd = [
     "headline": `${project.title} — ${project.niche}`,
     "description": project.overview || project.niche,
     "about": "Laravel",
-    "creator": { "@id": "https://asimali.online/#asim-ali" },
+    "creator": { "@id": "https://asimali.is-a.dev/#asim-ali" },
     "keywords": ["Laravel", "PHP", ...(project.tags || [])].join(', ')
   },
   {
@@ -49,7 +49,7 @@ const projectJsonLd = [
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://asimali.online/"
+        "item": "https://asimali.is-a.dev/"
       },
       {
         "@type": "ListItem",

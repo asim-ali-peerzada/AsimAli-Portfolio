@@ -7,7 +7,7 @@
  * markup, and astro.config.mjs redirects the old slugs there.
  */
 
-export const siteUrl = 'https://asimali.online';
+export const siteUrl = 'https://asimali.is-a.dev';
 
 /** Breadcrumbs for every landing page. Replaces the hand-rolled arrays. */
 export function buildBreadcrumb(slug: string, name: string) {
