@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { useLayoutEffect as useEffect } from 'react';
 import { projects, type Project } from '@/data/projects';
+import { withBase } from '@/lib/base';
 import BackToHome from './BackToHome';
 import ProjectCaseStudy from './ProjectCaseStudy';
 import ContactSection from './ContactSection';
@@ -40,11 +41,11 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
         <div className="w-full">
           <BackToHome
             label="Back to projects"
-            href="/#projects"
+            href={withBase('/#projects')}
             onClick={(e) => {
               e.preventDefault();
               window.sessionStorage.setItem('nav_target', 'projects');
-              window.location.href = '/#projects';
+              window.location.href = withBase('/#projects');
             }}
           />
         </div>
@@ -60,7 +61,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
           className="w-full mt-16 sm:mt-20 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
         >
           <a
-            href={`/projects/${prevProject.slug}`}
+            href={withBase(`/projects/${prevProject.slug}`)}
             className="group flex flex-col gap-1.5 sm:gap-2 min-w-0 rounded-xl sm:rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">
@@ -73,7 +74,7 @@ export default function ProjectDetailContent({ project }: ProjectDetailContentPr
           </a>
 
           <a
-            href={`/projects/${nextProject.slug}`}
+            href={withBase(`/projects/${nextProject.slug}`)}
             className="group flex flex-col items-start sm:items-end gap-1.5 sm:gap-2 min-w-0 rounded-xl sm:rounded-2xl border border-white/10 bg-white/3 p-4 sm:p-5 text-left sm:text-right transition-colors hover:border-white/20 hover:bg-white/5"
           >
             <span className="text-[11px] font-semibold uppercase tracking-widest text-dim font-display">

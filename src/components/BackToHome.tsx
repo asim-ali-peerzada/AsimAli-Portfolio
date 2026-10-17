@@ -1,5 +1,6 @@
 import type { MouseEvent } from 'react';
 import { ArrowLeft } from 'lucide-react';
+import { withBase } from '@/lib/base';
 
 /**
  * Back link shared by every standalone page (about, contact, blog, service,
@@ -25,7 +26,7 @@ export default function BackToHome({
 }) {
   return (
     <a
-      href={href}
+      href={withBase(href)}
       onClick={onClick}
       className={`group inline-flex items-center gap-2 text-[13.5px] text-muted hover:text-white transition-colors w-fit font-display ${className}`}
     >

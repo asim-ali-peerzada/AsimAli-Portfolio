@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import BackToHome from '../../components/BackToHome';
 import { buildBreadcrumb } from '../../lib/seo';
+import { withBase } from '../../lib/base';
 
 const canonicalUrl = 'https://asimali.is-a.dev/blog/laravel-application-structure/';
 const title = 'How I Structure a Laravel App for Maintenance';
@@ -36,7 +37,7 @@ const jsonLd = [
   <main id="main-content" class="w-full">
     <article class="mx-auto w-full max-w-[820px] px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 pb-16 flex flex-col">
       <div class="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8">
-        <a href="/blog" class="text-[13.5px] text-muted hover:text-white transition-colors w-fit font-display">&larr; All posts</a>
+        <a href={withBase('/blog')} class="text-[13.5px] text-muted hover:text-white transition-colors w-fit font-display">&larr; All posts</a>
         <BackToHome className="mb-0" />
       </div>
 
@@ -253,11 +254,11 @@ const jsonLd = [
         <p class="text-[16px] text-muted leading-[170%] font-display mt-4">
           If you want to see how these patterns look inside full production
           systems, explore the{" "}
-          <a href="/projects/ccms" class="text-orange hover:underline">CCMS Enterprise CRM</a>,{" "}
-          <a href="/projects/shipment-tracker" class="text-orange hover:underline">Shipment Tracker &amp; IMS</a>,{" "}
-          <a href="/projects/enterprise-single-sign-on" class="text-orange hover:underline">Enterprise Unified SSO</a>,
+          <a href={withBase('/projects/ccms')} class="text-orange hover:underline">CCMS Enterprise CRM</a>,{" "}
+          <a href={withBase('/projects/shipment-tracker')} class="text-orange hover:underline">Shipment Tracker &amp; IMS</a>,{" "}
+          <a href={withBase('/projects/enterprise-single-sign-on')} class="text-orange hover:underline">Enterprise Unified SSO</a>,
           and{" "}
-          <a href="/projects/close-out-package-system" class="text-orange hover:underline">Close-Out Package (COP) System</a>{" "}
+          <a href={withBase('/projects/close-out-package-system')} class="text-orange hover:underline">Close-Out Package (COP) System</a>{" "}
           case studies in my portfolio.
         </p>
       </div>
@@ -271,8 +272,8 @@ const jsonLd = [
           production Laravel applications. Remote, worldwide.
         </p>
         <div class="flex flex-wrap gap-3 mt-5">
-          <a href="/#contact-form-section" class="rounded-lg bg-cta px-5 py-3 text-[14px] font-semibold text-white hover:opacity-90 transition-opacity">Get in touch</a>
-          <a href="/#projects" class="rounded-lg border border-white/30 px-5 py-3 text-[14px] font-semibold text-white hover:bg-white/10 transition-colors">View case studies</a>
+          <a href={withBase('/#contact-form-section')} class="rounded-lg bg-cta px-5 py-3 text-[14px] font-semibold text-white hover:opacity-90 transition-opacity">Get in touch</a>
+          <a href={withBase('/#projects')} class="rounded-lg border border-white/30 px-5 py-3 text-[14px] font-semibold text-white hover:bg-white/10 transition-colors">View case studies</a>
         </div>
       </div>
     </article>

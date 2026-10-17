@@ -1,5 +1,6 @@
 import { Briefcase, Cpu, FolderGit2, Home, Mail, Zap } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { withBase } from "@/lib/base";
 
 interface NavItem {
   id?: string;
@@ -82,6 +83,8 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
+  const homeBase = normalise(withBase("/"));
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -89,8 +92,8 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
     // "Home": already on the home page, so scroll to the top rather than
     // reloading it. From a subpage, the plain "/" href navigates correctly
     // with or without JavaScript.
-    if (href === "/") {
-      if (pathname === "/") {
+    if (href === "/" || normalise(withBase(href)) === homeBase) {
+      if (pathname === "/" || pathname === homeBase) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -102,7 +105,8 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
 
     // Section link from another page: let the browser follow the absolute
     // href so navigation still works before hydration.
-    if (path && path !== pathname) return;
+    const resolvedPath = path ? normalise(withBase(path)) : homeBase;
+    if (resolvedPath && resolvedPath !== pathname) return;
 
     const el = document.getElementById(hash);
     if (!el) return;
@@ -126,19 +130,14 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
     >
       {navItems.map((item) => {
         const IconComponent = item.icon;
-        // A nav item can be a home-page section anchor, a page link, or both —
-        // Contact is a form at the foot of the home page *and* its own page.
-        // On the home page the anchor wins; elsewhere fall back to the URL.
-        // "Projects" points at "/#projects" because on the home page it is a
-        // scroll anchor. On a project detail page that literal path never
-        // matches, which left the dock with no active item at all. Match the
-        // route prefix instead so the section reads as active wherever the
-        // visitor actually is.
+        const targetHref = withBase(item.href);
+        const projectsBase = withBase("/projects");
         const isUrlMatch =
-          pathname === item.href ||
-          (item.id === "projects" && pathname.startsWith("/projects"));
+          pathname === normalise(targetHref) ||
+          (item.id === "projects" && pathname.startsWith(projectsBase));
+        const isHomePage = pathname === "/" || pathname === homeBase;
         const isActive = item.id
-          ? pathname === "/"
+          ? isHomePage
             ? activeSection === item.id
             : isUrlMatch
           : isUrlMatch;
@@ -149,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ pathname: rawPathname }) => {
         return (
           <a
             key={item.label}
-            href={item.href}
+            href={targetHref}
             onClick={(e) => handleNavClick(e, item.href)}
             aria-label={item.label}
             aria-current={ariaCurrent}

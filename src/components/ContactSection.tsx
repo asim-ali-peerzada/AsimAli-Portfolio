@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Send } from "lucide-react";
 import toast from "react-hot-toast";
+import { withBase } from "@/lib/base";
 
 const ContactSection = () => {
   const [name, setName] = useState("");
@@ -271,7 +272,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
             <p className="text-[14px] text-muted font-display text-center">
               or{" "}
               <a
-                href="/Asim_Ali_Resume.pdf"
+                href={withBase('/Asim_Ali_Resume.pdf')}
                 download
                 className="text-orange hover:underline"
               >

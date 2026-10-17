@@ -23,6 +23,7 @@ const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href
 
 import '@/styles/global.css';
 import Navbar from '../components/Navbar';
+import { withBase } from '@/lib/base';
 
 const baseSchemaGraph = [
   {
@@ -145,7 +146,7 @@ const mergedSchemaGraph = jsonLd
   <meta name="twitter:image" content={imageUrl} />
 
   <!-- Favicon & Canonical -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href={withBase('/favicon.ico')} />
   <link rel="canonical" href={canonical} />
   <meta name="theme-color" content="#151312" />
   <meta name="msvalidate.01" content="48F444AC64A76EC4DC734CFA29E94FD8" />

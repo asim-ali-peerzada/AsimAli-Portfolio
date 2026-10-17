@@ -20,6 +20,7 @@ import {
   type EngineeringCaseStudy,
   type GalleryItem,
 } from '@/data/caseStudies';
+import { withBase } from '@/lib/base';
 
 /**
  * Capability icon lookup. Keyed by each capability's `icon` field. An unknown
@@ -233,7 +234,7 @@ function Lightbox({
 
       <div className="relative flex min-h-0 flex-1 items-center justify-center px-3 pb-2 sm:px-10 sm:pb-4">
         <img
-          src={item.src}
+          src={withBase(item.src)}
           alt={item.caption || 'Screenshot'}
           decoding="async"
           className="max-h-full w-auto max-w-full object-contain"
@@ -344,7 +345,7 @@ function Showcase({
                   className="block w-full cursor-zoom-in overflow-hidden rounded-xl border border-white/10 bg-white/2 transition-colors hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/60"
                 >
                   <img
-                    src={item.src}
+                    src={withBase(item.src)}
                     alt={`${title} — ${item.caption}`}
                     loading="lazy"
                     decoding="async"
@@ -402,7 +403,7 @@ function Figure({
       className={`w-full overflow-hidden rounded-xl border border-white/10 bg-white/2 ${className}`}
     >
       <img
-        src={src}
+        src={withBase(src)}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"

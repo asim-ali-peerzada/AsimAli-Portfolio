@@ -2,12 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import BackToHome from '../../components/BackToHome';
 import { buildBreadcrumb } from '../../lib/seo';
+import { withBase } from '../../lib/base';
 
 const canonicalUrl = 'https://asimali.is-a.dev/blog/';
 
 const posts = [
   {
-    href: '/blog/laravel-application-structure',
+    href: withBase('/blog/laravel-application-structure'),
     title: 'How I Structure a Laravel Application for Long-Term Maintenance',
     description:
       'Service layers, model discipline, authorization as data, queues, state machines, and query hygiene — the structure that keeps a Laravel codebase workable after year one.',

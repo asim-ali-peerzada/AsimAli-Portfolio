@@ -1,5 +1,6 @@
 import { Download, Mail } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { withBase } from '@/lib/base';
 
 const Footer = () => {
   return (
@@ -39,7 +40,7 @@ const Footer = () => {
           ].map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={withBase(link.href)}
               className="text-[13px] text-muted transition-colors hover:text-white underline-offset-4 no-underline hover:underline hover:decoration-orange"
             >
               {link.label}
@@ -75,7 +76,7 @@ const Footer = () => {
             <Mail size={18} />
           </a>
           <a
-            href="/Asim_Ali_Resume.pdf"
+            href={withBase('/Asim_Ali_Resume.pdf')}
             download
             className="text-orange hover:text-white transition-all transform hover:scale-110"
             aria-label="Download Resume"

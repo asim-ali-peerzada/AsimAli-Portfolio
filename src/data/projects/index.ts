@@ -36,10 +36,12 @@ export interface Project {
   screenshots?: string[];
 }
 
+import { withBase } from '@/lib/base';
+
 function resolveImage(img: unknown): string {
-  if (typeof img === 'string') return img;
-  if (img && typeof img === 'object' && 'src' in img) return (img as { src: string }).src;
-  return String(img);
+  if (typeof img === 'string') return withBase(img);
+  if (img && typeof img === 'object' && 'src' in img) return withBase((img as { src: string }).src);
+  return withBase(String(img));
 }
 
 function normalizeProject(p: Record<string, unknown>): Project {

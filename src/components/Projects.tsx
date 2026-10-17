@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '@/data/projects';
+import { withBase } from '@/lib/base';
 
 const Projects = () => {
   return (
@@ -15,7 +16,7 @@ const Projects = () => {
         {projects.map((project) => (
           <a
             key={project.slug}
-            href={`/projects/${project.slug}`}
+            href={withBase(`/projects/${project.slug}`)}
             className="link-row flex items-start justify-between rounded-2xl p-4 sm:p-5 relative group cursor-pointer"
           >
             {/* Left Image + Text */}

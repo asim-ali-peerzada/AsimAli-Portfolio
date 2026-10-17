@@ -1,6 +1,7 @@
 import { Flame, MapPin } from "lucide-react";
 import { Download, Mail } from "lucide-react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { withBase } from "@/lib/base";
 
 const LeftPortraitCard = () => {
   return (
@@ -19,7 +20,7 @@ const LeftPortraitCard = () => {
         }}
       >
         <img
-          src="/images/my-headshot/croped-mine.webp"
+          src={withBase('/images/my-headshot/croped-mine.webp')}
           alt="Asim Ali"
           className="w-full h-full object-cover object-top filter contrast-[1.14] brightness-[1.02] border border-black/6"
           style={{
@@ -88,7 +89,7 @@ const LeftPortraitCard = () => {
             <Mail size={20} />
           </a>
           <a
-            href="/Asim_Ali_Resume.pdf"
+            href={withBase('/Asim_Ali_Resume.pdf')}
             download
             className="text-orange hover:text-[#d35422] transition-transform hover:scale-110"
             aria-label="Download Resume"
