@@ -36,3 +36,6 @@ src/components/.astro/
 # common local-only files
 *.log
 .DS_Store
+
+# migration documentation
+DOMAIN_MIGRATION_BLUEPRINT.md
