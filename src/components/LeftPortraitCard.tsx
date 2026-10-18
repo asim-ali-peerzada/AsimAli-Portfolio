@@ -11,9 +11,12 @@ const LeftPortraitCard = () => {
       // what produced the dead space to the right of the page on mobile.
       className="relative w-full max-w-86 h-auto sm:h-160 bg-white flex flex-col justify-start items-center gap-5 sm:gap-6 overflow-hidden p-5 sm:p-[30px_20px] rounded-2xl box-border"
     >
-      {/* 1. Portrait Image Container (Matching Framer reference: 304px x 310px, 16px radius, flat backdrop) */}
+      {/* 1. Portrait Image Container — aspect locked to the 304x310 reference at every
+          width. The old fixed h-64 on mobile made the frame wider than tall (286x240),
+          which switched object-cover on the square source photo from height-driven to
+          width-driven and cropped it at the chin instead of showing head + chest. */}
       <div
-        className="relative w-full max-w-76 h-64 sm:h-77.5 overflow-hidden flex items-center justify-center shrink-0"
+        className="relative w-full max-w-76 aspect-[304/310] overflow-hidden flex items-center justify-center shrink-0"
         style={{
           background: "#1B1E22",
           borderRadius: "16px",
